@@ -11,12 +11,13 @@
  */
 
 // Google Analytics 4 Measurement ID
-// Set this in your .env file as VITE_GA_MEASUREMENT_ID
-const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
+// Configured directly here for GitHub Pages deployment
+// Get your Measurement ID from: https://analytics.google.com/
+const GA_MEASUREMENT_ID = 'G-3L9C8QMNZV';
 
 // Check if analytics is enabled
 const isAnalyticsEnabled = () => {
-  return typeof window !== 'undefined' && GA_MEASUREMENT_ID !== '';
+  return typeof window !== 'undefined' && Boolean(GA_MEASUREMENT_ID);
 };
 
 // Initialize Google Analytics
