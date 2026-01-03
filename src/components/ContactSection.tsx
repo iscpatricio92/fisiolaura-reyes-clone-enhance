@@ -1,5 +1,6 @@
 import { MapPin, Phone, Clock, Mail, MessageCircle, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DoctoraliaCalendarWidget } from '@/components/DoctoraliaCalendarWidget';
 
 const locations = [
   {
@@ -65,9 +66,9 @@ export const ContactSection = () => {
               href={method.href}
               target={method.href.startsWith('http') ? '_blank' : undefined}
               rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group p-6 rounded-2xl bg-card shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1 border border-border/50 text-center"
+              className="group p-6 rounded-2xl bg-card shadow-soft hover:shadow-glow transition-all duration-300 hover:-translate-y-2 border border-border/50 hover:border-primary/30 text-center"
             >
-              <div className="w-16 h-16 rounded-2xl gradient-hero flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 rounded-2xl gradient-hero flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:shadow-glow transition-all duration-300">
                 <method.icon className="w-8 h-8 text-primary-foreground" />
               </div>
               <h3 className="font-display text-xl font-bold text-foreground mb-1">
@@ -79,12 +80,17 @@ export const ContactSection = () => {
           ))}
         </div>
 
+        {/* Doctoralia Calendar Widget */}
+        <div className="mb-16">
+          <DoctoraliaCalendarWidget />
+        </div>
+
         {/* Locations */}
         <div className="grid md:grid-cols-2 gap-8">
           {locations.map((location, index) => (
             <div
               key={index}
-              className="bg-card rounded-2xl overflow-hidden shadow-soft border border-border/50"
+              className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-glow border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1"
             >
               {/* Map Placeholder */}
               <div className="h-64 bg-secondary relative">

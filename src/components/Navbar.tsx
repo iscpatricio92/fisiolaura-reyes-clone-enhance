@@ -25,17 +25,17 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-card/95 backdrop-blur-md shadow-soft'
+          ? 'bg-card/98 backdrop-blur-xl shadow-medium border-b border-border/50'
           : 'bg-transparent'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#inicio" className="flex items-center gap-2">
-            <span className="font-display text-2xl font-bold text-primary">
+          <a href="#inicio" className="flex items-center gap-2 group">
+            <span className="font-display text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-105">
               Fisio<span className="text-accent">Analaura</span>
             </span>
           </a>
@@ -46,7 +46,7 @@ export const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="font-body text-sm font-medium text-foreground/80 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                className="font-body text-sm font-semibold text-foreground/80 hover:text-primary transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full hover:scale-105"
               >
                 {item.label}
               </a>
