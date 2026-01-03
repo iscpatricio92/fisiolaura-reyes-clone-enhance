@@ -73,8 +73,8 @@ export const PricingSection = () => {
               key={index}
               className={`relative rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 ${
                 plan.popular
-                  ? 'gradient-hero text-primary-foreground shadow-glow'
-                  : 'bg-card shadow-soft border border-border/50'
+                  ? 'gradient-hero text-primary-foreground shadow-glow-strong border-2 border-primary-foreground/20'
+                  : 'bg-card shadow-soft border border-border/50 hover:shadow-glow hover:border-primary/30'
               }`}
             >
               {plan.popular && (

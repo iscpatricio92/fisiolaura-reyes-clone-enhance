@@ -94,16 +94,16 @@ export const ServicesSection = () => {
           {specialties.map((specialty, index) => (
             <div
               key={index}
-              className="group p-6 rounded-2xl bg-card shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-2 border border-border/50"
+              className="group p-6 rounded-2xl bg-card shadow-soft hover:shadow-glow transition-all duration-300 hover:-translate-y-2 border border-border/50 hover:border-primary/30"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:gradient-hero flex items-center justify-center mb-4 transition-all duration-300">
-                <specialty.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:gradient-hero flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow">
+                <specialty.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
               </div>
-              <h3 className="font-display font-semibold text-lg text-foreground mb-2">
+              <h3 className="font-display font-bold text-lg text-foreground mb-2">
                 {specialty.title}
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {specialty.description}
               </p>
             </div>
@@ -125,7 +125,7 @@ export const ServicesSection = () => {
             {conditions.map((condition, index) => (
               <span
                 key={index}
-                className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-default"
+                className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:scale-105 transition-all duration-300 cursor-default shadow-soft hover:shadow-medium"
               >
                 {condition}
               </span>

@@ -72,11 +72,11 @@ export const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="group bg-card rounded-2xl p-6 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1 border border-border/50"
+              className="group bg-card rounded-2xl p-6 shadow-soft hover:shadow-glow transition-all duration-300 hover:-translate-y-2 border border-border/50 hover:border-primary/30"
             >
               {/* Quote icon */}
               <div className="mb-4">
-                <Quote className="w-8 h-8 text-primary/20" />
+                <Quote className="w-10 h-10 text-primary/20 group-hover:text-primary/30 transition-colors duration-300" />
               </div>
 
               {/* Rating */}
@@ -87,17 +87,17 @@ export const TestimonialsSection = () => {
               </div>
 
               {/* Text */}
-              <p className="text-foreground mb-6 leading-relaxed">
+              <p className="text-foreground mb-6 leading-relaxed font-medium italic">
                 "{testimonial.text}"
               </p>
 
               {/* Author */}
               <div className="flex items-center justify-between pt-4 border-t border-border">
                 <div>
-                  <div className="font-semibold text-foreground">{testimonial.name}</div>
-                  <div className="text-sm text-muted-foreground">{testimonial.date}</div>
+                  <div className="font-bold text-foreground">{testimonial.name}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{testimonial.date}</div>
                 </div>
-                <div className="w-10 h-10 rounded-full gradient-hero flex items-center justify-center text-primary-foreground font-bold">
+                <div className="w-12 h-12 rounded-full gradient-hero flex items-center justify-center text-primary-foreground font-bold shadow-md group-hover:scale-110 transition-transform duration-300">
                   {testimonial.name.charAt(0)}
                 </div>
               </div>
