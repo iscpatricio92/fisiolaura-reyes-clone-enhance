@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import { imagetools } from "vite-imagetools";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -16,6 +17,74 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(), 
     imagetools(),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'robots.txt', 'sitemap.xml'],
+      manifest: {
+        name: 'FisioAnalaura - Fisioterapeuta en CDMX y Metepec',
+        short_name: 'FisioAnalaura',
+        description: 'Fisioterapeuta con doble titulación (México y España). Especialista en traumatología, ATM, hipopresivos y manejo del dolor.',
+        theme_color: '#2CA3B3',
+        background_color: '#F8FBFB',
+        display: 'standalone',
+        icons: [
+          {
+            src: '/favicon.ico',
+            sizes: '64x64',
+            type: 'image/x-icon'
+          }
+        ]
+      },
+      workbox: {
+        // Cache-first para assets estáticos (JS, CSS, imágenes con hash)
+        // Network-first para HTML (para siempre tener la versión más reciente)
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,woff2}'],
+        // Estrategias de caché para recursos externos
+        runtimeCaching: [
+          {
+            // Google Fonts - Stale-while-revalidate para CSS
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheName: 'google-fonts-stylesheets',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          {
+            // Google Fonts - Cache-first para archivos de fuente
+            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-webfonts',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ],
+        // Limitar tamaño de caché (50MB)
+        maximumFileSizeToCacheInBytes: 50 * 1024 * 1024,
+        // Limpiar caché antigua automáticamente
+        cleanupOutdatedCaches: true,
+        // No usar skipWaiting (esperar a que el usuario recargue para nueva versión)
+        skipWaiting: false,
+        clientsClaim: false
+      },
+      // Solo en producción
+      devOptions: {
+        enabled: false
+      }
+    }),
     mode === "development" && componentTagger()
   ].filter(Boolean),
   resolve: {
