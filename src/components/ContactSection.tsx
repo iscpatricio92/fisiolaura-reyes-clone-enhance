@@ -1,6 +1,7 @@
-import { MapPin, Phone, Clock, Mail, MessageCircle, Calendar } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DoctoraliaCalendarWidget } from '@/components/DoctoraliaCalendarWidget';
+import { LazyMapIframe } from './LazyMapIframe';
 import { ScrollAnimated } from './ScrollAnimated';
 import { trackCTAClick, trackPhoneClick, trackWhatsAppClick, trackExternalLink } from '@/lib/analytics';
 
@@ -142,19 +143,12 @@ export const ContactSection = () => {
             {locations.map((location, index) => (
               <ScrollAnimated key={index} animation="slide-up" delay={index * 150}>
                 <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-glow border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-                  {/* Map - Smaller on mobile */}
-                  <div className="h-40 md:h-64 bg-secondary relative">
-                    <iframe
-                      src={location.embedUrl}
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title={`Mapa interactivo de Google Maps mostrando la ubicación de ${location.name} - ${location.address}`}
-                    />
-                  </div>
+                  {/* Map - Lazy loaded with security sandbox */}
+                  <LazyMapIframe
+                    src={location.embedUrl}
+                    title={`Mapa interactivo de Google Maps mostrando la ubicación de ${location.name} - ${location.address}`}
+                    className="h-40 md:h-64"
+                  />
 
                   <div className="p-4 md:p-6">
                     <h3 className="font-display text-lg md:text-xl font-bold text-foreground mb-2">
