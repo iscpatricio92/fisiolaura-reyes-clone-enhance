@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useFocusTrap } from '@/hooks/use-focus-trap';
 
 const navItems = [
   { label: 'Inicio', href: '#inicio' },
@@ -15,7 +16,9 @@ const navItems = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  
+  // Focus trap for mobile menu accessibility
+  const menuRef = useFocusTrap<HTMLDivElement>(isOpen, () => setIsOpen(false));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,24 +28,14 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cerrar menú al hacer clic fuera
+  // Prevent body scroll when menu is open
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) && isOpen) {
-        setIsOpen(false);
-      }
-    };
-
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      // Prevenir scroll del body cuando el menú está abierto
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
       document.body.style.overflow = '';
     };
   }, [isOpen]);
