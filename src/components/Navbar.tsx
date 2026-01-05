@@ -68,7 +68,9 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="#inicio" className="flex items-center gap-2 group">
-            <span className="font-display text-2xl font-bold text-primary transition-all duration-300 group-hover:scale-105">
+            <span className={`font-display text-2xl font-bold transition-all duration-300 group-hover:scale-105 ${
+              isScrolled ? 'text-primary' : 'text-white drop-shadow-md'
+            }`}>
               Fisio<span className="text-accent">Analaura</span>
             </span>
           </a>
