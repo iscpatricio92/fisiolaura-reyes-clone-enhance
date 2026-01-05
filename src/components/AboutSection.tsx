@@ -1,12 +1,12 @@
-import { GraduationCap, Globe, Award, Heart, Languages, Clock, Check } from 'lucide-react';
+import { GraduationCap, Globe, Award, Heart, Clock, Check } from 'lucide-react';
 import clinicImage from '@/assets/clinic-hero.jpg';
-import clinicImageWebP from '@/assets/clinic-hero.jpg?format=webp';
 // Responsive image sizes for srcset
 import clinicImageWebP400 from '@/assets/clinic-hero.jpg?w=400&format=webp';
 import clinicImageWebP800 from '@/assets/clinic-hero.jpg?w=800&format=webp';
 import clinicImageWebP1200 from '@/assets/clinic-hero.jpg?w=1200&format=webp';
 import clinicImageWebP1920 from '@/assets/clinic-hero.jpg?w=1920&format=webp';
 import { ScrollAnimated } from './ScrollAnimated';
+import { OptimizedImage } from './OptimizedImage';
 
 interface Credential {
   icon: React.ElementType;
@@ -80,22 +80,17 @@ export const AboutSection = () => {
             {/* Image */}
             <div className="relative">
             <div className="relative rounded-3xl overflow-hidden shadow-card">
-              <picture>
-                <source 
-                  srcSet={`${clinicImageWebP400} 400w, ${clinicImageWebP800} 800w, ${clinicImageWebP1200} 1200w, ${clinicImageWebP1920} 1920w`}
-                  sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1280px) 1200px, 1920px"
-                  type="image/webp" 
-                />
-                <img
-                  src={clinicImage}
-                  loading="lazy"
-                  decoding="async"
-                  alt="Consultorio de fisioterapia moderno"
-                  className="w-full h-auto object-cover"
-                  width={1920}
-                  height={1080}
-                />
-              </picture>
+              <OptimizedImage
+                src={clinicImage}
+                alt="Consultorio de fisioterapia moderno"
+                webpSrc={clinicImageWebP400}
+                srcSet={`${clinicImageWebP400} 400w, ${clinicImageWebP800} 800w, ${clinicImageWebP1200} 1200w, ${clinicImageWebP1920} 1920w`}
+                sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, (max-width: 1280px) 1200px, 1920px"
+                width={1920}
+                height={1080}
+                className="w-full h-auto object-cover"
+                blurPlaceholder
+              />
             </div>
             {/* Decorative element */}
             <div className="absolute -z-10 -bottom-8 -right-8 w-full h-full rounded-3xl border-2 border-primary/20" />
