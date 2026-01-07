@@ -253,7 +253,7 @@ export const TestimonialsSection = () => {
             <div className="inline-flex flex-col items-center gap-4 p-8 bg-card rounded-2xl border border-border/50 shadow-soft">
               <div className="flex items-center gap-2">
                 <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Doctoralia_logo.svg/512px-Doctoralia_logo.svg.png" 
+                  src="https://platform.docplanner.com/img/mx/logo/logo-default-mx.svg" 
                   alt="Doctoralia" 
                   className="h-6 object-contain"
                   loading="lazy"
@@ -266,7 +266,7 @@ export const TestimonialsSection = () => {
                 variant="outline" 
                 size="lg"
                 className="group min-h-[48px] px-6"
-                onClick={() => window.open('https://www.doctoralia.com.mx/heydi-sulay-martinez-vazquez/fisioterapeuta-fisiatra/tlalpan', '_blank')}
+                onClick={() => window.open('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/iztapalapa#profile-reviews', '_blank')}
               >
                 Ver Todas las Opiniones
                 <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

@@ -1,24 +1,22 @@
-import { MapPin, Phone, Clock, MessageCircle, Calendar } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageCircle, Calendar, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { DoctoraliaCalendarWidget } from '@/components/DoctoraliaCalendarWidget';
 import { LazyMapIframe } from './LazyMapIframe';
 import { ScrollAnimated } from './ScrollAnimated';
-import { trackCTAClick, trackPhoneClick, trackWhatsAppClick, trackExternalLink } from '@/lib/analytics';
+import { trackPhoneClick, trackWhatsAppClick, trackExternalLink } from '@/lib/analytics';
+import { getPhysicalAddresses, getAllAddresses } from '@/lib/doctoralia-addresses';
 
-const locations = [
-  {
-    name: 'Consultorio Iztapalapa',
-    address: 'Andres Tutino 25c, 09360 Iztapalapa, CDMX',
-    mapUrl: 'https://google.com/maps?q=19.3540592,-99.0791321',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d-99.0791321!3d19.3540592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDIxJzE0LjYiTiA5OcKwMDQnNDQuOSJX!5e0!3m2!1ses!2smx!4v1234567890',
-  },
-  {
-    name: 'Consultorio Metepec',
-    address: 'Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, México',
-    mapUrl: 'https://google.com/maps?q=19.2797222,-99.5938110',
-    embedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d-99.5938110!3d19.2797222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDE2JzQ3LjAiTiA5OcKwMzUnMzcuNyJX!5e0!3m2!1ses!2smx!4v1234567890',
-  },
-];
+// Obtener direcciones físicas desde la configuración centralizada
+const physicalAddresses = getPhysicalAddresses();
+
+// Mapear a formato compatible con el componente existente
+const locations = physicalAddresses.map((addr) => ({
+  name: addr.name,
+  address: addr.address,
+  mapUrl: addr.mapUrl || `https://google.com/maps?q=${addr.coordinates?.lat},${addr.coordinates?.lng}`,
+  embedUrl: addr.coordinates
+    ? `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d${addr.coordinates.lng}!3d${addr.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDIxJzE0LjYiTiA5OcKwMDQnNDQuOSJX!5e0!3m2!1ses!2smx!4v1234567890`
+    : '',
+}));
 
 const contactMethods = [
   {
@@ -57,8 +55,8 @@ export const ContactSection = () => {
             <h2 className="font-display text-2xl lg:text-5xl font-bold text-foreground mt-1 lg:mt-2">
               Agenda tu <span className="text-primary">Cita</span>
             </h2>
-            <p className="hidden sm:block text-base lg:text-lg text-muted-foreground mt-2 lg:mt-4 max-w-2xl mx-auto">
-              Estoy aquí para ayudarte. Contáctame por el medio que prefieras.
+            <p className="text-base lg:text-lg text-muted-foreground mt-2 lg:mt-4 max-w-2xl mx-auto">
+              Estoy aquí para ayudarte. Reserva tu cita directamente en Doctoralia en 3 sencillos pasos, ya sea para consulta física u online.
             </p>
           </div>
         </ScrollAnimated>
@@ -130,10 +128,161 @@ export const ContactSection = () => {
           </div>
         </ScrollAnimated>
 
-        {/* Doctoralia Calendar Widget */}
+        {/* Instrucciones y Widget de Doctoralia en 2 columnas */}
         <ScrollAnimated animation="fade-up" delay={200}>
           <div className="mb-8 md:mb-16">
-            <DoctoraliaCalendarWidget />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+              {/* Columna izquierda: Instrucciones */}
+              <div className="bg-card rounded-2xl p-4 md:p-6 lg:p-8 shadow-soft border border-border/50">
+                <h5 className="font-semibold text-foreground mb-4 text-center lg:text-left text-lg md:text-xl">
+                  Sigue estos pasos para agendar tu cita:
+                </h5>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border/30">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
+                      1
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-foreground mb-2">
+                        Selecciona el consultorio
+                      </p>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        En el calendario de la derecha, selecciona uno de estos consultorios en el selector de ubicaciones:
+                      </p>
+                      <ul className="space-y-2 text-sm text-muted-foreground ml-4">
+                        {getAllAddresses().map((address) => (
+                          <li key={address.addressId} className="flex items-start gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <div>
+                              <span className="font-medium text-foreground">{address.name}</span>
+                              {!address.isOnline && (
+                                <span className="block text-xs mt-0.5">{address.address}</span>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-4 rounded-lg bg-background/50 border border-border/30">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
+                      2
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-foreground mb-1">
+                        Elige la fecha y hora del consultorio
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Selecciona el día y la hora que mejor se adapte a tu agenda del calendario disponible.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-4 rounded-lg bg-primary/10 border border-primary/20">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
+                      3
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-semibold text-foreground mb-1">
+                        Confirma tu cita
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        Una vez que hayas seleccionado el consultorio, fecha y hora, serás redirigido a Doctoralia para completar y confirmar tu reserva.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Botón para abrir en Doctoralia */}
+                <div className="mt-6">
+                  <Button
+                    size="lg"
+                    className="w-full"
+                    asChild
+                  >
+                    <a
+                      href="https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2"
+                      onClick={() => trackExternalLink('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec', 'Abrir en Doctoralia')}
+                    >
+                      <Calendar className="w-5 h-5" />
+                      Abrir en Doctoralia
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </Button>
+                </div>
+
+                {/* Métodos de contacto alternativos */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    asChild
+                  >
+                    <a 
+                      href="tel:+525565053202" 
+                      className="inline-flex items-center gap-2"
+                      onClick={() => trackPhoneClick('+525565053202', 'Contact Section')}
+                    >
+                      <Phone className="w-4 h-4" />
+                      Llamar ahora
+                    </a>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    asChild
+                  >
+                    <a
+                      href="https://wa.me/525565053202"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2"
+                      onClick={() => trackWhatsAppClick('Contact Section', 'Contact Section')}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      WhatsApp
+                    </a>
+                  </Button>
+                </div>
+              </div>
+
+              {/* Columna derecha: Calendario de Doctoralia */}
+              <div className="bg-card rounded-2xl p-4 md:p-6 lg:p-8 shadow-soft border border-border/50">
+                <div className="text-center mb-4">
+                  <div className="w-12 h-12 rounded-xl gradient-hero flex items-center justify-center mx-auto mb-3">
+                    <Calendar className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <h5 className="font-semibold text-foreground mb-2 text-lg">
+                    Calendario de Disponibilidad
+                  </h5>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Selecciona el consultorio y elige la fecha y hora que prefieras directamente en el calendario
+                  </p>
+                </div>
+
+                {/* Calendario de Doctoralia - Iframe */}
+                <div className="relative min-h-[600px] w-full rounded-xl overflow-hidden">
+                  <iframe
+                    src="https://www.doctoralia.com.mx/ajax/marketing/doctor/widget/big_with_calendar/analaura-reyes-priego?hide_branding=true&saasonly=true"
+                    className="w-full"
+                    title="Calendario de reserva de citas con Lic. Analaura Reyes Priego - Fisioterapeuta. Selecciona el consultorio, fecha y hora para agendar tu consulta."
+                    loading="lazy"
+                    style={{ 
+                      height: '600px', 
+                      minHeight: '600px',
+                      width: '100%',
+                      maxWidth: '100%',
+                      border: 'none'
+                    }}
+                    allow="clipboard-write"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </ScrollAnimated>
 
@@ -237,30 +386,6 @@ export const ContactSection = () => {
           </div>
         </ScrollAnimated>
 
-        {/* Online Consultation Banner - Mobile Optimized */}
-        <div className="mt-8 md:mt-16 gradient-hero rounded-2xl md:rounded-3xl p-6 md:p-12 text-center text-primary-foreground">
-          <div className="max-w-2xl mx-auto">
-            <h3 className="font-display text-xl md:text-3xl font-bold mb-3 md:mb-4">
-              ¿Prefieres una Consulta en Línea?
-            </h3>
-            <p className="opacity-90 mb-4 md:mb-6 text-sm md:text-base">
-              Ofrezco consultas virtuales por videollamada. Recibe atención profesional 
-              desde la comodidad de tu hogar.
-            </p>
-            <Button variant="hero" size="lg" className="w-full md:w-auto text-base" asChild>
-              <a 
-                href="https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20en%20línea"
-                onClick={() => {
-                  trackCTAClick('Agendar Consulta Online', 'Contact Section');
-                  trackWhatsAppClick('Consulta en línea', 'Contact Section');
-                }}
-              >
-                <MessageCircle className="w-5 h-5" />
-                Agendar Consulta Online
-              </a>
-            </Button>
-          </div>
-        </div>
       </div>
     </section>
   );
