@@ -7,6 +7,9 @@ import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
 import { PWAUpdatePrompt } from "@/components/PWAUpdatePrompt";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import AvisoPrivacidad from "./pages/AvisoPrivacidad";
+import PoliticaCancelacion from "./pages/PoliticaCancelacion";
+import TerminosCondiciones from "./pages/TerminosCondiciones";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +27,9 @@ const App = () => (
       >
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/aviso-privacidad" element={<AvisoPrivacidad />} />
+          <Route path="/politica-cancelacion" element={<PoliticaCancelacion />} />
+          <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,4 +1,5 @@
 import { Phone, MapPin, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ShareButtons } from './ShareButtons';
 
 export const Footer = () => {
@@ -86,8 +87,25 @@ export const Footer = () => {
             className="justify-center"
           />
 
+          {/* Legal Links */}
+          <div className="text-center space-y-2 pt-4 border-t border-primary-foreground/10">
+            <div className="flex flex-wrap justify-center gap-3 text-xs">
+              <Link to="/aviso-privacidad" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Aviso de Privacidad
+              </Link>
+              <span className="text-primary-foreground/30">•</span>
+              <Link to="/politica-cancelacion" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Política de Cancelación
+              </Link>
+              <span className="text-primary-foreground/30">•</span>
+              <Link to="/terminos-condiciones" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Términos y Condiciones
+              </Link>
+            </div>
+          </div>
+
           {/* Copyright */}
-          <div className="text-center space-y-1 pt-4 border-t border-primary-foreground/10">
+          <div className="text-center space-y-1 pt-4">
             <p className="text-xs text-primary-foreground/50">
               © {currentYear} Lic. Analaura Reyes Priego
             </p>
@@ -188,8 +206,25 @@ export const Footer = () => {
             />
           </div>
 
+          {/* Legal Links */}
+          <div className="mt-8 pt-8 border-t border-primary-foreground/10">
+            <div className="flex flex-wrap justify-center gap-4 text-sm mb-6">
+              <Link to="/aviso-privacidad" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Aviso de Privacidad
+              </Link>
+              <span className="text-primary-foreground/30">•</span>
+              <Link to="/politica-cancelacion" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Política de Cancelación
+              </Link>
+              <span className="text-primary-foreground/30">•</span>
+              <Link to="/terminos-condiciones" className="text-primary-foreground/60 hover:text-accent transition-colors">
+                Términos y Condiciones
+              </Link>
+            </div>
+          </div>
+
           {/* Bottom */}
-          <div className="mt-8 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="pt-4 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-primary-foreground/50">
               © {currentYear} Lic. Analaura Reyes Priego. Todos los derechos reservados.
             </p>

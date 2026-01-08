@@ -1,4 +1,5 @@
 import { MapPin, Phone, Clock, MessageCircle, Calendar, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LazyMapIframe } from './LazyMapIframe';
 import { ScrollAnimated } from './ScrollAnimated';
