@@ -60,7 +60,7 @@ export const DOCTORALIA_ADDRESSES: DoctoraliaAddress[] = [
   {
     addressId: '238872',
     name: 'Consultorio Metepec',
-    address: 'Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, México',
+    address: 'Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México',
     coordinates: {
       lat: 19.2797222,
       lng: -99.5938110,

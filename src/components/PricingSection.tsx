@@ -191,12 +191,12 @@ export const PricingSection = () => {
               Sin sorpresas. Precios claros desde el primer día.
             </p>
             {/* Garantía visible */}
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
+          {/*   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
               <Check className="w-4 h-4 text-accent" />
               <span className="text-sm font-medium text-foreground">
                 Garantía: Si no ves mejoría en 3 sesiones, la 4ta es <span className="text-accent font-bold">GRATIS</span>
               </span>
-            </div>
+            </div> */}
           </div>
         </ScrollAnimated>
 

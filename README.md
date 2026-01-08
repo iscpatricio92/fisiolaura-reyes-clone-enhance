@@ -223,8 +223,8 @@ Configurado en `tsconfig.json` y `vite.config.ts`.
 1. **Iztapalapa, CDMX**
    - Andres Tutino 25c, 09360 Iztapalapa, CDMX
 
-2. **Metepec, México**
-   - Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, México
+2. **Metepec, Estado de México**
+   - Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México
 
 ---
 
