@@ -59,9 +59,12 @@ export const trackPageView = (path: string, title?: string) => {
   }
 
   try {
-    window.gtag('config', GA_MEASUREMENT_ID, {
+    // Use 'event' with 'page_view' for virtual pageviews (hash navigation)
+    // This is better for SPAs as it tracks navigation without full page reloads
+    window.gtag('event', 'page_view', {
       page_path: path,
       page_title: title || document.title,
+      page_location: window.location.href,
     });
     
     if (import.meta.env.DEV) {

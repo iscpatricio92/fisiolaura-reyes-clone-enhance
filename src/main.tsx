@@ -10,7 +10,8 @@ initAnalytics();
 if (typeof window !== 'undefined') {
   // Small delay to ensure GA4 script is loaded
   setTimeout(() => {
-    trackPageView(window.location.pathname, document.title);
+    const initialPath = window.location.pathname + window.location.hash;
+    trackPageView(initialPath, document.title);
   }, 500);
 }
 

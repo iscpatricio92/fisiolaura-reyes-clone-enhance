@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const PoliticaCancelacion = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-24 lg:pt-0">
       <Navbar />
       <main className="container mx-auto px-4 py-12 lg:py-24 max-w-4xl">
         <ScrollAnimated animation="fade-up">
