@@ -1,24 +1,33 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useFocusTrap } from '@/hooks/use-focus-trap';
 
 const navItems = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Sobre mí', href: '#sobre-mi' },
-  { label: 'Servicios', href: '#servicios' },
-  { label: 'Precios', href: '#precios' },
-  { label: 'Opiniones', href: '#opiniones' },
-  { label: 'FAQs', href: '#faqs' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: 'Inicio', id: 'inicio' },
+  { label: 'Sobre mí', id: 'sobre-mi' },
+  { label: 'Servicios', id: 'servicios' },
+  { label: 'Precios', id: 'precios' },
+  { label: 'Opiniones', id: 'opiniones' },
+  { label: 'FAQs', id: 'faqs' },
+  { label: 'Contacto', id: 'contacto' },
 ];
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
   
   // Focus trap for mobile menu accessibility
   const menuRef = useFocusTrap<HTMLDivElement>(isOpen, () => setIsOpen(false));
+
+  // Función para generar el href de navegación (igual que en Footer)
+  const getNavHref = (id: string) => {
+    const hash = `#${id}`;
+    return isHomePage ? hash : `/${hash}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,13 +63,15 @@ export const Navbar = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? 'bg-card/98 backdrop-blur-xl shadow-medium border-b border-border/50'
-          : 'bg-transparent'
+          : isHomePage
+          ? 'bg-transparent'
+          : 'gradient-hero'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#inicio" className="flex items-center gap-2 group">
+          <a href={getNavHref('inicio')} className="flex items-center gap-2 group">
             <span className={`font-display text-2xl font-bold transition-all duration-300 group-hover:scale-105 ${
               isScrolled ? 'text-primary' : 'text-white drop-shadow-md'
             }`}>
@@ -72,8 +83,8 @@ export const Navbar = () => {
           <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
               <a
-                key={item.href}
-                href={item.href}
+                key={item.id}
+                href={getNavHref(item.id)}
                 className={`font-body text-sm font-semibold transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all hover:after:w-full hover:scale-105 ${
                   isScrolled 
                     ? 'text-foreground/80 hover:text-primary' 
@@ -87,12 +98,14 @@ export const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+525565053202" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a href="tel:+525565053202" className={`flex items-center gap-2 text-sm ${
+              isScrolled ? 'text-primary' : 'text-white'
+            } hover:text-primary transition-colors`}>
               <Phone className="w-4 h-4" />
               <span>+52 55 6505 3202</span>
             </a>
             <Button variant="cta" size="sm" asChild>
-              <a href="#contacto">
+              <a href={getNavHref('contacto')}>
                 <Calendar className="w-4 h-4" />
                 Reservar Cita
               </a>
@@ -147,8 +160,8 @@ export const Navbar = () => {
             <div className="flex flex-col gap-2">
               {navItems.map((item, index) => (
                 <a
-                  key={item.href}
-                  href={item.href}
+                  key={item.id}
+                  href={getNavHref(item.id)}
                   onClick={() => setIsOpen(false)}
                   className="font-body text-base font-semibold text-foreground py-3 px-4 rounded-lg hover:bg-primary/10 hover:text-primary transition-all duration-200 active:scale-95 animate-slide-up"
                   style={{ animationDelay: `${index * 0.05}s` }}
@@ -166,7 +179,7 @@ export const Navbar = () => {
                   Llamar Ahora
                 </a>
                 <Button variant="cta" className="w-full" asChild>
-                  <a href="#contacto" onClick={() => setIsOpen(false)}>
+                  <a href={getNavHref('contacto')} onClick={() => setIsOpen(false)}>
                     <Calendar className="w-4 h-4" />
                     Reservar Cita
                   </a>

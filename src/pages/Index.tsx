@@ -6,6 +6,7 @@ import { MobileBottomCTA } from '@/components/MobileBottomCTA';
 import { SkipToContent } from '@/components/SkipToContent';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useSectionTracking } from '@/hooks/use-section-tracking';
+import { useHashNavigation } from '@/hooks/use-hash-navigation';
 
 // Lazy load components that are below the fold for better initial load performance
 const AboutSection = lazy(() => import('@/components/AboutSection').then(module => ({ default: module.AboutSection })));
@@ -17,6 +18,9 @@ const FAQSection = lazy(() => import('@/components/FAQSection').then(module => (
 const SocialMediaSection = lazy(() => import('@/components/SocialMediaSection').then(module => ({ default: module.SocialMediaSection })));
 
 const Index = () => {
+  // Hook para manejar navegación con hash y tracking
+  useHashNavigation();
+  
   const heroRef = useSectionTracking({ sectionName: 'Hero Section' });
   const aboutRef = useSectionTracking({ sectionName: 'About Section' });
   const servicesRef = useSectionTracking({ sectionName: 'Services Section' });
