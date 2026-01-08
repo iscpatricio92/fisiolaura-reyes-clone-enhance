@@ -207,7 +207,7 @@ El proyecto utiliza un sistema de colores basado en variables CSS con soporte pa
    - Horario: Lun - Vie: 9:00 AM - 7:00 PM
 
 2. **Consultorio Metepec**
-   - Dirección: Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, México
+   - Dirección: Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México
    - Horario: Lun - Vie: 9:00 AM - 7:00 PM
 
 **Consulta Online:**
@@ -302,8 +302,8 @@ npm run preview      # Preview del build de producción
    - Andres Tutino 25c, 09360 Iztapalapa, CDMX
    - Coordenadas: 19.3540592, -99.0791321
 
-2. **Metepec, México**
-   - Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, México
+2. **Metepec, Estado de México**
+   - Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México
    - Coordenadas: 19.2797222, -99.5938110
 
 ---
