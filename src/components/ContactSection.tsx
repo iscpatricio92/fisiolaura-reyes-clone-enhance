@@ -1,4 +1,5 @@
 import { MapPin, Phone, Clock, MessageCircle, Calendar, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LazyMapIframe } from './LazyMapIframe';
 import { ScrollAnimated } from './ScrollAnimated';
@@ -8,13 +9,20 @@ import { getPhysicalAddresses, getAllAddresses } from '@/lib/doctoralia-addresse
 // Obtener direcciones físicas desde la configuración centralizada
 const physicalAddresses = getPhysicalAddresses();
 
+// Función para generar URL de embed de Google Maps correctamente
+const generateGoogleMapsEmbedUrl = (lat: number, lng: number): string => {
+  // Usar el formato de búsqueda con output=embed que funciona sin API key
+  // Cada ubicación tendrá su propia URL única basada en sus coordenadas
+  return `https://www.google.com/maps?q=${lat},${lng}&output=embed&hl=es&z=15`;
+};
+
 // Mapear a formato compatible con el componente existente
 const locations = physicalAddresses.map((addr) => ({
   name: addr.name,
   address: addr.address,
-  mapUrl: addr.mapUrl || `https://google.com/maps?q=${addr.coordinates?.lat},${addr.coordinates?.lng}`,
+  mapUrl: addr.mapUrl || `https://www.google.com/maps?q=${addr.coordinates?.lat},${addr.coordinates?.lng}`,
   embedUrl: addr.coordinates
-    ? `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.5!2d${addr.coordinates.lng}!3d${addr.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDIxJzE0LjYiTiA5OcKwMDQnNDQuOSJX!5e0!3m2!1ses!2smx!4v1234567890`
+    ? generateGoogleMapsEmbedUrl(addr.coordinates.lat, addr.coordinates.lng)
     : '',
 }));
 
@@ -59,12 +67,12 @@ export const ContactSection = () => {
               Reserva en menos de 1 minuto. Elige tu consultorio, fecha y hora.
             </p>
             {/* Próxima disponibilidad destacada */}
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 animate-pulse-soft">
+           {/*  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 animate-pulse-soft">
               <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-sm font-medium text-foreground">
                 Próxima cita disponible: <span className="text-accent font-bold">Mañana a las 10:00 AM</span>
               </span>
-            </div>
+            </div> */}
           </div>
         </ScrollAnimated>
 
@@ -293,6 +301,7 @@ export const ContactSection = () => {
                 <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-glow border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
                   {/* Map - Lazy loaded with security sandbox */}
                   <LazyMapIframe
+                    key={`map-${location.name}-${location.embedUrl}`}
                     src={location.embedUrl}
                     title={`Mapa interactivo de Google Maps mostrando la ubicación de ${location.name} - ${location.address}`}
                     className="h-40 md:h-64"

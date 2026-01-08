@@ -52,7 +52,7 @@ const faqs: FAQ[] = [
   },
   {
     question: '¿Ofrecen consultas en línea o virtuales?',
-    answer: 'Sí, ofrezco consultas virtuales por videollamada. Estas son ideales para evaluaciones iniciales, seguimientos, educación sobre ejercicios y consultas de seguimiento. La consulta en línea tiene una duración de 45 minutos y cuesta $400 MXN.',
+    answer: 'Sí, ofrezco consultas virtuales por videollamada. Estas son ideales para evaluaciones iniciales, seguimientos, educación sobre ejercicios y consultas de seguimiento. La consulta en línea tiene una duración de 45 minutos y cuesta $450 MXN.',
     category: 'Servicios',
   },
   {
@@ -87,7 +87,7 @@ const faqs: FAQ[] = [
   },
   {
     question: '¿Qué horarios de atención tienen?',
-    answer: 'Atiendo de lunes a viernes de 9:00 AM a 7:00 PM en ambos consultorios (Iztapalapa, CDMX y Metepec, México). Las consultas en línea también están disponibles en estos horarios. Para agendar una cita, puedes usar el calendario en línea, llamar o contactar por WhatsApp.',
+    answer: 'Atiendo de lunes a viernes de 9:00 AM a 7:00 PM en ambos consultorios (Iztapalapa, CDMX y Metepec, Estado de México). Las consultas en línea también están disponibles en estos horarios. Para agendar una cita, puedes usar el calendario en línea, llamar o contactar por WhatsApp.',
     category: 'General',
   },
   {
@@ -97,7 +97,7 @@ const faqs: FAQ[] = [
   },
   {
     question: '¿Hay estacionamiento disponible?',
-    answer: 'Sí, en ambos consultorios hay opciones de estacionamiento. En Iztapalapa (CDMX) hay estacionamiento en la calle y parquímetros cercanos. En Metepec hay estacionamiento gratuito disponible en las inmediaciones del consultorio.',
+    answer: 'Sí, en ambos consultorios hay opciones de estacionamiento. En Iztapalapa (CDMX) hay estacionamiento en la calle. En Metepec hay estacionamiento gratuito disponible en las inmediaciones del consultorio.',
     category: 'General',
   },
 ];

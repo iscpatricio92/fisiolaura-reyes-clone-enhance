@@ -37,6 +37,11 @@ export const LazyMapIframe = ({ src, title, className = '' }: LazyMapIframeProps
     return () => observer.disconnect();
   }, []);
 
+  // Reset loaded state when src changes to ensure iframe reloads
+  useEffect(() => {
+    setIsLoaded(false);
+  }, [src]);
+
   return (
     <div ref={containerRef} className={`relative ${className}`}>
       {/* Loading placeholder */}
@@ -51,6 +56,7 @@ export const LazyMapIframe = ({ src, title, className = '' }: LazyMapIframeProps
       
       {isVisible && (
         <iframe
+          key={src}
           src={src}
           width="100%"
           height="100%"
