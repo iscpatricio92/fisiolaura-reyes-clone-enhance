@@ -1,20 +1,22 @@
 name: Auto Version Bump
 
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
   push:
     branches:
       - main
 
+# Evitar ejecuciones concurrentes del mismo workflow
+concurrency:
+  group: version-bump
+  cancel-in-progress: false
+
 jobs:
   bump-version:
-    # Solo ejecutar cuando el PR se mergea (no cuando se cierra sin merge)
+    # Solo ejecutar si el commit NO es del propio workflow
+    # (excluir commits que tienen [skip ci] o que son version bumps)
     if: |
-      (github.event_name == 'push') || 
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+      !contains(github.event.head_commit.message, '[skip ci]') &&
+      !contains(github.event.head_commit.message, 'chore: bump version')
     
     runs-on: ubuntu-latest
     
@@ -27,6 +29,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0  # Necesario para obtener el historial completo de tags
+          ref: main  # Asegurar que estamos en main
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -38,6 +41,12 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+      
+      - name: Pull latest changes before version bump
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull origin main --rebase || git pull origin main
 
       - name: Get current version
         id: current_version
@@ -50,23 +59,23 @@ jobs:
         id: bump_type
         run: |
           # Por defecto, incrementar patch version
-          # Puedes cambiar esto para usar conventional commits si lo prefieres
+          # Para cambiar el tipo, puedes:
+          # 1. Editar este workflow y cambiar BUMP_TYPE a "minor" o "major"
+          # 2. O usar conventional commits en el futuro
           BUMP_TYPE="patch"
           
-          # Si el PR tiene labels, puedes usarlos para determinar el tipo:
-          # - "major" -> major version bump
-          # - "minor" -> minor version bump
-          # - "patch" o sin label -> patch version bump
+          # Opcional: Analizar el mensaje del commit para determinar el tipo
+          # Basado en conventional commits (feat: = minor, BREAKING: = major)
+          COMMIT_MSG="${{ github.event.head_commit.message }}"
           
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            LABELS="${{ join(github.event.pull_request.labels.*.name, ' ') }}"
-            echo "PR Labels: $LABELS"
-            
-            if echo "$LABELS" | grep -qi "major"; then
-              BUMP_TYPE="major"
-            elif echo "$LABELS" | grep -qi "minor"; then
-              BUMP_TYPE="minor"
-            fi
+          if echo "$COMMIT_MSG" | grep -qiE "^(feat|feature):"; then
+            BUMP_TYPE="minor"
+            echo "Detected feature commit, using minor bump"
+          elif echo "$COMMIT_MSG" | grep -qiE "BREAKING CHANGE|^[^:]*!:"; then
+            BUMP_TYPE="major"
+            echo "Detected breaking change, using major bump"
+          else
+            echo "Using default patch bump"
           fi
           
           echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
@@ -91,7 +100,30 @@ jobs:
         run: |
           git add package.json
           git commit -m "chore: bump version to ${{ steps.new_version.outputs.new_version }} [skip ci]"
-          git push
+          
+      - name: Push version bump with retry
+        run: |
+          # Intentar push, si falla por conflictos, hacer pull y reintentar
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if git push origin main; then
+              echo "Push successful"
+              exit 0
+            else
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+              echo "Push failed, attempt $RETRY_COUNT/$MAX_RETRIES"
+              
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Pulling latest changes and retrying..."
+                git pull origin main --rebase || git pull origin main --no-edit
+              fi
+            fi
+          done
+          
+          echo "Failed to push after $MAX_RETRIES attempts"
+          exit 1
 
       - name: Create Git Tag
         run: |
