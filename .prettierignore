@@ -35,3 +35,6 @@ public/*.png
 public/*.jpg
 public/*.jpeg
 public/*.svg
+
+# Config files that should be formatted but checked
+.lintstagedrc.json
