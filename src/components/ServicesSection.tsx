@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Activity,
   Bone,
@@ -13,6 +13,43 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import { ScrollAnimated } from './ScrollAnimated';
+
+// Genera el schema Service para SEO
+const generateServiceSchema = (specialtiesList: typeof specialties) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Fisioterapia',
+  provider: {
+    '@type': 'Person',
+    name: 'Lic. Analaura Reyes Priego',
+    jobTitle: 'Fisioterapeuta',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Ciudad de México' },
+    { '@type': 'City', name: 'Metepec' },
+    { '@type': 'Country', name: 'México' },
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de Fisioterapia',
+    itemListElement: specialtiesList.map((specialty, index) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: specialty.title,
+        description: specialty.description,
+        provider: {
+          '@type': 'Person',
+          name: 'Lic. Analaura Reyes Priego',
+        },
+      },
+      price: `$${specialty.priceFrom}`,
+      priceCurrency: 'MXN',
+      position: index + 1,
+    })),
+  },
+  url: 'https://www.fisio-movimiento.com/#servicios',
+});
 
 const specialties = [
   {
@@ -102,6 +139,64 @@ export const ServicesSection = () => {
   const visibleConditions = showAllConditions
     ? conditions
     : conditions.slice(0, 8);
+
+  // Genera el schema ItemList para condiciones tratadas
+  const generateConditionListSchema = (conditionsList: string[]) => ({
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Condiciones Tratadas',
+    description: 'Lista de condiciones y lesiones que tratamos en fisioterapia',
+    itemListElement: conditionsList.map((condition, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'MedicalCondition',
+        name: condition,
+      },
+    })),
+  });
+
+  // Inyectar schemas para SEO
+  useEffect(() => {
+    // Schema Service
+    const existingServiceScript = document.querySelector(
+      'script[data-service-schema]',
+    );
+    if (!existingServiceScript) {
+      const serviceScript = document.createElement('script');
+      serviceScript.type = 'application/ld+json';
+      serviceScript.setAttribute('data-service-schema', 'true');
+      serviceScript.textContent = JSON.stringify(
+        generateServiceSchema(specialties),
+      );
+      document.head.appendChild(serviceScript);
+    }
+
+    // Schema ItemList para condiciones
+    const existingConditionScript = document.querySelector(
+      'script[data-condition-list-schema]',
+    );
+    if (!existingConditionScript) {
+      const conditionScript = document.createElement('script');
+      conditionScript.type = 'application/ld+json';
+      conditionScript.setAttribute('data-condition-list-schema', 'true');
+      conditionScript.textContent = JSON.stringify(
+        generateConditionListSchema(conditions),
+      );
+      document.head.appendChild(conditionScript);
+    }
+
+    return () => {
+      const serviceScript = document.querySelector(
+        'script[data-service-schema]',
+      );
+      if (serviceScript) serviceScript.remove();
+      const conditionScript = document.querySelector(
+        'script[data-condition-list-schema]',
+      );
+      if (conditionScript) conditionScript.remove();
+    };
+  }, []);
 
   return (
     <section id="servicios" className="py-16 lg:py-24 bg-secondary/30">

@@ -19,6 +19,7 @@ import {
   getPhysicalAddresses,
   getAllAddresses,
 } from '@/lib/doctoralia-addresses';
+import { useEffect } from 'react';
 
 // Obtener direcciones físicas desde la configuración centralizada
 const physicalAddresses = getPhysicalAddresses();
@@ -66,7 +67,60 @@ const contactMethods = [
   },
 ];
 
+// Genera el schema ContactPage para SEO
+const generateContactPageSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contacto - FisioAnalaura',
+  description:
+    'Agenda tu cita de fisioterapia en CDMX o Metepec. Consultorios en Iztapalapa y Metepec. Reserva en línea o por teléfono.',
+  url: 'https://www.fisio-movimiento.com/#contacto',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': 'https://www.fisio-movimiento.com/#organization',
+    name: 'Fisioterapia Analaura Reyes Priego',
+    telephone: '+52 55 6505 3202',
+    email: 'fisio-movimiento.mx@gmail.com',
+    address: [
+      {
+        '@type': 'PostalAddress',
+        streetAddress: 'Andres Tutino 25c',
+        addressLocality: 'Iztapalapa',
+        addressRegion: 'CDMX',
+        postalCode: '09360',
+        addressCountry: 'MX',
+      },
+      {
+        '@type': 'PostalAddress',
+        streetAddress: 'Priv. 5 de Mayo 5, San Jerónimo Chicahualco',
+        addressLocality: 'Metepec',
+        addressRegion: 'México',
+        postalCode: '52179',
+        addressCountry: 'MX',
+      },
+    ],
+  },
+});
+
 export const ContactSection = () => {
+  // Inyectar schema ContactPage para SEO
+  useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[data-contact-page-schema]',
+    );
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-contact-page-schema', 'true');
+      script.textContent = JSON.stringify(generateContactPageSchema());
+      document.head.appendChild(script);
+    }
+    return () => {
+      const script = document.querySelector('script[data-contact-page-schema]');
+      if (script) script.remove();
+    };
+  }, []);
+
   return (
     <section id="contacto" className="py-12 lg:py-24 bg-background">
       <div className="container mx-auto px-4">

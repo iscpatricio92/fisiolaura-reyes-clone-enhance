@@ -1,6 +1,7 @@
 import { GraduationCap, Award, Heart, Clock, Check } from 'lucide-react';
 import { ClinicGallery } from './ClinicGallery';
 import { ScrollAnimated } from './ScrollAnimated';
+import { useEffect } from 'react';
 
 interface Credential {
   icon: React.ElementType;
@@ -54,7 +55,86 @@ const languages = [
   { flag: '🇬🇧', name: 'Inglés', level: 'Avanzado' },
 ];
 
+// Genera el schema AboutPage para SEO
+const generateAboutPageSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Sobre Mí - FisioAnalaura',
+  description:
+    'Conoce a la Lic. Analaura Reyes Priego, fisioterapeuta con doble titulación de México y España, especialista en traumatología, ATM, hipopresivos y manejo del dolor.',
+  url: 'https://www.fisio-movimiento.com/#sobre-mi',
+  mainEntity: {
+    '@type': 'Person',
+    '@id': 'https://www.fisio-movimiento.com/#person',
+    name: 'Lic. Analaura Reyes Priego',
+    jobTitle: 'Fisioterapeuta',
+    description:
+      'Fisioterapeuta con doble titulación de México y España. Especialista en tratamientos personalizados y basados en evidencia científica.',
+    alumniOf: [
+      {
+        '@type': 'EducationalOrganization',
+        name: 'Universidad Europea de Madrid',
+        location: { '@type': 'Place', addressCountry: 'ES' },
+        endDate: '2015',
+      },
+      {
+        '@type': 'EducationalOrganization',
+        name: 'Universidad del Valle de México',
+        location: { '@type': 'Place', addressCountry: 'MX' },
+        endDate: '2017',
+      },
+    ],
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Universidad Europea de Madrid',
+        },
+        educationalLevel: "Bachelor's Degree",
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'degree',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Universidad del Valle de México',
+        },
+        educationalLevel: "Bachelor's Degree",
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Instituto Nacional de Neurología y Neurocirugía',
+        },
+        educationalLevel: 'Diploma',
+      },
+    ],
+  },
+});
+
 export const AboutSection = () => {
+  // Inyectar schema AboutPage para SEO
+  useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[data-about-page-schema]',
+    );
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-about-page-schema', 'true');
+      script.textContent = JSON.stringify(generateAboutPageSchema());
+      document.head.appendChild(script);
+    }
+    return () => {
+      const script = document.querySelector('script[data-about-page-schema]');
+      if (script) script.remove();
+    };
+  }, []);
+
   return (
     <section id="sobre-mi" className="py-16 lg:py-24 bg-background">
       <div className="container mx-auto px-4">
