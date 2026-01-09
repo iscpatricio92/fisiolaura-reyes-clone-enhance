@@ -40,7 +40,7 @@ export const Footer = () => {
             <a
               href="https://www.instagram.com/physioholisticmx/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="w-11 h-11 rounded-full bg-primary-foreground/10 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 hover:text-white flex items-center justify-center transition-all duration-300 active:scale-95"
               aria-label="Instagram"
             >
@@ -49,7 +49,7 @@ export const Footer = () => {
             <a
               href="https://www.facebook.com/fisio.movimiento.mx"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="w-11 h-11 rounded-full bg-primary-foreground/10 hover:bg-[#1877F2] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-95"
               aria-label="Facebook"
             >
@@ -58,7 +58,7 @@ export const Footer = () => {
             <a
               href="https://www.youtube.com/@tu-canal"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="w-11 h-11 rounded-full bg-primary-foreground/10 hover:bg-[#FF0000] hover:text-white flex items-center justify-center transition-all duration-300 active:scale-95"
               aria-label="YouTube"
             >
@@ -144,7 +144,7 @@ export const Footer = () => {
                 <a
                   href="https://www.instagram.com/physioholisticmx/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="w-12 h-12 rounded-full bg-primary-foreground/10 hover:bg-gradient-to-br hover:from-purple-600 hover:to-pink-600 hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-glow"
                   aria-label="Instagram"
                 >
@@ -153,7 +153,7 @@ export const Footer = () => {
                 <a
                   href="https://www.facebook.com/fisio.movimiento.mx"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="w-12 h-12 rounded-full bg-primary-foreground/10 hover:bg-[#1877F2] hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-glow"
                   aria-label="Facebook"
                 >
@@ -162,7 +162,7 @@ export const Footer = () => {
                 <a
                   href="https://www.youtube.com/@tu-canal"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="w-12 h-12 rounded-full bg-primary-foreground/10 hover:bg-[#FF0000] hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-glow"
                   aria-label="YouTube"
                 >

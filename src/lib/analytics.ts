@@ -14,6 +14,15 @@
  * - GA4 script is loaded directly in index.html (Measurement ID: G-3L9C8QMNZV)
  * - Meta Pixel script is loaded directly in index.html (Pixel ID: 1552455925827622)
  * 
+ * UTM Parameter Tracking:
+ * - Automatically captures UTM parameters from URL on page load
+ * - Stores in sessionStorage (current session) and localStorage (first touch)
+ * - Automatically includes UTM params in all events (GA4 and Meta Pixel)
+ * - Supports: utm_source, utm_medium, utm_campaign, utm_term, utm_content
+ * 
+ * Example UTM URL:
+ * https://fisio-movimiento.com/?utm_source=facebook&utm_medium=cpc&utm_campaign=promo_enero
+ * 
  * Note: Most tracking functions automatically track in both GA4 and Meta Pixel
  */
 
@@ -29,6 +38,132 @@ declare global {
     fbq: (...args: unknown[]) => void;
   }
 }
+
+// ============================================
+// UTM Parameter Management
+// ============================================
+
+interface UTMParams {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+}
+
+const UTM_STORAGE_KEY = 'utm_params';
+const UTM_SESSION_KEY = 'utm_params_session';
+
+/**
+ * Extract UTM parameters from current URL
+ */
+const extractUTMParams = (): UTMParams => {
+  if (typeof window === 'undefined') return {};
+
+  const params = new URLSearchParams(window.location.search);
+  const utmParams: UTMParams = {};
+
+  const utmKeys: (keyof UTMParams)[] = [
+    'utm_source',
+    'utm_medium',
+    'utm_campaign',
+    'utm_term',
+    'utm_content',
+  ];
+
+  utmKeys.forEach((key) => {
+    const value = params.get(key);
+    if (value) {
+      utmParams[key] = value;
+    }
+  });
+
+  return utmParams;
+};
+
+/**
+ * Store UTM parameters in sessionStorage and localStorage
+ * SessionStorage: for current session tracking
+ * LocalStorage: for cross-session attribution (first touch)
+ */
+const storeUTMParams = (params: UTMParams): void => {
+  if (typeof window === 'undefined' || Object.keys(params).length === 0) return;
+
+  try {
+    // Store in sessionStorage (current session)
+    sessionStorage.setItem(UTM_SESSION_KEY, JSON.stringify(params));
+
+    // Store in localStorage only if we don't have first-touch attribution yet
+    const existingFirstTouch = localStorage.getItem(UTM_STORAGE_KEY);
+    if (!existingFirstTouch) {
+      localStorage.setItem(UTM_STORAGE_KEY, JSON.stringify(params));
+    }
+  } catch (error) {
+    console.error('Analytics: Error storing UTM parameters:', error);
+  }
+};
+
+/**
+ * Get stored UTM parameters
+ * Priority: sessionStorage (current session) > localStorage (first touch)
+ */
+const getStoredUTMParams = (): UTMParams => {
+  if (typeof window === 'undefined') return {};
+
+  try {
+    // First, try sessionStorage (current session)
+    const sessionParams = sessionStorage.getItem(UTM_SESSION_KEY);
+    if (sessionParams) {
+      return JSON.parse(sessionParams);
+    }
+
+    // Fallback to localStorage (first touch attribution)
+    const firstTouchParams = localStorage.getItem(UTM_STORAGE_KEY);
+    if (firstTouchParams) {
+      return JSON.parse(firstTouchParams);
+    }
+  } catch (error) {
+    console.error('Analytics: Error reading UTM parameters:', error);
+  }
+
+  return {};
+};
+
+/**
+ * Initialize UTM parameter tracking
+ * Should be called on page load to capture UTM params from URL
+ */
+export const initUTMTracking = (): void => {
+  if (typeof window === 'undefined') return;
+
+  const urlParams = extractUTMParams();
+
+  // If we have UTM params in URL, store them
+  if (Object.keys(urlParams).length > 0) {
+    storeUTMParams(urlParams);
+    
+    if (import.meta.env.DEV) {
+      console.log('Analytics: UTM parameters captured:', urlParams);
+    }
+  }
+};
+
+/**
+ * Get UTM parameters formatted for analytics events
+ */
+const getUTMForEvents = (): Record<string, string> => {
+  const utmParams = getStoredUTMParams();
+  const formatted: Record<string, string> = {};
+
+  // Format for GA4 (standard UTM parameter names)
+  if (utmParams.utm_source) formatted.utm_source = utmParams.utm_source;
+  if (utmParams.utm_medium) formatted.utm_medium = utmParams.utm_medium;
+  if (utmParams.utm_campaign) formatted.utm_campaign = utmParams.utm_campaign;
+  if (utmParams.utm_term) formatted.utm_term = utmParams.utm_term;
+  if (utmParams.utm_content) formatted.utm_content = utmParams.utm_content;
+
+  return formatted;
+};
 
 // Check if analytics is enabled
 // Only enable in production (not in development mode)
@@ -46,6 +181,9 @@ const isMetaPixelEnabled = () => {
 // Initialize analytics (called in main.tsx)
 // The actual initialization is done in index.html via script tag
 export const initAnalytics = () => {
+  // Initialize UTM tracking first
+  initUTMTracking();
+
   if (import.meta.env.DEV) {
     console.log('Analytics: Disabled in development mode');
     return;
@@ -69,16 +207,20 @@ export const trackPageView = (path: string, title?: string) => {
   }
 
   try {
+    // Get UTM parameters
+    const utmParams = getUTMForEvents();
+
     // Use 'event' with 'page_view' for virtual pageviews (hash navigation)
     // This is better for SPAs as it tracks navigation without full page reloads
     window.gtag('event', 'page_view', {
       page_path: path,
       page_title: title || document.title,
       page_location: window.location.href,
+      ...utmParams, // Include UTM parameters
     });
     
     if (import.meta.env.DEV) {
-      console.log('Analytics: Page view sent:', path, title || document.title);
+      console.log('Analytics: Page view sent:', path, title || document.title, utmParams);
     }
   } catch (error) {
     console.error('Analytics: Error sending page view:', error);
@@ -98,10 +240,17 @@ export const trackEvent = (
   }
 
   try {
-    window.gtag('event', eventName, eventParams || {});
+    // Get UTM parameters and merge with event params
+    const utmParams = getUTMForEvents();
+    const finalParams = {
+      ...(eventParams || {}),
+      ...utmParams, // UTM params override any conflicting keys
+    };
+
+    window.gtag('event', eventName, finalParams);
     
     if (import.meta.env.DEV) {
-      console.log('Analytics: Event sent:', eventName, eventParams);
+      console.log('Analytics: Event sent:', eventName, finalParams);
     }
   } catch (error) {
     console.error('Analytics: Error sending event:', error);
@@ -196,12 +345,26 @@ export const trackSectionView = (sectionName: string) => {
   });
 };
 
-// Track service interest
-export const trackServiceInterest = (serviceName: string, action: 'view' | 'click') => {
-  trackEvent('service_interest', {
-    service_name: serviceName,
-    action: action,
+// Track service interest (improved with Meta Pixel tracking)
+export const trackServiceInterest = (serviceName: string, action: 'view' | 'click' = 'view') => {
+  // Track in GA4
+  trackEvent('select_content', {
+    content_type: 'service',
+    content_id: serviceName,
+    content_name: serviceName,
+    interaction_type: action,
   });
+  
+  // Track in Meta Pixel as ViewContent (indicates interest)
+  trackMetaPixelEvent('ViewContent', {
+    content_name: serviceName,
+    content_category: 'Service',
+    content_type: 'service',
+  });
+  
+  if (import.meta.env.DEV) {
+    console.log('Analytics: Service interest:', serviceName, action);
+  }
 };
 
 // Track testimonial interaction
@@ -227,6 +390,54 @@ export const trackShareClick = (method: string, platform: string) => {
   });
 };
 
+// Track pricing tab change (high value event - indicates interest)
+export const trackPricingTabChange = (tabName: string) => {
+  // Track in GA4 as select_item (standard e-commerce event)
+  trackEvent('select_item', {
+    item_list_id: 'pricing_tabs',
+    item_list_name: 'Precios',
+    item_name: tabName,
+    content_type: 'pricing_category',
+  });
+  
+  // Track in Meta Pixel as ViewContent (indicates interest in pricing)
+  trackMetaPixelEvent('ViewContent', {
+    content_name: tabName,
+    content_category: 'Pricing',
+    content_type: 'pricing_category',
+  });
+  
+  if (import.meta.env.DEV) {
+    console.log('Analytics: Pricing tab changed to:', tabName);
+  }
+};
+
+// Track time spent on key sections (only if significant time)
+export const trackTimeOnSection = (sectionName: string, timeSpent: number) => {
+  // Only track if user spent significant time (>30 seconds)
+  // This indicates real interest, not just passing through
+  if (timeSpent < 30) return;
+  
+  trackEvent('time_on_section', {
+    section_name: sectionName,
+    time_spent: Math.round(timeSpent),
+    engagement_time_msec: Math.round(timeSpent * 1000),
+  });
+  
+  // For key sections, also track in Meta Pixel
+  const keySections = ['precios', 'servicios', 'contacto'];
+  if (keySections.includes(sectionName.toLowerCase())) {
+    trackMetaPixelCustomEvent('TimeOnSection', {
+      section_name: sectionName,
+      time_spent: Math.round(timeSpent),
+    });
+  }
+  
+  if (import.meta.env.DEV) {
+    console.log('Analytics: Time on section:', sectionName, `${Math.round(timeSpent)}s`);
+  }
+};
+
 // ============================================
 // Meta Pixel Event Tracking
 // ============================================
@@ -248,10 +459,17 @@ export const trackMetaPixelEvent = (
   }
 
   try {
-    window.fbq('track', eventName, eventParams || {});
+    // Get UTM parameters and merge with event params
+    const utmParams = getUTMForEvents();
+    const finalParams = {
+      ...(eventParams || {}),
+      ...utmParams, // UTM params override any conflicting keys
+    };
+
+    window.fbq('track', eventName, finalParams);
     
     if (import.meta.env.DEV) {
-      console.log('Meta Pixel: Event sent:', eventName, eventParams);
+      console.log('Meta Pixel: Event sent:', eventName, finalParams);
     }
   } catch (error) {
     console.error('Meta Pixel: Error sending event:', error);
@@ -275,10 +493,17 @@ export const trackMetaPixelCustomEvent = (
   }
 
   try {
-    window.fbq('trackCustom', eventName, eventParams || {});
+    // Get UTM parameters and merge with event params
+    const utmParams = getUTMForEvents();
+    const finalParams = {
+      ...(eventParams || {}),
+      ...utmParams, // UTM params override any conflicting keys
+    };
+
+    window.fbq('trackCustom', eventName, finalParams);
     
     if (import.meta.env.DEV) {
-      console.log('Meta Pixel: Custom event sent:', eventName, eventParams);
+      console.log('Meta Pixel: Custom event sent:', eventName, finalParams);
     }
   } catch (error) {
     console.error('Meta Pixel: Error sending custom event:', error);

@@ -181,7 +181,7 @@ export const Navbar = () => {
                 <Button variant="cta" className="w-full" asChild>
                   <a href={getNavHref('contacto')} onClick={() => setIsOpen(false)}>
                     <Calendar className="w-4 h-4" />
-                    Reservar Cita
+                    Agendar Consulta
                   </a>
                 </Button>
               </div>

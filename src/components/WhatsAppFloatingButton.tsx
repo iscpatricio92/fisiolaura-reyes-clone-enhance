@@ -53,7 +53,7 @@ export const WhatsAppFloatingButton = ({
           <a
             href={whatsappUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="block w-full px-4 py-3 rounded-lg gradient-cta text-accent-foreground font-semibold text-center shadow-md hover:shadow-glow hover:scale-105 transition-all duration-300"
             onClick={() => {
               setIsExpanded(false);

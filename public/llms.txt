@@ -1,0 +1,64 @@
+# llms.txt - Guía para LLM Crawlers
+# Este archivo ayuda a los crawlers de Large Language Models a entender mejor el contenido del sitio
+
+# Información del sitio
+Sitio: FisioAnalaura - Fisioterapeuta en CDMX y Metepec
+URL: https://fisio-movimiento.com
+Descripción: Sitio web profesional de la Lic. Analaura Reyes Priego, fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor.
+
+# Información del profesional
+Profesional: Lic. Analaura Reyes Priego
+Cédula Profesional: 10909109
+Titulaciones: 
+  - Universidad Europea de Madrid (España, 2015)
+  - Universidad del Valle de México (México, 2017)
+Diplomado: Abordaje Integral del Dolor por el Instituto Nacional de Neurología y Neurocirugía (en curso)
+
+# Ubicaciones
+Consultorios:
+  - Iztapalapa, CDMX: Andres Tutino 25c, 09360
+  - Metepec, Estado de México: Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179
+
+# Contacto
+Teléfono: +52 55 6505 3202
+Email: fisio-movimiento.mx@gmail.com
+WhatsApp: https://wa.me/525565053202
+Reservas en línea: https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec
+
+# Servicios principales
+- Fisioterapia Traumatológica
+- Fisioterapia ATM (Articulación Temporomandibular)
+- Hipopresivos
+- Manejo del Dolor
+- Readaptación Deportiva
+- Terapias Manuales
+- Electroterapia
+- Fisioterapia para Adulto Mayor
+
+# Precios
+- Consulta en Línea: $450 MXN
+- Primera Visita: $600 MXN (promoción, precio normal $800)
+- Sesión de Fisioterapia: $550 MXN
+- Masaje de Descarga Muscular: $900 MXN
+
+# Horarios
+Lunes a Viernes: 9:00 AM - 7:00 PM
+
+# Redes sociales
+Instagram: https://www.instagram.com/physioholisticmx/
+Facebook: https://www.facebook.com/fisio.movimiento.mx
+Doctoralia: https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec
+
+# Páginas importantes
+- Inicio: https://fisio-movimiento.com/
+- Aviso de Privacidad: https://fisio-movimiento.com/aviso-privacidad
+- Política de Cancelación: https://fisio-movimiento.com/politica-cancelacion
+- Términos y Condiciones: https://fisio-movimiento.com/terminos-condiciones
+
+# Nota técnica
+Este sitio es una Single Page Application (SPA) construida con React.
+El contenido se renderiza dinámicamente con JavaScript.
+Para obtener el contenido completo, los crawlers deben ejecutar JavaScript.
+
+# Sitemap
+Sitemap: https://fisio-movimiento.com/sitemap.xml
