@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    # Excluir commits del workflow de version bump
-    paths-ignore:
-      - 'package.json'
 
 # Permissions required for GitHub Pages deployment
 permissions:
