@@ -97,7 +97,7 @@ export const ShareButtons = ({
                 key={button.name}
                 href={button.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className={`w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 ${button.color}`}
                 aria-label={button.label}
                 onClick={() => {
@@ -138,7 +138,7 @@ export const ShareButtons = ({
                   key={button.name}
                   href={button.href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 hover:scale-105 ${button.color}`}
                   aria-label={button.label}
                 >

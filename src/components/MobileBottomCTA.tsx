@@ -18,10 +18,10 @@ export const MobileBottomCTA = () => {
           >
             <a 
               href="#contacto"
-              onClick={() => trackCTAClick('Reservar Cita', 'Mobile Bottom CTA')}
+              onClick={() => trackCTAClick('Agendar Cita', 'Mobile Bottom CTA')}
             >
               <Calendar className="w-5 h-5" />
-              Reservar Cita
+              Agendar Cita
             </a>
           </Button>
           <Button 
@@ -32,7 +32,7 @@ export const MobileBottomCTA = () => {
             <a 
               href="https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20cita"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               onClick={() => trackWhatsAppClick('Contactar', 'Mobile Bottom CTA')}
             >
               <MessageCircle className="w-5 h-5" />

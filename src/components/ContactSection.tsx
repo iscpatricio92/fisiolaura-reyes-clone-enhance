@@ -93,7 +93,7 @@ export const ContactSection = () => {
               <a
                 href="https://wa.me/525565053202"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 onClick={() => trackWhatsAppClick('Contact Section Mobile', 'Contact Section')}
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-200 active:scale-95"
               >
@@ -105,7 +105,7 @@ export const ContactSection = () => {
               <a
                 href="https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 onClick={() => trackExternalLink('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec', 'Doctoralia Mobile')}
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-200 active:scale-95"
               >
@@ -211,7 +211,7 @@ export const ContactSection = () => {
                     <a
                       href="https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-2"
                       onClick={() => trackExternalLink('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec', 'Abrir en Doctoralia')}
                     >
@@ -246,7 +246,7 @@ export const ContactSection = () => {
                     <a
                       href="https://wa.me/525565053202"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-2"
                       onClick={() => trackWhatsAppClick('Contact Section', 'Contact Section')}
                     >
@@ -335,7 +335,7 @@ export const ContactSection = () => {
                         <a 
                           href={`https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20${encodeURIComponent(location.name)}`}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener noreferrer nofollow"
                           onClick={() => trackWhatsAppClick(`Cita en ${location.name}`, location.name)}
                         >
                           <MessageCircle className="w-4 h-4" />
@@ -345,7 +345,7 @@ export const ContactSection = () => {
                         <a 
                           href={location.mapUrl}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener noreferrer nofollow"
                           onClick={() => trackExternalLink(location.mapUrl, `Ver Mapa - ${location.name}`)}
                         >
                           <MapPin className="w-4 h-4" />
@@ -368,7 +368,7 @@ export const ContactSection = () => {
                         <a 
                           href={`https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20${encodeURIComponent(location.name)}`}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener noreferrer nofollow"
                           onClick={() => trackWhatsAppClick(`Cita en ${location.name}`, location.name)}
                         >
                           <MessageCircle className="w-4 h-4" />
@@ -379,7 +379,7 @@ export const ContactSection = () => {
                         <a 
                           href={location.mapUrl}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener noreferrer nofollow"
                           onClick={() => trackExternalLink(location.mapUrl, `Ver Mapa - ${location.name}`)}
                         >
                           <MapPin className="w-4 h-4" />

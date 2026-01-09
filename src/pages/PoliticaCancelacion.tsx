@@ -308,7 +308,7 @@ const PoliticaCancelacion = () => {
               </p>
               <div className="space-y-2 text-foreground">
                 <p>• Teléfono: <a href="tel:+525565053202" className="text-primary hover:underline font-semibold">+52 55 6505 3202</a></p>
-                <p>• WhatsApp: <a href="https://wa.me/525565053202" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-semibold">Enviar mensaje</a></p>
+                <p>• WhatsApp: <a href="https://wa.me/525565053202" target="_blank" rel="noopener noreferrer nofollow" className="text-primary hover:underline font-semibold">Enviar mensaje</a></p>
                 <p>• Correo: <a href="mailto:fisio-movimiento.mx@gmail.com" className="text-primary hover:underline font-semibold">fisio-movimiento.mx@gmail.com</a></p>
               </div>
             </section>

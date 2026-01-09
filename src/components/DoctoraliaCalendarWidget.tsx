@@ -103,7 +103,7 @@ export const DoctoraliaCalendarWidget = ({
             <a
               href={doctoraliaUrl}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="inline-flex items-center gap-2"
             >
               <Calendar className="w-5 h-5" />
@@ -133,7 +133,7 @@ export const DoctoraliaCalendarWidget = ({
             <a
               href="https://wa.me/525565053202"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="inline-flex items-center gap-2"
             >
               <MessageCircle className="w-4 h-4" />
@@ -150,7 +150,7 @@ export const DoctoraliaCalendarWidget = ({
           <a
             href={doctoraliaUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors text-sm"
           >
             Ver perfil completo en Doctoralia

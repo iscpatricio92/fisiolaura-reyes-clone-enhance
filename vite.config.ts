@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => ({
     imagetools(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon/favicon.ico', 'favicon/favicon-16x16.png', 'favicon/favicon-32x32.png', 'favicon/favicon-96x96.png', 'favicon/apple-touch-icon.png', 'robots.txt', 'sitemap.xml'],
+      includeAssets: ['favicon/favicon.ico', 'favicon/favicon-16x16.png', 'favicon/favicon-32x32.png', 'favicon/favicon-96x96.png', 'favicon/apple-touch-icon.png', 'robots.txt', 'sitemap.xml', 'llms.txt'],
       manifestFilename: 'manifest.json', // Cambiar extensión a .json para mejor compatibilidad con GitHub Pages
       manifest: {
         name: 'FisioAnalaura - Fisioterapeuta en CDMX y Metepec',

@@ -71,7 +71,7 @@ export const SocialMediaSection = ({
                 key={social.name}
                 href={social.url}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="group relative bg-secondary/50 hover:bg-card rounded-xl p-3 lg:p-5 border border-border/30 hover:border-primary/40 transition-all duration-200 hover:shadow-soft active:scale-95 text-center"
               >
                 <div className="flex flex-col items-center gap-2 lg:gap-3">
