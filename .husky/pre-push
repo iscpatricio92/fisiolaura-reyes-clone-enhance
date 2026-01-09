@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+# Hook pre-push: Verificar que el build funciona antes de hacer push
+
+echo "🔍 Verificando que el build funciona..."
+
+# Ejecutar build en modo silencioso
+npm run build > /dev/null 2>&1
+
+# Verificar el código de salida
+if [ $? -eq 0 ]; then
+  echo "✅ Build exitoso - Continuando con push"
+  exit 0
+else
+  echo "❌ Error: El build falló. Por favor, corrige los errores antes de hacer push."
+  echo ""
+  echo "Ejecuta 'npm run build' para ver los errores detallados."
+  exit 1
+fi

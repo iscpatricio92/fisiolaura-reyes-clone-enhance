@@ -4,12 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Security Headers (Meta Tags for GitHub Pages) -->
+    <!-- Content-Security-Policy: Controla qué recursos puede cargar el navegador -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://*.sentry.io https://*.ingest.sentry.io; frame-src 'self' https://www.google.com https://www.doctoralia.com.mx https://widgets.doctoralia.com.mx; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;"
+    />
+    <!-- X-Frame-Options: Previene clickjacking -->
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <!-- X-Content-Type-Options: Previene MIME type sniffing -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <!-- Referrer-Policy: Controla qué información se envía en el referrer -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <!-- Permissions-Policy: Controla qué APIs del navegador están disponibles -->
+    <meta
+      http-equiv="Permissions-Policy"
+      content="geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    />
+
     <!-- Performance: Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://widgets.doctoralia.com.mx" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- Preload critical resources -->
+    <!-- Note: Vite will inject module preloads automatically for critical chunks -->
 
     <!-- Google Analytics 4 -->
     <script
@@ -113,6 +134,7 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_MX" />
     <meta property="og:site_name" content="FisioAnalaura" />
+    <meta property="fb:app_id" content="1420769852737105" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
