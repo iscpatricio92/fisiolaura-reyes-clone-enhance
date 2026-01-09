@@ -1,4 +1,10 @@
-import { Instagram, Facebook, Youtube, ExternalLink, Share2 } from 'lucide-react';
+import {
+  Instagram,
+  Facebook,
+  Youtube,
+  ExternalLink,
+  Share2,
+} from 'lucide-react';
 
 interface SocialLink {
   name: string;
@@ -13,8 +19,8 @@ interface SocialMediaSectionProps {
   className?: string;
 }
 
-export const SocialMediaSection = ({ 
-  className = '' 
+export const SocialMediaSection = ({
+  className = '',
 }: SocialMediaSectionProps) => {
   // URLs de redes sociales - declaradas directamente en el componente
   const socialLinks: SocialLink[] = [
@@ -42,7 +48,7 @@ export const SocialMediaSection = ({
       description: 'Suscríbete a nuestro canal',
       enabled: true,
     },
-  ].filter(link => link.enabled);
+  ].filter((link) => link.enabled);
 
   return (
     <div className={`w-full ${className}`}>
@@ -90,4 +96,3 @@ export const SocialMediaSection = ({
     </div>
   );
 };
-

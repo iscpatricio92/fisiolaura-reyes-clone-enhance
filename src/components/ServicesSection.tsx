@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { 
-  Activity, 
-  Bone, 
-  Brain, 
-  Heart, 
-  Zap, 
-  Users, 
+import {
+  Activity,
+  Bone,
+  Brain,
+  Heart,
+  Zap,
+  Users,
   Target,
   Sparkles,
   ArrowRight,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
 } from 'lucide-react';
 import { ScrollAnimated } from './ScrollAnimated';
 
@@ -18,49 +18,57 @@ const specialties = [
   {
     icon: Bone,
     title: 'Traumatológica',
-    description: '¿Sufriste una lesión o saliste de cirugía? Te ayudo a recuperar tu movilidad paso a paso.',
+    description:
+      '¿Sufriste una lesión o saliste de cirugía? Te ayudo a recuperar tu movilidad paso a paso.',
     priceFrom: '550',
   },
   {
     icon: Zap,
     title: 'Electroterapia',
-    description: 'Alivia el dolor rápidamente con técnicas de electroterapia de última generación.',
+    description:
+      'Alivia el dolor rápidamente con técnicas de electroterapia de última generación.',
     priceFrom: '550',
   },
   {
     icon: Activity,
     title: 'Terapias Manuales',
-    description: '¿Contracturas o tensión muscular? Libera la rigidez con técnicas manuales especializadas.',
+    description:
+      '¿Contracturas o tensión muscular? Libera la rigidez con técnicas manuales especializadas.',
     priceFrom: '550',
   },
   {
     icon: Target,
     title: 'Readaptación Deportiva',
-    description: '¿Lesión deportiva te detuvo? Vuelve a entrenar con un plan de recuperación personalizado.',
+    description:
+      '¿Lesión deportiva te detuvo? Vuelve a entrenar con un plan de recuperación personalizado.',
     priceFrom: '550',
   },
   {
     icon: Brain,
     title: 'Tratamiento ATM',
-    description: '¿Dolor de mandíbula o bruxismo? Tratamiento especializado para que mastiques sin dolor.',
+    description:
+      '¿Dolor de mandíbula o bruxismo? Tratamiento especializado para que mastiques sin dolor.',
     priceFrom: '550',
   },
   {
     icon: Sparkles,
     title: 'Hipopresivos',
-    description: 'Fortalece tu suelo pélvico y abdomen con ejercicios que realmente funcionan.',
+    description:
+      'Fortalece tu suelo pélvico y abdomen con ejercicios que realmente funcionan.',
     priceFrom: '550',
   },
   {
     icon: Heart,
     title: 'Manejo del Dolor',
-    description: '¿Dolor crónico que no cede? Tratamiento integral basado en la evidencia más actual.',
+    description:
+      '¿Dolor crónico que no cede? Tratamiento integral basado en la evidencia más actual.',
     priceFrom: '550',
   },
   {
     icon: Users,
     title: 'Adulto Mayor',
-    description: 'Mantén tu independencia y prevén caídas con un programa diseñado para ti.',
+    description:
+      'Mantén tu independencia y prevén caídas con un programa diseñado para ti.',
     priceFrom: '550',
   },
 ];
@@ -89,9 +97,11 @@ const conditions = [
 
 export const ServicesSection = () => {
   const [showAllConditions, setShowAllConditions] = useState(false);
-  
+
   // Show only first 8 conditions on mobile when collapsed
-  const visibleConditions = showAllConditions ? conditions : conditions.slice(0, 8);
+  const visibleConditions = showAllConditions
+    ? conditions
+    : conditions.slice(0, 8);
 
   return (
     <section id="servicios" className="py-16 lg:py-24 bg-secondary/30">
@@ -106,8 +116,8 @@ export const ServicesSection = () => {
               ¿Qué <span className="text-primary">Tratamiento</span> Necesitas?
             </h2>
             <p className="text-base lg:text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-              Cuéntame tu dolor y juntos encontraremos la solución. 
-              Todos los tratamientos son personalizados para ti.
+              Cuéntame tu dolor y juntos encontraremos la solución. Todos los
+              tratamientos son personalizados para ti.
             </p>
           </div>
         </ScrollAnimated>
@@ -118,10 +128,7 @@ export const ServicesSection = () => {
           <div className="lg:hidden -mx-4 px-4 mb-8">
             <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
               {specialties.map((specialty, index) => (
-                <div 
-                  key={index} 
-                  className="flex-shrink-0 w-[280px] snap-start"
-                >
+                <div key={index} className="flex-shrink-0 w-[280px] snap-start">
                   <div className="group relative p-5 rounded-2xl bg-card shadow-soft border border-border/50 h-full min-h-[200px]">
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
                       <specialty.icon className="w-6 h-6 text-primary" />
@@ -147,8 +154,8 @@ export const ServicesSection = () => {
             <div className="flex flex-col items-center gap-2 mt-3">
               <div className="flex items-center gap-1.5">
                 {specialties.map((_, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
                       index === 0 ? 'w-4 bg-primary' : 'w-1.5 bg-primary/30'
                     }`}
@@ -164,7 +171,11 @@ export const ServicesSection = () => {
           {/* Desktop Grid */}
           <div className="hidden lg:grid lg:grid-cols-4 gap-6 mb-12">
             {specialties.map((specialty, index) => (
-              <ScrollAnimated key={index} animation="scale-in" delay={index * 50}>
+              <ScrollAnimated
+                key={index}
+                animation="scale-in"
+                delay={index * 50}
+              >
                 <div className="group relative p-6 rounded-2xl bg-card shadow-soft hover:shadow-glow transition-all duration-300 hover:-translate-y-2 border border-border/50 hover:border-primary/30">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:gradient-hero flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:shadow-glow">
                     <specialty.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
@@ -196,7 +207,9 @@ export const ServicesSection = () => {
               className="inline-flex items-center gap-2 px-6 py-3.5 lg:py-3 rounded-xl gradient-cta text-accent-foreground font-semibold shadow-md hover:shadow-glow hover:scale-105 transition-all duration-300 group min-h-[48px]"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById('precios')?.scrollIntoView({ behavior: 'smooth' });
+                document
+                  .getElementById('precios')
+                  ?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               Ver todos los precios
@@ -220,7 +233,7 @@ export const ServicesSection = () => {
             {/* Conditions tags */}
             <div className="flex flex-wrap justify-center gap-2 lg:gap-3">
               {visibleConditions.map((condition, index) => (
-                <span 
+                <span
                   key={index}
                   className="px-3 py-2 lg:px-4 lg:py-2 rounded-full bg-secondary text-secondary-foreground text-xs lg:text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-300 cursor-default shadow-soft min-h-[40px] lg:min-h-0 flex items-center"
                 >
@@ -252,7 +265,12 @@ export const ServicesSection = () => {
             {/* Desktop: Show all conditions */}
             <div className="hidden lg:flex flex-wrap justify-center gap-3 mt-0">
               {conditions.slice(8).map((condition, index) => (
-                <ScrollAnimated key={index + 8} animation="scale-in" delay={(index + 8) * 20} triggerOnce={true}>
+                <ScrollAnimated
+                  key={index + 8}
+                  animation="scale-in"
+                  delay={(index + 8) * 20}
+                  triggerOnce={true}
+                >
                   <span className="px-4 py-2 rounded-full bg-secondary text-secondary-foreground text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:scale-105 transition-all duration-300 cursor-default shadow-soft hover:shadow-medium inline-block">
                     {condition}
                   </span>

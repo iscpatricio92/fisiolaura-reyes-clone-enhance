@@ -1,15 +1,15 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { WhatsAppFloatingButton } from "@/components/WhatsAppFloatingButton";
-import { PWAUpdatePrompt } from "@/components/PWAUpdatePrompt";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import AvisoPrivacidad from "./pages/AvisoPrivacidad";
-import PoliticaCancelacion from "./pages/PoliticaCancelacion";
-import TerminosCondiciones from "./pages/TerminosCondiciones";
+import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton';
+import { PWAUpdatePrompt } from '@/components/PWAUpdatePrompt';
+import Index from './pages/Index';
+import NotFound from './pages/NotFound';
+import AvisoPrivacidad from './pages/AvisoPrivacidad';
+import PoliticaCancelacion from './pages/PoliticaCancelacion';
+import TerminosCondiciones from './pages/TerminosCondiciones';
 
 const queryClient = new QueryClient();
 
@@ -18,7 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter 
+      <BrowserRouter
         basename={import.meta.env.BASE_URL}
         future={{
           v7_startTransition: true,
@@ -28,8 +28,14 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/aviso-privacidad" element={<AvisoPrivacidad />} />
-          <Route path="/politica-cancelacion" element={<PoliticaCancelacion />} />
-          <Route path="/terminos-condiciones" element={<TerminosCondiciones />} />
+          <Route
+            path="/politica-cancelacion"
+            element={<PoliticaCancelacion />}
+          />
+          <Route
+            path="/terminos-condiciones"
+            element={<TerminosCondiciones />}
+          />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

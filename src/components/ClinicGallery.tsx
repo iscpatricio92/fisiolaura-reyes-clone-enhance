@@ -7,7 +7,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { Dialog, DialogContent, DialogClose, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 // Importar imágenes locales optimizadas con vite-imagetools
 // Redimensionar a 800x600 (aspect ratio 4:3) para mantener consistencia
@@ -86,17 +92,17 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
       >
         <CarouselContent className="-ml-2">
           {galleryImages.map((image, index) => (
-            <CarouselItem key={index} className={`pl-2 ${compact ? 'basis-full' : 'basis-full'}`}>
-              <div 
+            <CarouselItem
+              key={index}
+              className={`pl-2 ${compact ? 'basis-full' : 'basis-full'}`}
+            >
+              <div
                 className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-soft hover:shadow-glow transition-all duration-300"
                 onClick={() => setSelectedImage(image)}
               >
                 {/* Optimized image with WebP and fallback */}
                 <picture>
-                  <source 
-                    srcSet={image.src}
-                    type="image/webp" 
-                  />
+                  <source srcSet={image.src} type="image/webp" />
                   <img
                     src={image.fallback}
                     alt={image.alt}
@@ -118,7 +124,9 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
                 {/* Caption */}
                 {image.caption && (
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                    <p className="text-white font-semibold text-sm">{image.caption}</p>
+                    <p className="text-white font-semibold text-sm">
+                      {image.caption}
+                    </p>
                   </div>
                 )}
               </div>
@@ -138,21 +146,22 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
       <div className="absolute -z-10 -bottom-6 -right-6 w-full h-full rounded-3xl border-2 border-primary/20" />
 
       {/* Lightbox Modal */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+      <Dialog
+        open={!!selectedImage}
+        onOpenChange={() => setSelectedImage(null)}
+      >
         <DialogContent className="max-w-4xl p-0 bg-transparent border-none shadow-none">
           {/* DialogTitle for accessibility - visually hidden but accessible to screen readers */}
           <DialogTitle className="sr-only">
-            {selectedImage 
+            {selectedImage
               ? `${selectedImage.caption || 'Imagen de galería'} - ${selectedImage.alt}`
-              : 'Visor de imagen'
-            }
+              : 'Visor de imagen'}
           </DialogTitle>
           {/* DialogDescription for accessibility - visually hidden but accessible to screen readers */}
           <DialogDescription className="sr-only">
             {selectedImage
               ? `Imagen ampliada de ${selectedImage.caption || 'la galería'}. Presiona Escape o haz clic en el botón de cerrar para cerrar el visor.`
-              : 'Visor de imagen ampliada. Presiona Escape o haz clic en el botón de cerrar para cerrar.'
-            }
+              : 'Visor de imagen ampliada. Presiona Escape o haz clic en el botón de cerrar para cerrar.'}
           </DialogDescription>
           <DialogClose className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors">
             <X className="w-5 h-5" />
@@ -162,10 +171,7 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
             <div className="relative rounded-2xl overflow-hidden bg-black">
               {/* Optimized image in lightbox with WebP and fallback */}
               <picture>
-                <source 
-                  srcSet={selectedImage.src}
-                  type="image/webp" 
-                />
+                <source srcSet={selectedImage.src} type="image/webp" />
                 <img
                   src={selectedImage.fallback}
                   alt={selectedImage.alt}
@@ -175,8 +181,12 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
               </picture>
               {selectedImage.caption && (
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-                  <p className="text-white font-display font-bold text-lg">{selectedImage.caption}</p>
-                  <p className="text-white/70 text-sm mt-1">{selectedImage.alt}</p>
+                  <p className="text-white font-display font-bold text-lg">
+                    {selectedImage.caption}
+                  </p>
+                  <p className="text-white/70 text-sm mt-1">
+                    {selectedImage.alt}
+                  </p>
                 </div>
               )}
             </div>

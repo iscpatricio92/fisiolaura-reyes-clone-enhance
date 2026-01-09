@@ -1,5 +1,13 @@
 import { trackEvent } from '@/lib/analytics';
-import { Facebook, Twitter, MessageCircle, Linkedin, Share2, Copy, Check } from 'lucide-react';
+import {
+  Facebook,
+  Twitter,
+  MessageCircle,
+  Linkedin,
+  Share2,
+  Copy,
+  Check,
+} from 'lucide-react';
 import { useState } from 'react';
 
 interface ShareButtonsProps {
@@ -11,11 +19,13 @@ interface ShareButtonsProps {
 }
 
 export const ShareButtons = ({
-  url = typeof window !== 'undefined' ? window.location.href : 'https://www.fisio-movimiento.com/',
+  url = typeof window !== 'undefined'
+    ? window.location.href
+    : 'https://www.fisio-movimiento.com/',
   title = 'Lic. Analaura Reyes Priego | Fisioterapeuta en CDMX y Metepec',
   description = 'Fisioterapeuta con doble titulación. Especialista en traumatología, ATM, hipopresivos y manejo del dolor.',
   className = '',
-  variant = 'default'
+  variant = 'default',
 }: ShareButtonsProps) => {
   const [copied, setCopied] = useState(false);
 
@@ -88,7 +98,9 @@ export const ShareButtons = ({
   if (variant === 'compact') {
     return (
       <div className={`flex items-center gap-2 ${className}`}>
-        <span className="text-sm text-muted-foreground font-medium">Compartir:</span>
+        <span className="text-sm text-muted-foreground font-medium">
+          Compartir:
+        </span>
         <div className="flex gap-2">
           {shareButtons.map((button) => {
             const Icon = button.icon;
@@ -130,7 +142,9 @@ export const ShareButtons = ({
       <div className={`fixed bottom-24 right-4 md:right-6 z-40 ${className}`}>
         <div className="bg-card rounded-2xl p-4 shadow-glow border border-border/50 animate-scale-in">
           <div className="flex flex-col gap-3">
-            <div className="text-sm font-semibold text-foreground mb-2">Compartir</div>
+            <div className="text-sm font-semibold text-foreground mb-2">
+              Compartir
+            </div>
             {shareButtons.map((button) => {
               const Icon = button.icon;
               return (
@@ -155,7 +169,9 @@ export const ShareButtons = ({
               {copied ? (
                 <>
                   <Check className="w-5 h-5 text-green-500" />
-                  <span className="text-sm font-medium text-green-500">¡Copiado!</span>
+                  <span className="text-sm font-medium text-green-500">
+                    ¡Copiado!
+                  </span>
                 </>
               ) : (
                 <>
@@ -183,7 +199,9 @@ export const ShareButtons = ({
   // Default variant
   return (
     <div className={`flex flex-wrap items-center gap-4 ${className}`}>
-      <span className="text-sm font-semibold text-foreground">Compartir en:</span>
+      <span className="text-sm font-semibold text-foreground">
+        Compartir en:
+      </span>
       <div className="flex flex-wrap gap-3">
         {shareButtons.map((button) => {
           const Icon = button.icon;
@@ -197,8 +215,27 @@ export const ShareButtons = ({
               aria-label={button.label}
               onClick={(e) => {
                 // Tracking opcional (Google Analytics)
-                if (typeof window !== 'undefined' && (window as unknown as { gtag?: (command: string, targetId: string, config: { event_category: string; event_label: string }) => void }).gtag) {
-                  (window as unknown as { gtag: (command: string, targetId: string, config: { event_category: string; event_label: string }) => void }).gtag('event', 'share', {
+                if (
+                  typeof window !== 'undefined' &&
+                  (
+                    window as unknown as {
+                      gtag?: (
+                        command: string,
+                        targetId: string,
+                        config: { event_category: string; event_label: string },
+                      ) => void;
+                    }
+                  ).gtag
+                ) {
+                  (
+                    window as unknown as {
+                      gtag: (
+                        command: string,
+                        targetId: string,
+                        config: { event_category: string; event_label: string },
+                      ) => void;
+                    }
+                  ).gtag('event', 'share', {
                     event_category: 'Social',
                     event_label: button.name,
                   });
@@ -218,7 +255,9 @@ export const ShareButtons = ({
           {copied ? (
             <>
               <Check className="w-5 h-5 text-green-500" />
-              <span className="text-sm font-medium text-green-500">¡Copiado!</span>
+              <span className="text-sm font-medium text-green-500">
+                ¡Copiado!
+              </span>
             </>
           ) : (
             <>
@@ -241,4 +280,3 @@ export const ShareButtons = ({
     </div>
   );
 };
-

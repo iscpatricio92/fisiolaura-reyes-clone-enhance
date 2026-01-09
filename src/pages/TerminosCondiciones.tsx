@@ -20,15 +20,23 @@ const TerminosCondiciones = () => {
               Términos y <span className="text-primary">Condiciones</span>
             </h1>
             <p className="text-muted-foreground">
-              Última actualización: {new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' })}
+              Última actualización:{' '}
+              {new Date().toLocaleDateString('es-MX', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
             </p>
           </div>
 
           {/* Introducción */}
           <div className="bg-card rounded-2xl p-6 lg:p-8 shadow-soft border border-border/50 mb-8">
             <p className="text-foreground">
-              Al acceder y utilizar este sitio web y los servicios de fisioterapia ofrecidos por la <strong>Lic. Analaura Reyes Priego</strong>, 
-              usted acepta estar sujeto a los siguientes términos y condiciones. Le recomendamos leerlos cuidadosamente.
+              Al acceder y utilizar este sitio web y los servicios de
+              fisioterapia ofrecidos por la{' '}
+              <strong>Lic. Analaura Reyes Priego</strong>, usted acepta estar
+              sujeto a los siguientes términos y condiciones. Le recomendamos
+              leerlos cuidadosamente.
             </p>
           </div>
 
@@ -40,10 +48,26 @@ const TerminosCondiciones = () => {
                 1. Aceptación de los Términos
               </h2>
               <p className="text-foreground">
-                Al utilizar este sitio web, reservar una cita, o utilizar nuestros servicios, usted reconoce que ha leído, 
-                entendido y acepta estar vinculado por estos términos y condiciones, así como por nuestra 
-                <Link to="/aviso-privacidad" className="text-primary hover:underline"> Política de Privacidad</Link> y 
-                <Link to="/politica-cancelacion" className="text-primary hover:underline"> Política de Cancelación</Link>.
+                Al utilizar este sitio web, reservar una cita, o utilizar
+                nuestros servicios, usted reconoce que ha leído, entendido y
+                acepta estar vinculado por estos términos y condiciones, así
+                como por nuestra
+                <Link
+                  to="/aviso-privacidad"
+                  className="text-primary hover:underline"
+                >
+                  {' '}
+                  Política de Privacidad
+                </Link>{' '}
+                y
+                <Link
+                  to="/politica-cancelacion"
+                  className="text-primary hover:underline"
+                >
+                  {' '}
+                  Política de Cancelación
+                </Link>
+                .
               </p>
             </section>
 
@@ -56,9 +80,15 @@ const TerminosCondiciones = () => {
                 Este sitio web es propiedad y está operado por:
               </p>
               <div className="bg-background/50 rounded-lg p-4">
-                <p className="font-semibold text-foreground">Lic. Analaura Reyes Priego</p>
-                <p className="text-muted-foreground">Cédula Profesional: 10909109</p>
-                <p className="text-muted-foreground mt-2">Fisioterapeuta registrada y certificada</p>
+                <p className="font-semibold text-foreground">
+                  Lic. Analaura Reyes Priego
+                </p>
+                <p className="text-muted-foreground">
+                  Cédula Profesional: 10909109
+                </p>
+                <p className="text-muted-foreground mt-2">
+                  Fisioterapeuta registrada y certificada
+                </p>
               </div>
             </section>
 
@@ -67,11 +97,16 @@ const TerminosCondiciones = () => {
               <h2 className="font-display text-2xl font-bold text-foreground mb-4">
                 3. Uso del Sitio Web
               </h2>
-              <p className="text-foreground mb-4">Usted se compromete a utilizar este sitio web de manera legal y apropiada. Está prohibido:</p>
+              <p className="text-foreground mb-4">
+                Usted se compromete a utilizar este sitio web de manera legal y
+                apropiada. Está prohibido:
+              </p>
               <ul className="space-y-2 text-foreground ml-4">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Utilizar el sitio para fines ilegales o no autorizados</span>
+                  <span>
+                    Utilizar el sitio para fines ilegales o no autorizados
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
@@ -83,7 +118,9 @@ const TerminosCondiciones = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Copiar, modificar o distribuir el contenido sin autorización</span>
+                  <span>
+                    Copiar, modificar o distribuir el contenido sin autorización
+                  </span>
                 </li>
               </ul>
             </section>
@@ -97,28 +134,46 @@ const TerminosCondiciones = () => {
                 </h2>
               </div>
               <div className="bg-accent/10 rounded-lg p-4 mb-4 border border-accent/20">
-                <p className="text-foreground font-semibold mb-2">⚠️ IMPORTANTE:</p>
+                <p className="text-foreground font-semibold mb-2">
+                  ⚠️ IMPORTANTE:
+                </p>
                 <p className="text-foreground">
-                  La información proporcionada en este sitio web tiene fines informativos y educativos únicamente. 
-                  <strong> No sustituye una consulta médica profesional, un diagnóstico o un tratamiento personalizado.</strong>
+                  La información proporcionada en este sitio web tiene fines
+                  informativos y educativos únicamente.
+                  <strong>
+                    {' '}
+                    No sustituye una consulta médica profesional, un diagnóstico
+                    o un tratamiento personalizado.
+                  </strong>
                 </p>
               </div>
               <ul className="space-y-2 text-foreground ml-4">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>La información del sitio no constituye asesoramiento médico profesional</span>
+                  <span>
+                    La información del sitio no constituye asesoramiento médico
+                    profesional
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>No debe utilizarse para autodiagnóstico o autotratamiento</span>
+                  <span>
+                    No debe utilizarse para autodiagnóstico o autotratamiento
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Consulte siempre con un profesional de la salud calificado antes de tomar decisiones sobre su salud</span>
+                  <span>
+                    Consulte siempre con un profesional de la salud calificado
+                    antes de tomar decisiones sobre su salud
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>En caso de emergencia médica, contacte inmediatamente a los servicios de emergencia (911)</span>
+                  <span>
+                    En caso de emergencia médica, contacte inmediatamente a los
+                    servicios de emergencia (911)
+                  </span>
                 </li>
               </ul>
             </section>
@@ -129,7 +184,8 @@ const TerminosCondiciones = () => {
                 5. Reserva de Citas y Servicios
               </h2>
               <p className="text-foreground mb-4">
-                Al reservar una cita a través de este sitio web o cualquier plataforma asociada (como Doctoralia), usted acepta:
+                Al reservar una cita a través de este sitio web o cualquier
+                plataforma asociada (como Doctoralia), usted acepta:
               </p>
               <ul className="space-y-2 text-foreground ml-4">
                 <li className="flex items-start gap-2">
@@ -138,7 +194,15 @@ const TerminosCondiciones = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Cumplir con nuestra <Link to="/politica-cancelacion" className="text-primary hover:underline">Política de Cancelación y Reagendación</Link></span>
+                  <span>
+                    Cumplir con nuestra{' '}
+                    <Link
+                      to="/politica-cancelacion"
+                      className="text-primary hover:underline"
+                    >
+                      Política de Cancelación y Reagendación
+                    </Link>
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
@@ -146,12 +210,16 @@ const TerminosCondiciones = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Comunicar cualquier cambio en su estado de salud antes de la cita</span>
+                  <span>
+                    Comunicar cualquier cambio en su estado de salud antes de la
+                    cita
+                  </span>
                 </li>
               </ul>
               <p className="text-muted-foreground text-sm mt-4">
-                La confirmación de una cita está sujeta a disponibilidad. Nos reservamos el derecho de cancelar o reagendar citas 
-                en caso de emergencias o circunstancias imprevistas.
+                La confirmación de una cita está sujeta a disponibilidad. Nos
+                reservamos el derecho de cancelar o reagendar citas en caso de
+                emergencias o circunstancias imprevistas.
               </p>
             </section>
 
@@ -163,17 +231,25 @@ const TerminosCondiciones = () => {
                   6. Métodos de Pago
                 </h2>
               </div>
-              <p className="text-foreground mb-4">Aceptamos los siguientes métodos de pago:</p>
+              <p className="text-foreground mb-4">
+                Aceptamos los siguientes métodos de pago:
+              </p>
               <ul className="space-y-2 text-foreground ml-4">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span><strong>Efectivo:</strong> Pago en el consultorio al momento de la consulta</span>
+                  <span>
+                    <strong>Efectivo:</strong> Pago en el consultorio al momento
+                    de la consulta
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span><strong>Transferencia bancaria:</strong> Se proporcionarán los datos bancarios al confirmar la cita</span>
+                  <span>
+                    <strong>Transferencia bancaria:</strong> Se proporcionarán
+                    los datos bancarios al confirmar la cita
+                  </span>
                 </li>
-               {/*  <li className="flex items-start gap-2">
+                {/*  <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span><strong>Tarjeta de débito/crédito:</strong> Aceptadas en el consultorio (sujeto a disponibilidad del terminal)</span>
                 </li> */}
@@ -192,11 +268,13 @@ const TerminosCondiciones = () => {
                 7. Precios y Tarifas
               </h2>
               <p className="text-foreground mb-4">
-                Los precios mostrados en este sitio web están sujetos a cambios sin previo aviso. El precio final de los servicios 
-                se confirmará al momento de la reserva de la cita.
+                Los precios mostrados en este sitio web están sujetos a cambios
+                sin previo aviso. El precio final de los servicios se confirmará
+                al momento de la reserva de la cita.
               </p>
               <p className="text-muted-foreground text-sm">
-                Los precios pueden variar según el tipo de servicio, duración de la sesión, y si es consulta presencial u online.
+                Los precios pueden variar según el tipo de servicio, duración de
+                la sesión, y si es consulta presencial u online.
               </p>
             </section>
 
@@ -206,11 +284,14 @@ const TerminosCondiciones = () => {
                 8. Propiedad Intelectual
               </h2>
               <p className="text-foreground mb-4">
-                Todo el contenido de este sitio web, incluyendo textos, imágenes, logotipos, gráficos, y diseño, 
-                es propiedad de la Lic. Analaura Reyes Priego y está protegido por las leyes de propiedad intelectual de México.
+                Todo el contenido de este sitio web, incluyendo textos,
+                imágenes, logotipos, gráficos, y diseño, es propiedad de la Lic.
+                Analaura Reyes Priego y está protegido por las leyes de
+                propiedad intelectual de México.
               </p>
               <p className="text-muted-foreground text-sm">
-                Está prohibida la reproducción, distribución, modificación o uso comercial del contenido sin autorización escrita.
+                Está prohibida la reproducción, distribución, modificación o uso
+                comercial del contenido sin autorización escrita.
               </p>
             </section>
 
@@ -220,9 +301,11 @@ const TerminosCondiciones = () => {
                 9. Enlaces a Sitios de Terceros
               </h2>
               <p className="text-foreground">
-                Este sitio web puede contener enlaces a sitios de terceros (como Doctoralia, redes sociales, etc.). 
-                No somos responsables del contenido, políticas de privacidad o prácticas de estos sitios externos. 
-                Le recomendamos revisar los términos y condiciones de cualquier sitio de terceros que visite.
+                Este sitio web puede contener enlaces a sitios de terceros (como
+                Doctoralia, redes sociales, etc.). No somos responsables del
+                contenido, políticas de privacidad o prácticas de estos sitios
+                externos. Le recomendamos revisar los términos y condiciones de
+                cualquier sitio de terceros que visite.
               </p>
             </section>
 
@@ -235,16 +318,23 @@ const TerminosCondiciones = () => {
                 </h2>
               </div>
               <p className="text-foreground mb-4">
-                En la medida permitida por la ley aplicable, no seremos responsables de:
+                En la medida permitida por la ley aplicable, no seremos
+                responsables de:
               </p>
               <ul className="space-y-2 text-foreground ml-4">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Daños directos, indirectos, incidentales o consecuentes derivados del uso de este sitio web</span>
+                  <span>
+                    Daños directos, indirectos, incidentales o consecuentes
+                    derivados del uso de este sitio web
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Interrupciones en el servicio, errores técnicos o fallas en el sitio web</span>
+                  <span>
+                    Interrupciones en el servicio, errores técnicos o fallas en
+                    el sitio web
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
@@ -252,7 +342,10 @@ const TerminosCondiciones = () => {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>Decisiones médicas tomadas basándose únicamente en la información del sitio web</span>
+                  <span>
+                    Decisiones médicas tomadas basándose únicamente en la
+                    información del sitio web
+                  </span>
                 </li>
               </ul>
             </section>
@@ -263,9 +356,10 @@ const TerminosCondiciones = () => {
                 11. Modificaciones a los Términos
               </h2>
               <p className="text-foreground">
-                Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. 
-                Los cambios serán publicados en esta página con la fecha de última actualización. 
-                Le recomendamos revisar periódicamente estos términos.
+                Nos reservamos el derecho de modificar estos términos y
+                condiciones en cualquier momento. Los cambios serán publicados
+                en esta página con la fecha de última actualización. Le
+                recomendamos revisar periódicamente estos términos.
               </p>
             </section>
 
@@ -275,9 +369,11 @@ const TerminosCondiciones = () => {
                 12. Ley Aplicable y Jurisdicción
               </h2>
               <p className="text-foreground">
-                Estos términos y condiciones se rigen por las leyes de los Estados Unidos Mexicanos. 
-                Cualquier disputa relacionada con estos términos o con nuestros servicios será resuelta 
-                en los tribunales competentes de la Ciudad de México o del Estado de México, según corresponda.
+                Estos términos y condiciones se rigen por las leyes de los
+                Estados Unidos Mexicanos. Cualquier disputa relacionada con
+                estos términos o con nuestros servicios será resuelta en los
+                tribunales competentes de la Ciudad de México o del Estado de
+                México, según corresponda.
               </p>
             </section>
 
@@ -287,13 +383,39 @@ const TerminosCondiciones = () => {
                 ¿Tiene preguntas sobre estos términos?
               </h2>
               <p className="text-foreground mb-4">
-                Si tiene alguna duda o necesita aclaración sobre estos términos y condiciones, 
-                no dude en contactarnos:
+                Si tiene alguna duda o necesita aclaración sobre estos términos
+                y condiciones, no dude en contactarnos:
               </p>
               <div className="space-y-2 text-foreground">
-                <p>• Teléfono: <a href="tel:+525565053202" className="text-primary hover:underline font-semibold">+52 55 6505 3202</a></p>
-                <p>• WhatsApp: <a href="https://wa.me/525565053202" target="_blank" rel="noopener noreferrer nofollow" className="text-primary hover:underline font-semibold">Enviar mensaje</a></p>
-                <p>• Correo: <a href="mailto:fisio-movimiento.mx@gmail.com" className="text-primary hover:underline font-semibold">fisio-movimiento.mx@gmail.com</a></p>
+                <p>
+                  • Teléfono:{' '}
+                  <a
+                    href="tel:+525565053202"
+                    className="text-primary hover:underline font-semibold"
+                  >
+                    +52 55 6505 3202
+                  </a>
+                </p>
+                <p>
+                  • WhatsApp:{' '}
+                  <a
+                    href="https://wa.me/525565053202"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="text-primary hover:underline font-semibold"
+                  >
+                    Enviar mensaje
+                  </a>
+                </p>
+                <p>
+                  • Correo:{' '}
+                  <a
+                    href="mailto:fisio-movimiento.mx@gmail.com"
+                    className="text-primary hover:underline font-semibold"
+                  >
+                    fisio-movimiento.mx@gmail.com
+                  </a>
+                </p>
               </div>
             </section>
           </div>

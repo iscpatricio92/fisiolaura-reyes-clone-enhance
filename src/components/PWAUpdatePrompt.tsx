@@ -5,7 +5,7 @@ import { RefreshCw, X } from 'lucide-react';
 
 /**
  * Componente que muestra una notificación cuando hay una actualización disponible
- * 
+ *
  * Aparece automáticamente cuando el Service Worker detecta una nueva versión
  */
 export const PWAUpdatePrompt = () => {
@@ -42,10 +42,10 @@ export const PWAUpdatePrompt = () => {
   };
 
   return (
-    <div 
+    <div
       className={`fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 z-50 transition-all duration-300 ${
-        isVisible 
-          ? 'opacity-100 translate-y-0' 
+        isVisible
+          ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
@@ -62,11 +62,7 @@ export const PWAUpdatePrompt = () => {
               Hay una nueva versión del sitio. ¿Deseas actualizar ahora?
             </p>
             <div className="flex gap-2">
-              <Button
-                size="sm"
-                onClick={handleUpdate}
-                className="flex-1"
-              >
+              <Button size="sm" onClick={handleUpdate} className="flex-1">
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Actualizar ahora
               </Button>
@@ -85,4 +81,3 @@ export const PWAUpdatePrompt = () => {
     </div>
   );
 };
-

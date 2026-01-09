@@ -16,7 +16,7 @@ const useReducedMotion = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
+
     const handleChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);
     };
@@ -105,7 +105,7 @@ export const useScrollAnimation = ({
       {
         threshold,
         rootMargin: isMobile ? '0px 0px -20px 0px' : rootMargin,
-      }
+      },
     );
 
     observer.observe(element);
@@ -113,7 +113,15 @@ export const useScrollAnimation = ({
     return () => {
       observer.disconnect();
     };
-  }, [threshold, rootMargin, triggerOnce, effectiveDelay, hasAnimated, prefersReducedMotion, isMobile]);
+  }, [
+    threshold,
+    rootMargin,
+    triggerOnce,
+    effectiveDelay,
+    hasAnimated,
+    prefersReducedMotion,
+    isMobile,
+  ]);
 
   return {
     ref: elementRef,
@@ -123,4 +131,3 @@ export const useScrollAnimation = ({
 };
 
 export { useReducedMotion, useIsMobile };
-

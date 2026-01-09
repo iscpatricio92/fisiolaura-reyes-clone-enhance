@@ -19,9 +19,9 @@ interface WhatsAppFloatingButtonProps {
   message?: string;
 }
 
-export const WhatsAppFloatingButton = ({ 
+export const WhatsAppFloatingButton = ({
   phoneNumber = '+525565053202',
-  message = 'Hola, me gustaría agendar una cita'
+  message = 'Hola, me gustaría agendar una cita',
 }: WhatsAppFloatingButtonProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -38,8 +38,12 @@ export const WhatsAppFloatingButton = ({
                 <WhatsAppIcon className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="font-bold text-foreground text-sm">¿Necesitas ayuda?</h4>
-                <p className="text-xs text-muted-foreground">Escríbenos por WhatsApp</p>
+                <h4 className="font-bold text-foreground text-sm">
+                  ¿Necesitas ayuda?
+                </h4>
+                <p className="text-xs text-muted-foreground">
+                  Escríbenos por WhatsApp
+                </p>
               </div>
             </div>
             <button
@@ -69,14 +73,14 @@ export const WhatsAppFloatingButton = ({
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="group relative w-14 h-14 md:w-16 md:h-16 rounded-full bg-[#25D366] shadow-glow hover:shadow-glow-strong flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 hover:bg-[#20BA5A]"
-        aria-label={isExpanded ? "Cerrar" : "Abrir WhatsApp"}
+        aria-label={isExpanded ? 'Cerrar' : 'Abrir WhatsApp'}
       >
         {!isExpanded ? (
           <WhatsAppIcon className="w-7 h-7 md:w-8 md:h-8 text-white group-hover:scale-110 transition-transform duration-300 relative z-10" />
         ) : (
           <X className="w-7 h-7 md:w-8 md:h-8 text-white group-hover:scale-110 transition-transform duration-300 relative z-10" />
         )}
-        
+
         {/* Pulse animation ring */}
         {!isExpanded && (
           <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-50 animate-pulse-soft" />
@@ -92,4 +96,3 @@ export const WhatsAppFloatingButton = ({
     </div>
   );
 };
-

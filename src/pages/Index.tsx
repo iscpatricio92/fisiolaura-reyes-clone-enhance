@@ -10,29 +10,59 @@ import { useHashNavigation } from '@/hooks/use-hash-navigation';
 import { useSectionTimeTracking } from '@/hooks/use-section-time-tracking';
 
 // Lazy load components that are below the fold for better initial load performance
-const AboutSection = lazy(() => import('@/components/AboutSection').then(module => ({ default: module.AboutSection })));
-const ServicesSection = lazy(() => import('@/components/ServicesSection').then(module => ({ default: module.ServicesSection })));
-const PricingSection = lazy(() => import('@/components/PricingSection').then(module => ({ default: module.PricingSection })));
-const TestimonialsSection = lazy(() => import('@/components/TestimonialsSection').then(module => ({ default: module.TestimonialsSection })));
-const ContactSection = lazy(() => import('@/components/ContactSection').then(module => ({ default: module.ContactSection })));
-const FAQSection = lazy(() => import('@/components/FAQSection').then(module => ({ default: module.FAQSection })));
-const SocialMediaSection = lazy(() => import('@/components/SocialMediaSection').then(module => ({ default: module.SocialMediaSection })));
+const AboutSection = lazy(() =>
+  import('@/components/AboutSection').then((module) => ({
+    default: module.AboutSection,
+  })),
+);
+const ServicesSection = lazy(() =>
+  import('@/components/ServicesSection').then((module) => ({
+    default: module.ServicesSection,
+  })),
+);
+const PricingSection = lazy(() =>
+  import('@/components/PricingSection').then((module) => ({
+    default: module.PricingSection,
+  })),
+);
+const TestimonialsSection = lazy(() =>
+  import('@/components/TestimonialsSection').then((module) => ({
+    default: module.TestimonialsSection,
+  })),
+);
+const ContactSection = lazy(() =>
+  import('@/components/ContactSection').then((module) => ({
+    default: module.ContactSection,
+  })),
+);
+const FAQSection = lazy(() =>
+  import('@/components/FAQSection').then((module) => ({
+    default: module.FAQSection,
+  })),
+);
+const SocialMediaSection = lazy(() =>
+  import('@/components/SocialMediaSection').then((module) => ({
+    default: module.SocialMediaSection,
+  })),
+);
 
 const Index = () => {
   // Hook para manejar navegación con hash y tracking
   useHashNavigation();
-  
+
   // Track tiempo en secciones clave (solo si pasa >30 segundos)
   // Esto indica interés real del usuario
   useSectionTimeTracking('servicios', 'Servicios', true);
   useSectionTimeTracking('precios', 'Precios', true);
   useSectionTimeTracking('contacto', 'Contacto', true);
-  
+
   const heroRef = useSectionTracking({ sectionName: 'Hero Section' });
   const aboutRef = useSectionTracking({ sectionName: 'About Section' });
   const servicesRef = useSectionTracking({ sectionName: 'Services Section' });
   const pricingRef = useSectionTracking({ sectionName: 'Pricing Section' });
-  const testimonialsRef = useSectionTracking({ sectionName: 'Testimonials Section' });
+  const testimonialsRef = useSectionTracking({
+    sectionName: 'Testimonials Section',
+  });
   const contactRef = useSectionTracking({ sectionName: 'Contact Section' });
   const faqRef = useSectionTracking({ sectionName: 'FAQ Section' });
   const socialRef = useSectionTracking({ sectionName: 'Social Media Section' });
@@ -51,45 +81,45 @@ const Index = () => {
         <Navbar />
         <main id="main-content">
           <section ref={heroRef}>
-          <HeroSection />
-        </section>
-        <section ref={aboutRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <AboutSection />
-          </Suspense>
-        </section>
-        <section ref={servicesRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <ServicesSection />
-          </Suspense>
-        </section>
-        <section ref={pricingRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <PricingSection />
-          </Suspense>
-        </section>
-        <section ref={testimonialsRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <TestimonialsSection />
-          </Suspense>
-        </section>
-        <section ref={contactRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <ContactSection />
-          </Suspense>
-        </section>
-        {/* <section id="redes-sociales" ref={socialRef} className="py-24 bg-background">
+            <HeroSection />
+          </section>
+          <section ref={aboutRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <AboutSection />
+            </Suspense>
+          </section>
+          <section ref={servicesRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <ServicesSection />
+            </Suspense>
+          </section>
+          <section ref={pricingRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <PricingSection />
+            </Suspense>
+          </section>
+          <section ref={testimonialsRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <TestimonialsSection />
+            </Suspense>
+          </section>
+          <section ref={contactRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <ContactSection />
+            </Suspense>
+          </section>
+          {/* <section id="redes-sociales" ref={socialRef} className="py-24 bg-background">
           <div className="container mx-auto px-4">
             <Suspense fallback={<SectionLoader />}>
               <SocialMediaSection />
             </Suspense>
           </div>
         </section> */}
-        <section ref={faqRef}>
-          <Suspense fallback={<SectionLoader />}>
-            <FAQSection />
-          </Suspense>
-        </section>
+          <section ref={faqRef}>
+            <Suspense fallback={<SectionLoader />}>
+              <FAQSection />
+            </Suspense>
+          </section>
         </main>
         <Footer />
         <MobileBottomCTA />

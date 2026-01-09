@@ -27,11 +27,7 @@ export const ScrollAnimated = ({
 
   // If user prefers reduced motion, render without animation classes
   if (prefersReducedMotion) {
-    return (
-      <div className={className}>
-        {children}
-      </div>
-    );
+    return <div className={className}>{children}</div>;
   }
 
   const animationClasses = {
@@ -57,12 +53,10 @@ export const ScrollAnimated = ({
         'transition-all duration-500 lg:duration-700 ease-out',
         animationClasses[animation],
         isVisible && visibleClasses[animation],
-        className
+        className,
       )}
     >
       {children}
     </div>
   );
 };
-
-

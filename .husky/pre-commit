@@ -7,3 +7,7 @@ if [ -n "$(git diff --name-only package.json)" ] && [ -z "$(git diff --cached --
   git add package.json
   echo "📦 Versión incrementada automáticamente y agregada al commit"
 fi
+
+# Verificar formato y hacer lint de archivos staged
+# Si el formato no es correcto, el commit fallará
+npx lint-staged

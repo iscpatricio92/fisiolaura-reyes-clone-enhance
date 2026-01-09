@@ -36,7 +36,7 @@ export const useSectionTracking = ({
       },
       {
         threshold,
-      }
+      },
     );
 
     observer.observe(element);
@@ -48,4 +48,3 @@ export const useSectionTracking = ({
 
   return sectionRef;
 };
-

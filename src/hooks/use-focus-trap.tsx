@@ -6,7 +6,7 @@ import { useEffect, useRef, RefObject } from 'react';
  */
 export function useFocusTrap<T extends HTMLElement>(
   isActive: boolean,
-  onEscape?: () => void
+  onEscape?: () => void,
 ): RefObject<T> {
   const containerRef = useRef<T>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -30,7 +30,9 @@ export function useFocusTrap<T extends HTMLElement>(
         'select:not([disabled])',
         '[tabindex]:not([tabindex="-1"])',
       ];
-      return container.querySelectorAll<HTMLElement>(focusableSelectors.join(', '));
+      return container.querySelectorAll<HTMLElement>(
+        focusableSelectors.join(', '),
+      );
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -73,7 +75,7 @@ export function useFocusTrap<T extends HTMLElement>(
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      
+
       // Restore focus to the previously focused element
       if (previousActiveElement.current) {
         previousActiveElement.current.focus();

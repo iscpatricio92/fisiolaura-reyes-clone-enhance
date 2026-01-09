@@ -11,7 +11,11 @@ interface LazyMapIframeProps {
  * Only loads the iframe when it becomes visible in the viewport
  * Includes security sandbox attributes
  */
-export const LazyMapIframe = ({ src, title, className = '' }: LazyMapIframeProps) => {
+export const LazyMapIframe = ({
+  src,
+  title,
+  className = '',
+}: LazyMapIframeProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +31,7 @@ export const LazyMapIframe = ({ src, title, className = '' }: LazyMapIframeProps
       {
         rootMargin: '200px', // Start loading 200px before it's visible
         threshold: 0,
-      }
+      },
     );
 
     if (containerRef.current) {
@@ -49,11 +53,13 @@ export const LazyMapIframe = ({ src, title, className = '' }: LazyMapIframeProps
         <div className="absolute inset-0 bg-secondary flex items-center justify-center">
           <div className="text-center">
             <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-            <span className="text-sm text-muted-foreground">Cargando mapa...</span>
+            <span className="text-sm text-muted-foreground">
+              Cargando mapa...
+            </span>
           </div>
         </div>
       )}
-      
+
       {isVisible && (
         <iframe
           key={src}
