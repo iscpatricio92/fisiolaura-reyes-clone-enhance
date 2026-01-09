@@ -7,6 +7,7 @@ import { SkipToContent } from '@/components/SkipToContent';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useSectionTracking } from '@/hooks/use-section-tracking';
 import { useHashNavigation } from '@/hooks/use-hash-navigation';
+import { useSectionTimeTracking } from '@/hooks/use-section-time-tracking';
 
 // Lazy load components that are below the fold for better initial load performance
 const AboutSection = lazy(() => import('@/components/AboutSection').then(module => ({ default: module.AboutSection })));
@@ -20,6 +21,12 @@ const SocialMediaSection = lazy(() => import('@/components/SocialMediaSection').
 const Index = () => {
   // Hook para manejar navegación con hash y tracking
   useHashNavigation();
+  
+  // Track tiempo en secciones clave (solo si pasa >30 segundos)
+  // Esto indica interés real del usuario
+  useSectionTimeTracking('servicios', 'Servicios', true);
+  useSectionTimeTracking('precios', 'Precios', true);
+  useSectionTimeTracking('contacto', 'Contacto', true);
   
   const heroRef = useSectionTracking({ sectionName: 'Hero Section' });
   const aboutRef = useSectionTracking({ sectionName: 'About Section' });

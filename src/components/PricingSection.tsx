@@ -2,6 +2,9 @@ import { Check, Bone, Zap, Activity, Target, Brain, Sparkles, Heart, Users, Stet
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ScrollAnimated } from './ScrollAnimated';
+import { trackPricingTabChange, trackServiceInterest } from '@/lib/analytics';
+import { useState } from 'react';
+import { useSectionTimeTracking } from '@/hooks/use-section-time-tracking';
 
 const plans = [
   {
@@ -175,6 +178,19 @@ const serviceCategories = [
 ];
 
 export const PricingSection = () => {
+  const [activeTab, setActiveTab] = useState(serviceCategories[0].id);
+
+  // Track tiempo en sección de precios (solo si pasa >30 segundos)
+  useSectionTimeTracking('precios', 'Precios', true);
+
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    const category = serviceCategories.find(cat => cat.id === value);
+    if (category) {
+      trackPricingTabChange(category.title);
+    }
+  };
+
   return (
     <section id="precios" className="py-12 lg:py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-4">
@@ -342,7 +358,7 @@ export const PricingSection = () => {
 
         {/* Additional Services by Category with Tabs */}
         <div className="bg-secondary/50 rounded-xl lg:rounded-3xl p-3 lg:p-8 overflow-hidden">
-          <Tabs defaultValue={serviceCategories[0].id} className="w-full">
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             {/* Mobile: Scrollable tabs - contained */}
             <div className="overflow-x-auto -mx-3 px-3 lg:mx-0 lg:px-0 mb-4 lg:mb-8 scrollbar-hide">
               <TabsList className="inline-flex lg:grid lg:w-full lg:grid-cols-4 bg-background/50 p-1 h-auto min-w-max lg:min-w-0">
@@ -367,7 +383,9 @@ export const PricingSection = () => {
                     return (
                       <div
                         key={serviceIndex}
-                        className="flex items-center gap-2.5 p-2.5 rounded-lg bg-card border border-border/30 active:scale-[0.98] transition-transform duration-150"
+                        className="flex items-center gap-2.5 p-2.5 rounded-lg bg-card border border-border/30 active:scale-[0.98] transition-transform duration-150 cursor-pointer"
+                        onClick={() => trackServiceInterest(service.name, 'click')}
+                        onMouseEnter={() => trackServiceInterest(service.name, 'view')}
                       >
                         <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                           <ServiceIcon className="w-4 h-4 text-primary" />
@@ -390,7 +408,9 @@ export const PricingSection = () => {
                     return (
                       <div
                         key={serviceIndex}
-                        className="group p-5 rounded-xl bg-card hover:shadow-glow hover:border-primary/50 border border-border/50 transition-all duration-300 hover:-translate-y-1"
+                        className="group p-5 rounded-xl bg-card hover:shadow-glow hover:border-primary/50 border border-border/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                        onClick={() => trackServiceInterest(service.name, 'click')}
+                        onMouseEnter={() => trackServiceInterest(service.name, 'view')}
                       >
                         <div className="flex items-start gap-3 mb-3">
                           <div className="w-10 h-10 rounded-lg bg-primary/10 group-hover:bg-primary/20 flex items-center justify-center shrink-0 transition-colors duration-300">
