@@ -229,7 +229,7 @@ export const PricingSection = () => {
                           {plan.name}
                         </h3>
                         <div className="flex items-center gap-1.5 mt-1 flex-wrap">
-                          {plan.features.slice(0, 2).map((feature, i) => (
+                          {plan.features.slice(0, 5).map((feature, i) => (
                             <span 
                               key={i} 
                               className={`inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full ${
@@ -239,7 +239,7 @@ export const PricingSection = () => {
                               }`}
                             >
                               <Check className={`w-2.5 h-2.5 ${plan.popular ? 'text-primary-foreground' : 'text-primary'}`} />
-                              {feature.split(' ').slice(0, 2).join(' ')}
+                              {feature}
                             </span>
                           ))}
                         </div>
@@ -350,7 +350,7 @@ export const PricingSection = () => {
                   <TabsTrigger
                     key={category.id}
                     value={category.id}
-                    className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-3 py-2 lg:py-3 text-[11px] lg:text-sm font-semibold rounded-lg transition-all duration-200 whitespace-nowrap"
+                    className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-3 py-2 lg:py-3 text-[11px] lg:text-sm font-semibold rounded-lg transition-all duration-200 whitespace-nowrap animate-pulse-tab"
                   >
                     {category.title}
                   </TabsTrigger>

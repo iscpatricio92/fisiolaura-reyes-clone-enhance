@@ -304,6 +304,17 @@
     }
   }
 
+  @keyframes pulse-soft {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(44, 163, 179, 0);
+    }
+    50% {
+      transform: scale(0.98);
+      box-shadow: 0 0 0 4px rgba(44, 163, 179, 0.1);
+    }
+  }
+
   .animate-float {
     animation: float 4s ease-in-out infinite;
     will-change: transform;
@@ -335,6 +346,26 @@
     background-size: 200% 200%;
     animation: gradient-shift 3s ease infinite;
     will-change: background-position;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+
+  /* Pulse solo en tabs inactivos en mobile */
+  @media (max-width: 1023px) {
+    .animate-pulse-tab:not(.data-\[state\=active\]) {
+      animation: pulse-soft 2s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
+    
+    /* Radix UI usa data-state="active" como atributo */
+    .animate-pulse-tab[data-state="inactive"],
+    .animate-pulse-tab:not([data-state="active"]) {
+      animation: pulse-soft 2s ease-in-out infinite;
+      will-change: transform, box-shadow;
+    }
   }
 
   /* Glass morphism effect - simplified on mobile */
@@ -400,6 +431,12 @@
       background-size: 100% 100%;
     }
 
+    /* Keep pulse animation for tabs (it's important for UX) */
+    .animate-pulse-tab[data-state="inactive"],
+    .animate-pulse-tab:not([data-state="active"]) {
+      animation: pulse-soft 2s ease-in-out infinite;
+    }
+
     /* Faster transitions on mobile */
     * {
       transition-duration: 150ms;
@@ -433,7 +470,9 @@
     /* Disable continuous animations */
     .animate-float,
     .animate-shimmer,
-    .animate-gradient {
+    .animate-gradient,
+    .animate-pulse-soft,
+    .animate-pulse-tab {
       animation: none !important;
     }
 
