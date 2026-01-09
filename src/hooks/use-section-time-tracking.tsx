@@ -3,12 +3,12 @@ import { trackTimeOnSection } from '@/lib/analytics';
 
 /**
  * Hook para trackear tiempo que el usuario pasa en secciones clave
- * 
+ *
  * Mejores prácticas:
  * - Solo trackea si el usuario pasa más de 30 segundos (indica interés real)
  * - Solo se activa para secciones críticas (Precios, Servicios, Contacto)
  * - No afecta el rendimiento al usar IntersectionObserver
- * 
+ *
  * @param sectionId - ID de la sección a trackear
  * @param sectionName - Nombre de la sección para el evento
  * @param enabled - Si está habilitado el tracking (default: true)
@@ -16,7 +16,7 @@ import { trackTimeOnSection } from '@/lib/analytics';
 export const useSectionTimeTracking = (
   sectionId: string,
   sectionName: string,
-  enabled: boolean = true
+  enabled: boolean = true,
 ) => {
   const startTimeRef = useRef<number | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -53,7 +53,7 @@ export const useSectionTimeTracking = (
       {
         threshold: 0.5, // Al menos 50% visible
         rootMargin: '0px',
-      }
+      },
     );
 
     observerRef.current.observe(sectionElement);

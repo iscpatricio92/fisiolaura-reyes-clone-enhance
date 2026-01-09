@@ -7,7 +7,15 @@ export const Footer = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
-  const navItems = ['Inicio', 'Sobre mí', 'Servicios', 'Precios', 'Opiniones', 'FAQs', 'Contacto'];
+  const navItems = [
+    'Inicio',
+    'Sobre mí',
+    'Servicios',
+    'Precios',
+    'Opiniones',
+    'FAQs',
+    'Contacto',
+  ];
 
   // Función para generar el href de navegación
   const getNavHref = (item: string) => {
@@ -95,23 +103,32 @@ export const Footer = () => {
           </div>
 
           {/* Share Buttons */}
-          <ShareButtons 
-            variant="compact" 
-            className="justify-center"
-          />
+          <ShareButtons variant="compact" className="justify-center" />
 
           {/* Legal Links */}
           <div className="text-center space-y-2 pt-4 border-t border-primary-foreground/10">
             <div className="flex flex-wrap justify-center gap-3 text-xs">
-              <Link to="/aviso-privacidad" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/aviso-privacidad"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Aviso de Privacidad
               </Link>
               <span className="text-primary-foreground/30">•</span>
-              <Link to="/politica-cancelacion" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/politica-cancelacion"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Política de Cancelación
               </Link>
               <span className="text-primary-foreground/30">•</span>
-              <Link to="/terminos-condiciones" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/terminos-condiciones"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Términos y Condiciones
               </Link>
             </div>
@@ -137,7 +154,7 @@ export const Footer = () => {
                 Fisio<span className="text-accent">Analaura</span>
               </span>
               <p className="mt-4 text-primary-foreground/70 max-w-md">
-                Fisioterapia humana y de calidad. Tratamientos personalizados, 
+                Fisioterapia humana y de calidad. Tratamientos personalizados,
                 basados en evidencia, para tu bienestar integral.
               </p>
               <div className="flex gap-4 mt-6">
@@ -173,7 +190,9 @@ export const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-display font-semibold text-lg mb-4">Navegación</h4>
+              <h4 className="font-display font-semibold text-lg mb-4">
+                Navegación
+              </h4>
               <ul className="space-y-3">
                 {navItems.map((item) => (
                   <li key={item}>
@@ -190,7 +209,9 @@ export const Footer = () => {
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-display font-semibold text-lg mb-4">Contacto</h4>
+              <h4 className="font-display font-semibold text-lg mb-4">
+                Contacto
+              </h4>
               <ul className="space-y-3">
                 <li>
                   <a
@@ -204,7 +225,11 @@ export const Footer = () => {
                 <li>
                   <div className="flex items-start gap-3 text-primary-foreground/70">
                     <MapPin className="w-4 h-4 shrink-0 mt-1" />
-                    <span>Iztapalapa, CDMX<br />Metepec, Estado de México</span>
+                    <span>
+                      Iztapalapa, CDMX
+                      <br />
+                      Metepec, Estado de México
+                    </span>
                   </div>
                 </li>
               </ul>
@@ -213,24 +238,33 @@ export const Footer = () => {
 
           {/* Share Buttons */}
           <div className="mt-12 pt-8 border-t border-primary-foreground/10">
-            <ShareButtons 
-              variant="compact" 
-              className="justify-center"
-            />
+            <ShareButtons variant="compact" className="justify-center" />
           </div>
 
           {/* Legal Links */}
           <div className="mt-8 pt-8 border-t border-primary-foreground/10">
             <div className="flex flex-wrap justify-center gap-4 text-sm mb-6">
-              <Link to="/aviso-privacidad" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/aviso-privacidad"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Aviso de Privacidad
               </Link>
               <span className="text-primary-foreground/30">•</span>
-              <Link to="/politica-cancelacion" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/politica-cancelacion"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Política de Cancelación
               </Link>
               <span className="text-primary-foreground/30">•</span>
-              <Link to="/terminos-condiciones" onClick={handleLegalLinkClick} className="text-primary-foreground/60 hover:text-accent transition-colors">
+              <Link
+                to="/terminos-condiciones"
+                onClick={handleLegalLinkClick}
+                className="text-primary-foreground/60 hover:text-accent transition-colors"
+              >
                 Términos y Condiciones
               </Link>
             </div>
@@ -239,7 +273,8 @@ export const Footer = () => {
           {/* Bottom */}
           <div className="pt-4 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-primary-foreground/50">
-              © {currentYear} Lic. Analaura Reyes Priego. Todos los derechos reservados.
+              © {currentYear} Lic. Analaura Reyes Priego. Todos los derechos
+              reservados.
             </p>
             <p className="text-sm text-primary-foreground/50">
               Cédula Profesional: 10909109

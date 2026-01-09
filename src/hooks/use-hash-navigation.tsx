@@ -4,12 +4,12 @@ import { trackPageView } from '@/lib/analytics';
 
 /**
  * Hook para manejar navegación con hash y tracking en GA4
- * 
+ *
  * Mejores prácticas implementadas:
  * - Solo trackea clicks intencionales en navegación (NO scroll automático)
  * - Evita ruido en analytics trackeando solo acciones del usuario
  * - Mantiene URL actualizada para mejor UX y SEO
- * 
+ *
  * Basado en mejores prácticas de GA4 para SPAs:
  * - Trackear navegación intencional (clicks) es valioso
  * - Trackear scroll automático genera ruido sin valor de negocio
@@ -37,7 +37,7 @@ export const useHashNavigation = () => {
     const handleHashClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href^="#"]') as HTMLAnchorElement;
-      
+
       if (!link || !link.hash || link.hash === '#') return;
 
       const hash = link.hash;
@@ -46,16 +46,16 @@ export const useHashNavigation = () => {
 
       if (targetElement) {
         e.preventDefault();
-        
+
         // Actualizar la URL con el hash usando history.pushState
         // Esto permite que GA4 trackee el cambio como una nueva página
         const newUrl = `${location.pathname}${hash}`;
         window.history.pushState(null, '', newUrl);
 
         // Hacer scroll suave al elemento
-        targetElement.scrollIntoView({ 
+        targetElement.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'start',
         });
 
         // Trackear como pageview en GA4 después de un pequeño delay
@@ -95,12 +95,12 @@ export const useHashNavigation = () => {
       if (hash && hash !== '#') {
         const targetId = hash.substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
           // Scroll suave al elemento
-          targetElement.scrollIntoView({ 
+          targetElement.scrollIntoView({
             behavior: 'smooth',
-            block: 'start'
+            block: 'start',
           });
 
           // Trackear como pageview
@@ -131,7 +131,7 @@ export const useHashNavigation = () => {
   }, [location.pathname]);
 
   // NOTA: Tracking de scroll automático desactivado según mejores prácticas
-  // 
+  //
   // Razones:
   // 1. Genera demasiado ruido en analytics sin valor de negocio real
   // 2. Los clicks intencionales ya proporcionan suficiente información

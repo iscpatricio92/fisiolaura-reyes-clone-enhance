@@ -49,26 +49,27 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-6">
               <AlertTriangle className="w-8 h-8 text-destructive" />
             </div>
-            
+
             <h2 className="font-display text-2xl font-bold text-foreground mb-2">
               Algo salió mal
             </h2>
-            
+
             <p className="text-muted-foreground mb-6">
-              Lo sentimos, ocurrió un error inesperado. Por favor, intenta de nuevo.
+              Lo sentimos, ocurrió un error inesperado. Por favor, intenta de
+              nuevo.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button 
-                variant="default" 
+              <Button
+                variant="default"
                 onClick={this.handleRetry}
                 className="gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
                 Reintentar
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={this.handleGoHome}
                 className="gap-2"
               >

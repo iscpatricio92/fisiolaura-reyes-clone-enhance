@@ -1,7 +1,7 @@
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import { initAnalytics, trackPageView } from "./lib/analytics";
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import { initAnalytics, trackPageView } from './lib/analytics';
 
 // Initialize analytics
 initAnalytics();
@@ -15,4 +15,4 @@ if (typeof window !== 'undefined') {
   }, 500);
 }
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById('root')!).render(<App />);

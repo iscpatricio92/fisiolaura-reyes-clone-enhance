@@ -1,10 +1,24 @@
-import { MapPin, Phone, Clock, MessageCircle, Calendar, ExternalLink } from 'lucide-react';
+import {
+  MapPin,
+  Phone,
+  Clock,
+  MessageCircle,
+  Calendar,
+  ExternalLink,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LazyMapIframe } from './LazyMapIframe';
 import { ScrollAnimated } from './ScrollAnimated';
-import { trackPhoneClick, trackWhatsAppClick, trackExternalLink } from '@/lib/analytics';
-import { getPhysicalAddresses, getAllAddresses } from '@/lib/doctoralia-addresses';
+import {
+  trackPhoneClick,
+  trackWhatsAppClick,
+  trackExternalLink,
+} from '@/lib/analytics';
+import {
+  getPhysicalAddresses,
+  getAllAddresses,
+} from '@/lib/doctoralia-addresses';
 
 // Obtener direcciones físicas desde la configuración centralizada
 const physicalAddresses = getPhysicalAddresses();
@@ -20,7 +34,9 @@ const generateGoogleMapsEmbedUrl = (lat: number, lng: number): string => {
 const locations = physicalAddresses.map((addr) => ({
   name: addr.name,
   address: addr.address,
-  mapUrl: addr.mapUrl || `https://www.google.com/maps?q=${addr.coordinates?.lat},${addr.coordinates?.lng}`,
+  mapUrl:
+    addr.mapUrl ||
+    `https://www.google.com/maps?q=${addr.coordinates?.lat},${addr.coordinates?.lng}`,
   embedUrl: addr.coordinates
     ? generateGoogleMapsEmbedUrl(addr.coordinates.lat, addr.coordinates.lng)
     : '',
@@ -67,7 +83,7 @@ export const ContactSection = () => {
               Reserva en menos de 1 minuto. Elige tu consultorio, fecha y hora.
             </p>
             {/* Próxima disponibilidad destacada */}
-           {/*  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 animate-pulse-soft">
+            {/*  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 animate-pulse-soft">
               <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-sm font-medium text-foreground">
                 Próxima cita disponible: <span className="text-accent font-bold">Mañana a las 10:00 AM</span>
@@ -82,37 +98,55 @@ export const ContactSection = () => {
             <div className="grid grid-cols-3 gap-2">
               <a
                 href="tel:+525565053202"
-                onClick={() => trackPhoneClick('+525565053202', 'Contact Section Mobile')}
+                onClick={() =>
+                  trackPhoneClick('+525565053202', 'Contact Section Mobile')
+                }
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-200 active:scale-95"
               >
                 <div className="w-10 h-10 rounded-lg gradient-hero flex items-center justify-center">
                   <Phone className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="text-xs font-semibold text-foreground">Llamar</span>
+                <span className="text-xs font-semibold text-foreground">
+                  Llamar
+                </span>
               </a>
               <a
                 href="https://wa.me/525565053202"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                onClick={() => trackWhatsAppClick('Contact Section Mobile', 'Contact Section')}
+                onClick={() =>
+                  trackWhatsAppClick(
+                    'Contact Section Mobile',
+                    'Contact Section',
+                  )
+                }
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-200 active:scale-95"
               >
                 <div className="w-10 h-10 rounded-lg bg-[hsl(142,70%,45%)] flex items-center justify-center">
                   <MessageCircle className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <span className="text-xs font-semibold text-foreground">WhatsApp</span>
+                <span className="text-xs font-semibold text-foreground">
+                  WhatsApp
+                </span>
               </a>
               <a
                 href="https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
-                onClick={() => trackExternalLink('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec', 'Doctoralia Mobile')}
+                onClick={() =>
+                  trackExternalLink(
+                    'https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec',
+                    'Doctoralia Mobile',
+                  )
+                }
                 className="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-card border border-border/50 hover:border-primary/30 transition-all duration-200 active:scale-95"
               >
                 <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
                   <Calendar className="w-5 h-5 text-accent-foreground" />
                 </div>
-                <span className="text-xs font-semibold text-foreground">Reservar</span>
+                <span className="text-xs font-semibold text-foreground">
+                  Reservar
+                </span>
               </a>
             </div>
           </ScrollAnimated>
@@ -122,11 +156,19 @@ export const ContactSection = () => {
         <ScrollAnimated animation="fade-up" delay={100}>
           <div className="hidden md:grid md:grid-cols-3 gap-6 mb-16">
             {contactMethods.map((method, index) => (
-              <ScrollAnimated key={index} animation="scale-in" delay={index * 100}>
+              <ScrollAnimated
+                key={index}
+                animation="scale-in"
+                delay={index * 100}
+              >
                 <a
                   href={method.href}
                   target={method.href.startsWith('http') ? '_blank' : undefined}
-                  rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  rel={
+                    method.href.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
                   className="block p-6 rounded-2xl bg-card shadow-soft transition-all duration-300 hover:-translate-y-2 border border-border/50 hover:border-primary/30 text-center"
                 >
                   <div className="w-16 h-16 rounded-2xl gradient-hero flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:shadow-glow transition-all duration-300">
@@ -135,8 +177,12 @@ export const ContactSection = () => {
                   <h3 className="font-display text-xl font-bold text-foreground mb-1">
                     {method.label}
                   </h3>
-                  <p className="text-primary font-semibold mb-2">{method.value}</p>
-                  <p className="text-sm text-muted-foreground">{method.description}</p>
+                  <p className="text-primary font-semibold mb-2">
+                    {method.value}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    {method.description}
+                  </p>
                 </a>
               </ScrollAnimated>
             ))}
@@ -162,16 +208,24 @@ export const ContactSection = () => {
                         Selecciona el consultorio
                       </p>
                       <p className="text-sm text-muted-foreground mb-3">
-                        En el calendario de la derecha, selecciona uno de estos consultorios en el selector de ubicaciones:
+                        En el calendario de la derecha, selecciona uno de estos
+                        consultorios en el selector de ubicaciones:
                       </p>
                       <ul className="space-y-2 text-sm text-muted-foreground ml-4">
                         {getAllAddresses().map((address) => (
-                          <li key={address.addressId} className="flex items-start gap-2">
+                          <li
+                            key={address.addressId}
+                            className="flex items-start gap-2"
+                          >
                             <span className="text-primary mt-1">•</span>
                             <div>
-                              <span className="font-medium text-foreground">{address.name}</span>
+                              <span className="font-medium text-foreground">
+                                {address.name}
+                              </span>
                               {!address.isOnline && (
-                                <span className="block text-xs mt-0.5">{address.address}</span>
+                                <span className="block text-xs mt-0.5">
+                                  {address.address}
+                                </span>
                               )}
                             </div>
                           </li>
@@ -184,10 +238,13 @@ export const ContactSection = () => {
                       2
                     </div>
                     <div className="flex-1">
-                    <p className="font-medium text-foreground text-sm">
-                    Selecciona el día y la hora  <span className="text-muted-foreground">que mejor se adapte a tu agenda del calendario disponible.</span>
+                      <p className="font-medium text-foreground text-sm">
+                        Selecciona el día y la hora{' '}
+                        <span className="text-muted-foreground">
+                          que mejor se adapte a tu agenda del calendario
+                          disponible.
+                        </span>
                       </p>
-                  
                     </div>
                   </div>
 
@@ -196,24 +253,28 @@ export const ContactSection = () => {
                       3
                     </div>
                     <p className="font-medium text-foreground text-sm">
-                      ¡Confirma y listo! <span className="text-muted-foreground">Recibirás recordatorio</span>
+                      ¡Confirma y listo!{' '}
+                      <span className="text-muted-foreground">
+                        Recibirás recordatorio
+                      </span>
                     </p>
                   </div>
                 </div>
 
                 {/* Botón para abrir en Doctoralia */}
                 <div className="mt-6">
-                  <Button
-                    size="lg"
-                    className="w-full"
-                    asChild
-                  >
+                  <Button size="lg" className="w-full" asChild>
                     <a
                       href="https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-2"
-                      onClick={() => trackExternalLink('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec', 'Abrir en Doctoralia')}
+                      onClick={() =>
+                        trackExternalLink(
+                          'https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec',
+                          'Abrir en Doctoralia',
+                        )
+                      }
                     >
                       <Calendar className="w-5 h-5" />
                       Abrir en Doctoralia
@@ -224,31 +285,27 @@ export const ContactSection = () => {
 
                 {/* Métodos de contacto alternativos */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    asChild
-                  >
-                    <a 
-                      href="tel:+525565053202" 
+                  <Button variant="outline" className="w-full" asChild>
+                    <a
+                      href="tel:+525565053202"
                       className="inline-flex items-center gap-2"
-                      onClick={() => trackPhoneClick('+525565053202', 'Contact Section')}
+                      onClick={() =>
+                        trackPhoneClick('+525565053202', 'Contact Section')
+                      }
                     >
                       <Phone className="w-4 h-4" />
                       Llamar ahora
                     </a>
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    asChild
-                  >
+                  <Button variant="outline" className="w-full" asChild>
                     <a
                       href="https://wa.me/525565053202"
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-2"
-                      onClick={() => trackWhatsAppClick('Contact Section', 'Contact Section')}
+                      onClick={() =>
+                        trackWhatsAppClick('Contact Section', 'Contact Section')
+                      }
                     >
                       <MessageCircle className="w-4 h-4" />
                       WhatsApp
@@ -267,7 +324,8 @@ export const ContactSection = () => {
                     Calendario de Disponibilidad
                   </h5>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Selecciona el consultorio y elige la fecha y hora que prefieras directamente en el calendario
+                    Selecciona el consultorio y elige la fecha y hora que
+                    prefieras directamente en el calendario
                   </p>
                 </div>
 
@@ -278,12 +336,12 @@ export const ContactSection = () => {
                     className="w-full"
                     title="Calendario de reserva de citas con Lic. Analaura Reyes Priego - Fisioterapeuta. Selecciona el consultorio, fecha y hora para agendar tu consulta."
                     loading="lazy"
-                    style={{ 
-                      height: '600px', 
+                    style={{
+                      height: '600px',
                       minHeight: '600px',
                       width: '100%',
                       maxWidth: '100%',
-                      border: 'none'
+                      border: 'none',
                     }}
                     allow="clipboard-write"
                   />
@@ -297,7 +355,11 @@ export const ContactSection = () => {
         <ScrollAnimated animation="fade-up" delay={300}>
           <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
             {locations.map((location, index) => (
-              <ScrollAnimated key={index} animation="slide-up" delay={index * 150}>
+              <ScrollAnimated
+                key={index}
+                animation="slide-up"
+                delay={index * 150}
+              >
                 <div className="bg-card rounded-2xl overflow-hidden shadow-soft hover:shadow-glow border border-border/50 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
                   {/* Map - Lazy loaded with security sandbox */}
                   <LazyMapIframe
@@ -323,30 +385,57 @@ export const ContactSection = () => {
 
                     {/* Mobile: Compact buttons */}
                     <div className="grid grid-cols-3 gap-2 md:hidden">
-                      <Button variant="default" size="sm" className="w-full" asChild>
-                        <a 
+                      <Button
+                        variant="default"
+                        size="sm"
+                        className="w-full"
+                        asChild
+                      >
+                        <a
                           href="tel:+525565053202"
-                          onClick={() => trackPhoneClick('+525565053202', location.name)}
+                          onClick={() =>
+                            trackPhoneClick('+525565053202', location.name)
+                          }
                         >
                           <Phone className="w-4 h-4" />
                         </a>
                       </Button>
-                      <Button variant="cta" size="sm" className="w-full" asChild>
-                        <a 
+                      <Button
+                        variant="cta"
+                        size="sm"
+                        className="w-full"
+                        asChild
+                      >
+                        <a
                           href={`https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20${encodeURIComponent(location.name)}`}
                           target="_blank"
                           rel="noopener noreferrer nofollow"
-                          onClick={() => trackWhatsAppClick(`Cita en ${location.name}`, location.name)}
+                          onClick={() =>
+                            trackWhatsAppClick(
+                              `Cita en ${location.name}`,
+                              location.name,
+                            )
+                          }
                         >
                           <MessageCircle className="w-4 h-4" />
                         </a>
                       </Button>
-                      <Button variant="outline" size="sm" className="w-full" asChild>
-                        <a 
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full"
+                        asChild
+                      >
+                        <a
                           href={location.mapUrl}
                           target="_blank"
                           rel="noopener noreferrer nofollow"
-                          onClick={() => trackExternalLink(location.mapUrl, `Ver Mapa - ${location.name}`)}
+                          onClick={() =>
+                            trackExternalLink(
+                              location.mapUrl,
+                              `Ver Mapa - ${location.name}`,
+                            )
+                          }
                         >
                           <MapPin className="w-4 h-4" />
                         </a>
@@ -356,31 +445,43 @@ export const ContactSection = () => {
                     {/* Desktop: Full buttons */}
                     <div className="hidden md:flex flex-col sm:flex-row gap-3">
                       <Button variant="default" className="flex-1" asChild>
-                        <a 
+                        <a
                           href="tel:+525565053202"
-                          onClick={() => trackPhoneClick('+525565053202', location.name)}
+                          onClick={() =>
+                            trackPhoneClick('+525565053202', location.name)
+                          }
                         >
                           <Phone className="w-4 h-4" />
                           Llamar
                         </a>
                       </Button>
                       <Button variant="cta" className="flex-1" asChild>
-                        <a 
+                        <a
                           href={`https://wa.me/525565053202?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20en%20${encodeURIComponent(location.name)}`}
                           target="_blank"
                           rel="noopener noreferrer nofollow"
-                          onClick={() => trackWhatsAppClick(`Cita en ${location.name}`, location.name)}
+                          onClick={() =>
+                            trackWhatsAppClick(
+                              `Cita en ${location.name}`,
+                              location.name,
+                            )
+                          }
                         >
                           <MessageCircle className="w-4 h-4" />
                           WhatsApp
                         </a>
                       </Button>
                       <Button variant="outline" className="flex-1" asChild>
-                        <a 
+                        <a
                           href={location.mapUrl}
                           target="_blank"
                           rel="noopener noreferrer nofollow"
-                          onClick={() => trackExternalLink(location.mapUrl, `Ver Mapa - ${location.name}`)}
+                          onClick={() =>
+                            trackExternalLink(
+                              location.mapUrl,
+                              `Ver Mapa - ${location.name}`,
+                            )
+                          }
                         >
                           <MapPin className="w-4 h-4" />
                           Ver Mapa
@@ -393,7 +494,6 @@ export const ContactSection = () => {
             ))}
           </div>
         </ScrollAnimated>
-
       </div>
     </section>
   );

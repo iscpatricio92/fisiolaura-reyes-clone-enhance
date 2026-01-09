@@ -1,4 +1,10 @@
-import { Star, Quote, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Star,
+  Quote,
+  ExternalLink,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollAnimated } from '@/components/ScrollAnimated';
 import { useRef, useState, useEffect } from 'react';
@@ -79,7 +85,11 @@ const featuredTestimonials = [
 ];
 
 // Testimonial Card Component with transformation
-const TestimonialCard = ({ testimonial }: { testimonial: typeof featuredTestimonials[0] }) => (
+const TestimonialCard = ({
+  testimonial,
+}: {
+  testimonial: (typeof featuredTestimonials)[0];
+}) => (
   <div className="group bg-card rounded-2xl p-6 shadow-soft hover:shadow-glow transition-all duration-300 lg:hover:-translate-y-2 border border-border/50 hover:border-primary/30 h-full flex flex-col">
     {/* Transformation badge */}
     {'transformation' in testimonial && testimonial.transformation && (
@@ -108,7 +118,9 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof featuredTestimon
       "{testimonial.text}"
     </p>
     <div className="flex items-center justify-between pt-4 border-t border-border/50 mt-auto">
-      <span className="font-semibold text-foreground text-sm">{testimonial.name}</span>
+      <span className="font-semibold text-foreground text-sm">
+        {testimonial.name}
+      </span>
       <span className="text-xs text-muted-foreground">{testimonial.date}</span>
     </div>
   </div>
@@ -127,7 +139,8 @@ export const TestimonialsSection = () => {
     if (container) {
       setCanScrollLeft(container.scrollLeft > 0);
       setCanScrollRight(
-        container.scrollLeft < container.scrollWidth - container.clientWidth - 10
+        container.scrollLeft <
+          container.scrollWidth - container.clientWidth - 10,
       );
       // Calculate current index based on scroll position
       const cardWidth = container.scrollWidth / displayedTestimonials.length;
@@ -173,11 +186,18 @@ export const TestimonialsSection = () => {
           <div className="flex flex-wrap items-center justify-center gap-2 mt-4 lg:mt-6">
             <div className="flex">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 lg:w-6 lg:h-6 fill-accent text-accent" />
+                <Star
+                  key={i}
+                  className="w-5 h-5 lg:w-6 lg:h-6 fill-accent text-accent"
+                />
               ))}
             </div>
-            <span className="text-xl lg:text-2xl font-bold text-foreground">5.0</span>
-            <span className="text-sm lg:text-base text-muted-foreground">• +150 opiniones</span>
+            <span className="text-xl lg:text-2xl font-bold text-foreground">
+              5.0
+            </span>
+            <span className="text-sm lg:text-base text-muted-foreground">
+              • +150 opiniones
+            </span>
           </div>
         </div>
 
@@ -244,8 +264,8 @@ export const TestimonialsSection = () => {
                   <div
                     key={index}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      index === currentIndex 
-                        ? 'w-6 bg-primary' 
+                      index === currentIndex
+                        ? 'w-6 bg-primary'
                         : 'w-1.5 bg-border'
                     }`}
                   />
@@ -256,7 +276,11 @@ export const TestimonialsSection = () => {
             {/* Desktop Grid */}
             <div className="hidden lg:grid lg:grid-cols-3 gap-6">
               {displayedTestimonials.map((testimonial, index) => (
-                <ScrollAnimated key={index} animation="scale-in" delay={index * 100}>
+                <ScrollAnimated
+                  key={index}
+                  animation="scale-in"
+                  delay={index * 100}
+                >
                   <TestimonialCard testimonial={testimonial} />
                 </ScrollAnimated>
               ))}
@@ -273,10 +297,13 @@ export const TestimonialsSection = () => {
             <p className="text-muted-foreground mb-4">
               Únete a más de 500 pacientes que ya recuperaron su bienestar
             </p>
-            <Button variant="cta" size="lg" className="min-h-[52px] px-8" asChild>
-              <a href="#contacto">
-                Reservar Mi Cita Ahora
-              </a>
+            <Button
+              variant="cta"
+              size="lg"
+              className="min-h-[52px] px-8"
+              asChild
+            >
+              <a href="#contacto">Reservar Mi Cita Ahora</a>
             </Button>
           </div>
         </ScrollAnimated>
@@ -286,9 +313,9 @@ export const TestimonialsSection = () => {
           <div className="text-center">
             <div className="inline-flex flex-col items-center gap-4 p-8 bg-card rounded-2xl border border-border/50 shadow-soft">
               <div className="flex items-center gap-2">
-                <img 
-                  src="https://platform.docplanner.com/img/mx/logo/logo-default-mx.svg" 
-                  alt="Doctoralia" 
+                <img
+                  src="https://platform.docplanner.com/img/mx/logo/logo-default-mx.svg"
+                  alt="Doctoralia"
                   className="h-6 object-contain"
                   loading="lazy"
                 />
@@ -296,11 +323,16 @@ export const TestimonialsSection = () => {
               <p className="text-muted-foreground">
                 Lee todas las opiniones verificadas en mi perfil de Doctoralia
               </p>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
                 className="group min-h-[48px] px-6"
-                onClick={() => window.open('https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/iztapalapa#profile-reviews', '_blank')}
+                onClick={() =>
+                  window.open(
+                    'https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/iztapalapa#profile-reviews',
+                    '_blank',
+                  )
+                }
               >
                 Ver Todas las Opiniones
                 <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

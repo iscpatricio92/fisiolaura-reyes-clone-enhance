@@ -1,17 +1,24 @@
-import { Calendar, ExternalLink, MapPin, Clock, Phone, MessageCircle } from "lucide-react";
-import { getAllAddresses } from "@/lib/doctoralia-addresses";
-import { Button } from "@/components/ui/button";
+import {
+  Calendar,
+  ExternalLink,
+  MapPin,
+  Clock,
+  Phone,
+  MessageCircle,
+} from 'lucide-react';
+import { getAllAddresses } from '@/lib/doctoralia-addresses';
+import { Button } from '@/components/ui/button';
 
 interface DoctoraliaCalendarWidgetProps {
   className?: string;
 }
 
 export const DoctoraliaCalendarWidget = ({
-  className = "",
+  className = '',
 }: DoctoraliaCalendarWidgetProps) => {
   const doctoraliaUrl =
-    "https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec";
-  
+    'https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec';
+
   // Obtener todas las direcciones dinámicamente
   const addresses = getAllAddresses();
 
@@ -45,16 +52,24 @@ export const DoctoraliaCalendarWidget = ({
                   Selecciona el consultorio
                 </p>
                 <p className="text-sm text-muted-foreground mb-3">
-                  En la página de Doctoralia, asegúrate de seleccionar uno de estos consultorios en el selector de ubicaciones:
+                  En la página de Doctoralia, asegúrate de seleccionar uno de
+                  estos consultorios en el selector de ubicaciones:
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground ml-4">
                   {addresses.map((address) => (
-                    <li key={address.addressId} className="flex items-start gap-2">
+                    <li
+                      key={address.addressId}
+                      className="flex items-start gap-2"
+                    >
                       <span className="text-primary mt-1">•</span>
                       <div>
-                        <span className="font-medium text-foreground">{address.name}</span>
+                        <span className="font-medium text-foreground">
+                          {address.name}
+                        </span>
                         {!address.isOnline && (
-                          <span className="block text-xs mt-0.5">{address.address}</span>
+                          <span className="block text-xs mt-0.5">
+                            {address.address}
+                          </span>
                         )}
                       </div>
                     </li>
@@ -72,7 +87,8 @@ export const DoctoraliaCalendarWidget = ({
                   Selecciona el servicio
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Elige el tipo de consulta o tratamiento que necesitas de la lista de servicios disponibles.
+                  Elige el tipo de consulta o tratamiento que necesitas de la
+                  lista de servicios disponibles.
                 </p>
               </div>
             </div>
@@ -86,7 +102,8 @@ export const DoctoraliaCalendarWidget = ({
                   Elige fecha y hora
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Selecciona el día y la hora que mejor se adapte a tu agenda del calendario disponible.
+                  Selecciona el día y la hora que mejor se adapte a tu agenda
+                  del calendario disponible.
                 </p>
               </div>
             </div>
@@ -95,11 +112,7 @@ export const DoctoraliaCalendarWidget = ({
 
         {/* Botón principal para agendar en Doctoralia */}
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-          <Button
-            size="lg"
-            className="w-full sm:w-auto min-w-[200px]"
-            asChild
-          >
+          <Button size="lg" className="w-full sm:w-auto min-w-[200px]" asChild>
             <a
               href={doctoraliaUrl}
               target="_blank"
@@ -115,21 +128,16 @@ export const DoctoraliaCalendarWidget = ({
 
         {/* Métodos de contacto alternativos */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto mb-6">
-          <Button
-            variant="outline"
-            className="w-full"
-            asChild
-          >
-            <a href="tel:+525565053202" className="inline-flex items-center gap-2">
+          <Button variant="outline" className="w-full" asChild>
+            <a
+              href="tel:+525565053202"
+              className="inline-flex items-center gap-2"
+            >
               <Phone className="w-4 h-4" />
               Llamar ahora
             </a>
           </Button>
-          <Button
-            variant="outline"
-            className="w-full"
-            asChild
-          >
+          <Button variant="outline" className="w-full" asChild>
             <a
               href="https://wa.me/525565053202"
               target="_blank"

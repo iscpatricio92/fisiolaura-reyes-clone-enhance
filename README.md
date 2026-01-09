@@ -46,12 +46,14 @@ npm run preview      # Preview del build de producción localmente
 ## 🛠️ Stack Tecnológico
 
 ### Frontend Core
+
 - **React 18.3.1** - Biblioteca de UI moderna
 - **TypeScript 5.8.3** - Tipado estático para mayor robustez
 - **Vite 5.4.19** - Build tool ultrarrápido y dev server
 - **React Router DOM 6.30.1** - Navegación SPA con soporte para futuro v7
 
 ### UI Components
+
 - **shadcn/ui** - Sistema de componentes basado en Radix UI
 - **Radix UI** - Componentes primitivos accesibles y personalizables
 - **Lucide React** - Librería de iconos moderna
@@ -60,16 +62,19 @@ npm run preview      # Preview del build de producción localmente
 - **@tailwindcss/typography** - Estilos tipográficos mejorados
 
 ### Estado y Datos
+
 - **TanStack Query 5.83.0** - Gestión de estado del servidor y caché
 - **React Hook Form 7.61.1** - Manejo eficiente de formularios
 - **Zod 3.25.76** - Validación de esquemas TypeScript-first
 
 ### Optimización y Performance
+
 - **vite-imagetools** - Optimización automática de imágenes (WebP, srcset)
 - **vite-plugin-pwa** - Service Worker y PWA capabilities
 - **workbox-window** - Gestión avanzada de Service Worker
 
 ### Fuentes
+
 - **Playfair Display** (serif) - Títulos y encabezados
 - **Work Sans** (sans-serif) - Texto del cuerpo
 
@@ -126,6 +131,7 @@ fisiolaura-reyes-clone-enhance/
 ## 🎨 Características Principales
 
 ### Performance
+
 - ✅ **PageSpeed Insights**: 99 (Desktop) / 90 (Mobile)
 - ✅ **Imágenes optimizadas**: WebP con fallback, srcset responsive
 - ✅ **Code splitting**: Lazy loading de componentes
@@ -133,18 +139,21 @@ fisiolaura-reyes-clone-enhance/
 - ✅ **PWA**: Actualizaciones automáticas con notificaciones
 
 ### SEO
+
 - ✅ **Meta tags optimizados**: Títulos, descripciones, Open Graph
 - ✅ **Schema.org JSON-LD**: LocalBusiness y ProfessionalService
 - ✅ **Sitemap XML**: Actualizado y referenciado en robots.txt
 - ✅ **Estructura semántica**: HTML5 semántico
 
 ### Accesibilidad
+
 - ✅ **WCAG 2.1 AA**: Contraste adecuado, tamaños táctiles (44x44px)
 - ✅ **Navegación por teclado**: Componentes Radix UI accesibles
 - ✅ **Screen readers**: Títulos descriptivos, aria-labels
 - ✅ **prefers-reduced-motion**: Soporte para usuarios sensibles a animaciones
 
 ### Integraciones
+
 - ✅ **Google Analytics 4**: Tracking de eventos y conversiones
 - ✅ **Doctoralia**: Widget de calendario y testimonios
 - ✅ **WhatsApp**: Botón flotante con tracking
@@ -165,6 +174,7 @@ El proyecto está configurado para desplegarse automáticamente en **GitHub Page
 ### Dominio Personalizado
 
 El proyecto está configurado para usar `fisio-movimiento.com`:
+
 - Archivo `CNAME` en `public/`
 - `vite.config.ts` configurado con `base: '/'`
 - `BrowserRouter` usa `import.meta.env.BASE_URL`
@@ -194,12 +204,14 @@ La documentación detallada está disponible en el directorio `docs/`:
 ### Variables de Entorno
 
 El proyecto no requiere variables de entorno en desarrollo. Las configuraciones están en:
+
 - `index.html` - Google Analytics Measurement ID (`G-3L9C8QMNZV`)
 - `vite.config.ts` - Configuración de build y PWA
 
 ### Path Aliases
 
 El proyecto usa path aliases para imports más limpios:
+
 ```typescript
 import { Button } from '@/components/ui/button';
 import { usePWAUpdate } from '@/hooks/use-pwa-update';

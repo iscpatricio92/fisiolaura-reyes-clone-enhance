@@ -1,6 +1,12 @@
 import { useCallback } from 'react';
 
-type HapticType = 'light' | 'medium' | 'heavy' | 'success' | 'warning' | 'error';
+type HapticType =
+  | 'light'
+  | 'medium'
+  | 'heavy'
+  | 'success'
+  | 'warning'
+  | 'error';
 
 export const useHapticFeedback = () => {
   const vibrate = useCallback((type: HapticType = 'light') => {
@@ -24,9 +30,12 @@ export const useHapticFeedback = () => {
     }
   }, []);
 
-  const triggerHaptic = useCallback((type: HapticType = 'light') => {
-    vibrate(type);
-  }, [vibrate]);
+  const triggerHaptic = useCallback(
+    (type: HapticType = 'light') => {
+      vibrate(type);
+    },
+    [vibrate],
+  );
 
   return { triggerHaptic };
 };

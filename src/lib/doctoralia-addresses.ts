@@ -1,9 +1,9 @@
 /**
  * Configuración de direcciones/consultorios de Doctoralia
- * 
+ *
  * Estos IDs se obtienen del sitio de Doctoralia y corresponden a cada ubicación
  * donde el especialista atiende pacientes.
- * 
+ *
  * Para obtener los IDs actualizados:
  * 1. Visita el perfil en Doctoralia
  * 2. Inspecciona los elementos con data-address-id
@@ -32,7 +32,7 @@ export interface DoctoraliaAddress {
 
 /**
  * Direcciones del especialista en Doctoralia
- * 
+ *
  * IDs obtenidos del sitio: https://www.fisioanalaurareyes.com/
  * - addressId: 238870 (Consulta en línea)
  * - addressId: 238871 (Consultorio Iztapalapa)
@@ -60,10 +60,11 @@ export const DOCTORALIA_ADDRESSES: DoctoraliaAddress[] = [
   {
     addressId: '238872',
     name: 'Consultorio Metepec',
-    address: 'Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México',
+    address:
+      'Priv. 5 de Mayo 5, San Jerónimo Chicahualco, 52179 Metepec, Estado de México',
     coordinates: {
       lat: 19.2797222,
-      lng: -99.5938110,
+      lng: -99.593811,
     },
     mapUrl: 'https://google.com/maps?q=19.2797222,-99.5938110',
     calendarId: '94291',
@@ -73,7 +74,9 @@ export const DOCTORALIA_ADDRESSES: DoctoraliaAddress[] = [
 /**
  * Obtiene una dirección por su addressId
  */
-export const getAddressById = (addressId: string): DoctoraliaAddress | undefined => {
+export const getAddressById = (
+  addressId: string,
+): DoctoraliaAddress | undefined => {
   return DOCTORALIA_ADDRESSES.find((addr) => addr.addressId === addressId);
 };
 
@@ -97,4 +100,3 @@ export const getPhysicalAddresses = (): DoctoraliaAddress[] => {
 export const getOnlineAddress = (): DoctoraliaAddress | undefined => {
   return DOCTORALIA_ADDRESSES.find((addr) => addr.isOnline);
 };
-
