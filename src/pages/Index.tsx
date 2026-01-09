@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
 import { Footer } from '@/components/Footer';
@@ -8,6 +8,44 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useSectionTracking } from '@/hooks/use-section-tracking';
 import { useHashNavigation } from '@/hooks/use-hash-navigation';
 import { useSectionTimeTracking } from '@/hooks/use-section-time-tracking';
+
+// Genera el schema BreadcrumbList para SEO
+const generateBreadcrumbSchema = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: 'https://www.fisio-movimiento.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Servicios',
+      item: 'https://www.fisio-movimiento.com/#servicios',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Precios',
+      item: 'https://www.fisio-movimiento.com/#precios',
+    },
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: 'Testimonios',
+      item: 'https://www.fisio-movimiento.com/#testimonios',
+    },
+    {
+      '@type': 'ListItem',
+      position: 5,
+      name: 'Contacto',
+      item: 'https://www.fisio-movimiento.com/#contacto',
+    },
+  ],
+});
 
 // Lazy load components that are below the fold for better initial load performance
 const AboutSection = lazy(() =>
@@ -49,6 +87,24 @@ const SocialMediaSection = lazy(() =>
 const Index = () => {
   // Hook para manejar navegación con hash y tracking
   useHashNavigation();
+
+  // Inyectar schema BreadcrumbList para SEO
+  useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[data-breadcrumb-schema]',
+    );
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-breadcrumb-schema', 'true');
+      script.textContent = JSON.stringify(generateBreadcrumbSchema());
+      document.head.appendChild(script);
+    }
+    return () => {
+      const script = document.querySelector('script[data-breadcrumb-schema]');
+      if (script) script.remove();
+    };
+  }, []);
 
   // Track tiempo en secciones clave (solo si pasa >30 segundos)
   // Esto indica interés real del usuario

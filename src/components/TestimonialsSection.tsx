@@ -9,6 +9,36 @@ import { Button } from '@/components/ui/button';
 import { ScrollAnimated } from '@/components/ScrollAnimated';
 import { useRef, useState, useEffect } from 'react';
 
+// Genera el schema Review para SEO
+const generateReviewSchema = (testimonials: typeof featuredTestimonials) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://www.fisio-movimiento.com/#organization',
+  name: 'Fisioterapia Analaura Reyes Priego',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5.0',
+    reviewCount: testimonials.length.toString(),
+    bestRating: '5',
+    worstRating: '1',
+  },
+  review: testimonials.map((testimonial) => ({
+    '@type': 'Review',
+    author: {
+      '@type': 'Person',
+      name: testimonial.name,
+    },
+    reviewRating: {
+      '@type': 'Rating',
+      ratingValue: testimonial.rating.toString(),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    reviewBody: testimonial.text,
+    datePublished: new Date().toISOString().split('T')[0], // Approximate date
+  })),
+});
+
 const featuredTestimonials = [
   {
     name: 'María G.',
@@ -133,6 +163,24 @@ export const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const displayedTestimonials = featuredTestimonials.slice(0, 6);
+
+  // Inyectar schema Review para SEO
+  useEffect(() => {
+    const existingScript = document.querySelector('script[data-review-schema]');
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.setAttribute('data-review-schema', 'true');
+      script.textContent = JSON.stringify(
+        generateReviewSchema(featuredTestimonials),
+      );
+      document.head.appendChild(script);
+    }
+    return () => {
+      const script = document.querySelector('script[data-review-schema]');
+      if (script) script.remove();
+    };
+  }, []);
 
   const updateScrollState = () => {
     const container = scrollContainerRef.current;

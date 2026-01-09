@@ -3,53 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <!-- Performance: Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://widgets.doctoralia.com.mx" />
     <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-    
+
     <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9C8QMNZV"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-3L9C8QMNZV"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       // Disable automatic pageview for SPA - we'll track it manually in main.tsx
       gtag('config', 'G-3L9C8QMNZV', {
-        send_page_view: false
+        send_page_view: false,
       });
     </script>
 
     <!-- Facebook Pixel -->
     <!-- Meta Pixel Code -->
     <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js',
+      );
       fbq('init', '1552455925827622');
       fbq('track', 'PageView');
     </script>
     <!-- End Meta Pixel Code -->
-    
+
     <!-- Google Fonts: Optimized loading with display=swap -->
     <!-- Loading only required font weights: Inter (400,500,600,700) and Poppins (400,500,600,700,800,900) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Primary Meta Tags - SEO Optimized -->
     <title>Fisioterapeuta CDMX y Metepec | Analaura Reyes - ATM, Dolor</title>
-    <meta name="title" content="Fisioterapeuta CDMX y Metepec | Analaura Reyes - ATM, Dolor" />
-    <meta name="description" content="Fisioterapeuta con doble titulación México-España. Especialista en dolor de espalda, ATM e hipopresivos. CDMX y Metepec. Primera cita $600. ¡Reserva hoy!" />
-    <meta name="keywords" content="fisioterapia, fisioterapeuta, CDMX, Metepec, Iztapalapa, rehabilitación, dolor de espalda, ATM, hipopresivos, terapia manual, fisioterapia traumatológica, dolor crónico, lesiones deportivas" />
+    <meta
+      name="title"
+      content="Fisioterapeuta CDMX y Metepec | Analaura Reyes - ATM, Dolor"
+    />
+    <meta
+      name="description"
+      content="Fisioterapeuta con doble titulación México-España. Especialista en dolor de espalda, ATM e hipopresivos. CDMX y Metepec. Primera cita $600. ¡Reserva hoy!"
+    />
+    <meta
+      name="keywords"
+      content="fisioterapia, fisioterapeuta, CDMX, Metepec, Iztapalapa, rehabilitación, dolor de espalda, ATM, hipopresivos, terapia manual, fisioterapia traumatológica, dolor crónico, lesiones deportivas"
+    />
     <meta name="author" content="Lic. Analaura Reyes Priego" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
     <meta name="language" content="es-MX" />
     <meta name="geo.region" content="MX-DF" />
     <meta name="geo.placename" content="Ciudad de México, Metepec" />
@@ -58,13 +93,22 @@
     <meta name="country" content="Mexico" />
     <meta name="target-country" content="MX" />
     <link rel="canonical" href="https://fisio-movimiento.com/" />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://fisio-movimiento.com/" />
-    <meta property="og:title" content="Fisioterapeuta CDMX y Metepec | Analaura Reyes - Especialista en Dolor" />
-    <meta property="og:description" content="¿Dolor de espalda o articulaciones? Fisioterapeuta con doble titulación. Tratamientos personalizados. Primera cita $600. ¡Reserva hoy!" />
-    <meta property="og:image" content="https://fisio-movimiento.com/og-image.png" />
+    <meta
+      property="og:title"
+      content="Fisioterapeuta CDMX y Metepec | Analaura Reyes - Especialista en Dolor"
+    />
+    <meta
+      property="og:description"
+      content="¿Dolor de espalda o articulaciones? Fisioterapeuta con doble titulación. Tratamientos personalizados. Primera cita $600. ¡Reserva hoy!"
+    />
+    <meta
+      property="og:image"
+      content="https://fisio-movimiento.com/og-image.png"
+    />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_MX" />
@@ -73,23 +117,393 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://fisio-movimiento.com/" />
-    <meta name="twitter:title" content="Lic. Analaura Reyes Priego | Fisioterapeuta Especializada" />
-    <meta name="twitter:description" content="Fisioterapeuta con doble titulación. Especialista en traumatología, ATM, hipopresivos y manejo del dolor. Consultorios en CDMX y Metepec." />
-    <meta name="twitter:image" content="https://fisio-movimiento.com/og-image.png" />
+    <meta
+      name="twitter:title"
+      content="Lic. Analaura Reyes Priego | Fisioterapeuta Especializada"
+    />
+    <meta
+      name="twitter:description"
+      content="Fisioterapeuta con doble titulación. Especialista en traumatología, ATM, hipopresivos y manejo del dolor. Consultorios en CDMX y Metepec."
+    />
+    <meta
+      name="twitter:image"
+      content="https://fisio-movimiento.com/og-image.png"
+    />
 
     <!-- Schema.org - LocalBusiness -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.fisio-movimiento.com/","name":"Fisioterapia Analaura Reyes Priego","alternateName":"FisioAnalaura","description":"Fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor. Consultorios en Iztapalapa, CDMX y Metepec, Estado de México.","url":"https://www.fisio-movimiento.com/","telephone":"+52 55 6505 3202","priceRange":"$400-$800 MXN","image":"https://www.fisio-movimiento.com/og-image.png","logo":"https://www.fisio-movimiento.com/logo.png","address":[{"@type":"PostalAddress","streetAddress":"Andres Tutino 25c","addressLocality":"Iztapalapa","addressRegion":"CDMX","postalCode":"09360","addressCountry":"MX"},{"@type":"PostalAddress","streetAddress":"Priv. 5 de Mayo 5, San Jerónimo Chicahualco","addressLocality":"Metepec","addressRegion":"México","postalCode":"52179","addressCountry":"MX"}],"geo":[{"@type":"GeoCoordinates","latitude":"19.3540592","longitude":"-99.0791321"},{"@type":"GeoCoordinates","latitude":"19.2797222","longitude":"-99.5938110"}],"areaServed":[{"@type":"Country","name":"México","identifier":"MX"},{"@type":"City","name":"Ciudad de México"},{"@type":"City","name":"Metepec"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:00"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"150","bestRating":"5","worstRating":"1"},"sameAs":["https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec","https://www.instagram.com/physioholisticmx/","https://www.facebook.com/fisio.movimiento.mx"]}</script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.fisio-movimiento.com/",
+        "name": "Fisioterapia Analaura Reyes Priego",
+        "alternateName": "FisioAnalaura",
+        "description": "Fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor. Consultorios en Iztapalapa, CDMX y Metepec, Estado de México.",
+        "url": "https://www.fisio-movimiento.com/",
+        "telephone": "+52 55 6505 3202",
+        "priceRange": "$400-$800 MXN",
+        "image": "https://www.fisio-movimiento.com/og-image.png",
+        "logo": "https://www.fisio-movimiento.com/logo.png",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Andres Tutino 25c",
+            "addressLocality": "Iztapalapa",
+            "addressRegion": "CDMX",
+            "postalCode": "09360",
+            "addressCountry": "MX"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Priv. 5 de Mayo 5, San Jerónimo Chicahualco",
+            "addressLocality": "Metepec",
+            "addressRegion": "México",
+            "postalCode": "52179",
+            "addressCountry": "MX"
+          }
+        ],
+        "geo": [
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "19.3540592",
+            "longitude": "-99.0791321"
+          },
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "19.2797222",
+            "longitude": "-99.5938110"
+          }
+        ],
+        "areaServed": [
+          { "@type": "Country", "name": "México", "identifier": "MX" },
+          { "@type": "City", "name": "Ciudad de México" },
+          { "@type": "City", "name": "Metepec" }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "19:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",
+          "reviewCount": "150",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "sameAs": [
+          "https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec",
+          "https://www.instagram.com/physioholisticmx/",
+          "https://www.facebook.com/fisio.movimiento.mx"
+        ]
+      }
+    </script>
 
     <!-- Schema.org - ProfessionalService -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"Fisioterapia Analaura Reyes Priego","provider":{"@type":"Person","name":"Lic. Analaura Reyes Priego","jobTitle":"Fisioterapeuta","description":"Fisioterapeuta con doble titulación de Universidad Europea de Madrid (España, 2015) y Universidad del Valle de México (México, 2017). Diplomado en Abordaje Integral del Dolor por el Instituto Nacional de Neurología y Neurocirugía (en curso).","identifier":{"@type":"PropertyValue","name":"Cédula Profesional","value":"10909109"}},"areaServed":[{"@type":"City","name":"Ciudad de México"},{"@type":"City","name":"Metepec"},{"@type":"Country","name":"México"}],"serviceType":["Fisioterapia Traumatológica","Fisioterapia ATM","Hipopresivos","Manejo del Dolor","Readaptación Deportiva","Terapias Manuales","Electroterapia","Fisioterapia para Adulto Mayor"],"url":"https://www.fisio-movimiento.com/"}</script>
-    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Fisioterapia Analaura Reyes Priego",
+        "provider": {
+          "@type": "Person",
+          "name": "Lic. Analaura Reyes Priego",
+          "jobTitle": "Fisioterapeuta",
+          "description": "Fisioterapeuta con doble titulación de Universidad Europea de Madrid (España, 2015) y Universidad del Valle de México (México, 2017). Diplomado en Abordaje Integral del Dolor por el Instituto Nacional de Neurología y Neurocirugía (en curso).",
+          "identifier": {
+            "@type": "PropertyValue",
+            "name": "Cédula Profesional",
+            "value": "10909109"
+          }
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Ciudad de México" },
+          { "@type": "City", "name": "Metepec" },
+          { "@type": "Country", "name": "México" }
+        ],
+        "serviceType": [
+          "Fisioterapia Traumatológica",
+          "Fisioterapia ATM",
+          "Hipopresivos",
+          "Manejo del Dolor",
+          "Readaptación Deportiva",
+          "Terapias Manuales",
+          "Electroterapia",
+          "Fisioterapia para Adulto Mayor"
+        ],
+        "url": "https://www.fisio-movimiento.com/"
+      }
+    </script>
+
+    <!-- Schema.org - Person (Detallado) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://www.fisio-movimiento.com/#person",
+        "name": "Lic. Analaura Reyes Priego",
+        "alternateName": "Analaura Reyes",
+        "jobTitle": "Fisioterapeuta",
+        "description": "Fisioterapeuta con doble titulación de México y España. Especialista en traumatología, ATM, hipopresivos y manejo del dolor.",
+        "image": "https://www.fisio-movimiento.com/og-image.png",
+        "url": "https://www.fisio-movimiento.com/",
+        "telephone": "+52 55 6505 3202",
+        "email": "fisio-movimiento.mx@gmail.com",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Andres Tutino 25c",
+            "addressLocality": "Iztapalapa",
+            "addressRegion": "CDMX",
+            "postalCode": "09360",
+            "addressCountry": "MX"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Priv. 5 de Mayo 5, San Jerónimo Chicahualco",
+            "addressLocality": "Metepec",
+            "addressRegion": "México",
+            "postalCode": "52179",
+            "addressCountry": "MX"
+          }
+        ],
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Universidad Europea de Madrid",
+            "location": { "@type": "Place", "addressCountry": "ES" },
+            "endDate": "2015"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Universidad del Valle de México",
+            "location": { "@type": "Place", "addressCountry": "MX" },
+            "endDate": "2017"
+          }
+        ],
+        "hasCredential": [
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "recognizedBy": {
+              "@type": "Organization",
+              "name": "Universidad Europea de Madrid"
+            },
+            "educationalLevel": "Bachelor's Degree"
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "degree",
+            "recognizedBy": {
+              "@type": "Organization",
+              "name": "Universidad del Valle de México"
+            },
+            "educationalLevel": "Bachelor's Degree"
+          },
+          {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "certification",
+            "recognizedBy": {
+              "@type": "Organization",
+              "name": "Instituto Nacional de Neurología y Neurocirugía"
+            },
+            "educationalLevel": "Diploma"
+          }
+        ],
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "Cédula Profesional",
+          "value": "10909109"
+        },
+        "knowsLanguage": ["es-MX", "en"],
+        "sameAs": [
+          "https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec",
+          "https://www.instagram.com/physioholisticmx/",
+          "https://www.facebook.com/fisio.movimiento.mx"
+        ]
+      }
+    </script>
+
+    <!-- Schema.org - WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.fisio-movimiento.com/#website",
+        "url": "https://www.fisio-movimiento.com/",
+        "name": "FisioAnalaura - Fisioterapeuta en CDMX y Metepec",
+        "alternateName": "FisioAnalaura",
+        "description": "Fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor.",
+        "publisher": {
+          "@id": "https://www.fisio-movimiento.com/#organization"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.fisio-movimiento.com/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- Schema.org - Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://www.fisio-movimiento.com/#organization",
+        "name": "Fisioterapia Analaura Reyes Priego",
+        "alternateName": "FisioAnalaura",
+        "url": "https://www.fisio-movimiento.com/",
+        "logo": "https://www.fisio-movimiento.com/og-image.png",
+        "image": "https://www.fisio-movimiento.com/og-image.png",
+        "description": "Fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor. Consultorios en Iztapalapa, CDMX y Metepec, Estado de México.",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Andres Tutino 25c",
+            "addressLocality": "Iztapalapa",
+            "addressRegion": "CDMX",
+            "postalCode": "09360",
+            "addressCountry": "MX"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Priv. 5 de Mayo 5, San Jerónimo Chicahualco",
+            "addressLocality": "Metepec",
+            "addressRegion": "México",
+            "postalCode": "52179",
+            "addressCountry": "MX"
+          }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+52 55 6505 3202",
+          "contactType": "customer service",
+          "areaServed": "MX",
+          "availableLanguage": ["es-MX", "en"]
+        },
+        "sameAs": [
+          "https://www.doctoralia.com.mx/analaura-reyes-priego/fisioterapeuta/metepec",
+          "https://www.instagram.com/physioholisticmx/",
+          "https://www.facebook.com/fisio.movimiento.mx"
+        ]
+      }
+    </script>
+
+    <!-- Schema.org - MedicalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "@id": "https://www.fisio-movimiento.com/#medicalbusiness",
+        "name": "Fisioterapia Analaura Reyes Priego",
+        "alternateName": "FisioAnalaura",
+        "description": "Fisioterapeuta con doble titulación (México y España) especializada en traumatología, ATM, hipopresivos y manejo del dolor.",
+        "url": "https://www.fisio-movimiento.com/",
+        "telephone": "+52 55 6505 3202",
+        "priceRange": "$400-$800 MXN",
+        "image": "https://www.fisio-movimiento.com/og-image.png",
+        "logo": "https://www.fisio-movimiento.com/logo.png",
+        "address": [
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Andres Tutino 25c",
+            "addressLocality": "Iztapalapa",
+            "addressRegion": "CDMX",
+            "postalCode": "09360",
+            "addressCountry": "MX"
+          },
+          {
+            "@type": "PostalAddress",
+            "streetAddress": "Priv. 5 de Mayo 5, San Jerónimo Chicahualco",
+            "addressLocality": "Metepec",
+            "addressRegion": "México",
+            "postalCode": "52179",
+            "addressCountry": "MX"
+          }
+        ],
+        "geo": [
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "19.3540592",
+            "longitude": "-99.0791321"
+          },
+          {
+            "@type": "GeoCoordinates",
+            "latitude": "19.2797222",
+            "longitude": "-99.5938110"
+          }
+        ],
+        "areaServed": [
+          { "@type": "Country", "name": "México", "identifier": "MX" },
+          { "@type": "City", "name": "Ciudad de México" },
+          { "@type": "City", "name": "Metepec" }
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "19:00"
+          }
+        ],
+        "medicalSpecialty": [
+          "Fisioterapia Traumatológica",
+          "Fisioterapia ATM",
+          "Hipopresivos",
+          "Manejo del Dolor",
+          "Readaptación Deportiva",
+          "Terapias Manuales",
+          "Electroterapia",
+          "Fisioterapia para Adulto Mayor"
+        ]
+      }
+    </script>
+
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-    
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-touch-icon.png"
+    />
+
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#2CA3B3" />
@@ -102,11 +516,14 @@
   <body>
     <!-- Facebook Pixel Noscript -->
     <noscript>
-      <img height="1" width="1" style="display:none"
+      <img
+        height="1"
+        width="1"
+        style="display: none"
         src="https://www.facebook.com/tr?id=1552455925827622&ev=PageView&noscript=1"
       />
     </noscript>
-    
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

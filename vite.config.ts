@@ -1,9 +1,10 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
-import { componentTagger } from "lovable-tagger";
-import { imagetools } from "vite-imagetools";
-import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import path from 'path';
+import { componentTagger } from 'lovable-tagger';
+import { imagetools } from 'vite-imagetools';
+import { VitePWA } from 'vite-plugin-pwa';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -11,23 +12,33 @@ export default defineConfig(({ mode }) => ({
   // Works the same in local development
   base: '/',
   server: {
-    host: "::",
+    host: '::',
     port: 8080,
     headers: {
       'Cache-Control': 'no-cache',
     },
   },
   plugins: [
-    react(), 
+    react(),
     imagetools(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon/favicon.ico', 'favicon/favicon-16x16.png', 'favicon/favicon-32x32.png', 'favicon/favicon-96x96.png', 'favicon/apple-touch-icon.png', 'robots.txt', 'sitemap.xml', 'llms.txt'],
+      includeAssets: [
+        'favicon/favicon.ico',
+        'favicon/favicon-16x16.png',
+        'favicon/favicon-32x32.png',
+        'favicon/favicon-96x96.png',
+        'favicon/apple-touch-icon.png',
+        'robots.txt',
+        'sitemap.xml',
+        'llms.txt',
+      ],
       manifestFilename: 'manifest.json', // Cambiar extensión a .json para mejor compatibilidad con GitHub Pages
       manifest: {
         name: 'FisioAnalaura - Fisioterapeuta en CDMX y Metepec',
         short_name: 'FisioAnalaura',
-        description: 'Fisioterapeuta con doble titulación (México y España). Especialista en traumatología, ATM, hipopresivos y manejo del dolor.',
+        description:
+          'Fisioterapeuta con doble titulación (México y España). Especialista en traumatología, ATM, hipopresivos y manejo del dolor.',
         theme_color: '#2CA3B3',
         background_color: '#F8FBFB',
         display: 'standalone',
@@ -38,40 +49,42 @@ export default defineConfig(({ mode }) => ({
           {
             src: '/favicon/icon-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: '/favicon/icon-512x512.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: '/favicon/apple-touch-icon.png',
             sizes: '180x180',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: '/favicon/favicon-16x16.png',
             sizes: '16x16',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: '/favicon/favicon-32x32.png',
             sizes: '32x32',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: '/favicon/favicon-96x96.png',
             sizes: '96x96',
-            type: 'image/png'
-          }
-        ]
+            type: 'image/png',
+          },
+        ],
       },
       workbox: {
         // Cache-first para assets estáticos (JS, CSS, imágenes con hash)
         // Network-first para HTML (para siempre tener la versión más reciente)
         ...(mode === 'production' && {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,woff2}'],
+          globPatterns: [
+            '**/*.{js,css,html,ico,png,svg,webp,jpg,jpeg,woff,woff2}',
+          ],
         }),
         // En desarrollo, deshabilitar precaching completamente para evitar warnings
         // Workbox usa un patrón por defecto si no se define globPatterns, por eso lo deshabilitamos
@@ -90,12 +103,12 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'google-fonts-stylesheets',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 año
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
+                statuses: [0, 200],
+              },
+            },
           },
           {
             // Google Fonts - Cache-first para archivos de fuente
@@ -105,13 +118,13 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'google-fonts-webfonts',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 año
+                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 año
               },
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            }
-          }
+                statuses: [0, 200],
+              },
+            },
+          },
         ],
         // Limitar tamaño de caché (50MB)
         maximumFileSizeToCacheInBytes: 50 * 1024 * 1024,
@@ -119,7 +132,7 @@ export default defineConfig(({ mode }) => ({
         cleanupOutdatedCaches: true,
         // No usar skipWaiting (esperar a que el usuario recargue para nueva versión)
         skipWaiting: false,
-        clientsClaim: false
+        clientsClaim: false,
       },
       // Habilitar PWA en desarrollo para generar manifest
       devOptions: {
@@ -127,13 +140,22 @@ export default defineConfig(({ mode }) => ({
         type: 'module',
         // Nota: El warning de globPatterns en desarrollo es conocido y puede ignorarse
         // Workbox usa un patrón por defecto que busca en dev-dist/, pero no afecta la funcionalidad
-      }
+      },
     }),
-    mode === "development" && componentTagger()
+    mode === 'development' && componentTagger(),
+    // Bundle size analyzer - solo cuando se solicita con ANALYZE=true
+    process.env.ANALYZE === 'true' &&
+      visualizer({
+        filename: 'dist/stats.html',
+        open: true,
+        gzipSize: true,
+        brotliSize: true,
+        template: 'treemap', // o "sunburst", "network"
+      }),
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
   build: {
