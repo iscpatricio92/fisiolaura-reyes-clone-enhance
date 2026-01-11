@@ -34,10 +34,6 @@
  * Note: Most tracking functions automatically track in both GA4 and Meta Pixel
  */
 
-// Google Analytics 4 Measurement ID
-// This is loaded via the script tag in index.html
-const GA_MEASUREMENT_ID = 'G-3L9C8QMNZV';
-
 // Declare gtag and fbq function types
 declare global {
   interface Window {
@@ -187,25 +183,18 @@ const isMetaPixelEnabled = () => {
 };
 
 // Initialize analytics (called in main.tsx)
-// The actual initialization is done in index.html via script tag
+// The actual initialization is done in index.html via script tag (loadAnalytics function)
+// This function only initializes UTM tracking - GA4 script is loaded asynchronously in index.html
 export const initAnalytics = () => {
-  // Initialize UTM tracking first
+  // Initialize UTM tracking (this runs immediately on page load)
   initUTMTracking();
 
-  if (import.meta.env.DEV) {
-    console.log('Analytics: Disabled in development mode');
-    return;
-  }
-
-  if (typeof window === 'undefined' || !window.gtag) {
-    console.log('Analytics: GA4 script not loaded');
-    return;
-  }
-
-  console.log(
-    'Analytics: Google Analytics 4 initialized with ID',
-    GA_MEASUREMENT_ID,
-  );
+  // Note: window.gtag is created in index.html's loadAnalytics() function,
+  // which runs asynchronously after the initial render. So we don't check for it here.
+  // The actual GA4 script loading is handled in index.html, and main.tsx waits
+  // for the script to load before tracking the initial page view.
+  // Individual tracking functions (trackEvent, trackPageView, etc.) will check
+  // if GA4 is loaded before sending events via isAnalyticsEnabled().
 };
 
 // Track page view
