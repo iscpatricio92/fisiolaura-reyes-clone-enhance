@@ -16,46 +16,63 @@ import {
 } from '@/components/ui/dialog';
 
 // Importar imágenes locales optimizadas con vite-imagetools
-// Redimensionar a 800x600 (aspect ratio 4:3) para mantener consistencia
-import clinicCdmx1 from '@/assets/clinics/physioholistic cdmx.jpeg?w=800&h=600&format=webp';
+// Generar múltiples tamaños para srcset responsive (400w, 665w, 800w)
+// Aspect ratio 4:3 para mantener consistencia
+
+// CDMX 1 - Múltiples tamaños
+import clinicCdmx1Small from '@/assets/clinics/physioholistic cdmx.jpeg?w=400&h=300&format=webp';
+import clinicCdmx1Medium from '@/assets/clinics/physioholistic cdmx.jpeg?w=665&h=499&format=webp';
+import clinicCdmx1Large from '@/assets/clinics/physioholistic cdmx.jpeg?w=800&h=600&format=webp';
 import clinicCdmx1Fallback from '@/assets/clinics/physioholistic cdmx.jpeg?w=800&h=600';
-import clinicCdmx2 from '@/assets/clinics/physioholistic cdmx 2.jpeg?w=800&h=600&format=webp';
+
+// CDMX 2 - Múltiples tamaños
+import clinicCdmx2Small from '@/assets/clinics/physioholistic cdmx 2.jpeg?w=400&h=300&format=webp';
+import clinicCdmx2Medium from '@/assets/clinics/physioholistic cdmx 2.jpeg?w=665&h=499&format=webp';
+import clinicCdmx2Large from '@/assets/clinics/physioholistic cdmx 2.jpeg?w=800&h=600&format=webp';
 import clinicCdmx2Fallback from '@/assets/clinics/physioholistic cdmx 2.jpeg?w=800&h=600';
-import clinicToluca1 from '@/assets/clinics/physioholistic consultorio toluca.jpeg?w=800&h=600&format=webp';
+
+// Toluca 1 - Múltiples tamaños
+import clinicToluca1Small from '@/assets/clinics/physioholistic consultorio toluca.jpeg?w=400&h=300&format=webp';
+import clinicToluca1Medium from '@/assets/clinics/physioholistic consultorio toluca.jpeg?w=665&h=499&format=webp';
+import clinicToluca1Large from '@/assets/clinics/physioholistic consultorio toluca.jpeg?w=800&h=600&format=webp';
 import clinicToluca1Fallback from '@/assets/clinics/physioholistic consultorio toluca.jpeg?w=800&h=600';
-import clinicToluca2 from '@/assets/clinics/physioholistic consultorio toluca calle.jpeg?w=800&h=600&format=webp';
+
+// Toluca 2 - Múltiples tamaños
+import clinicToluca2Small from '@/assets/clinics/physioholistic consultorio toluca calle.jpeg?w=400&h=300&format=webp';
+import clinicToluca2Medium from '@/assets/clinics/physioholistic consultorio toluca calle.jpeg?w=665&h=499&format=webp';
+import clinicToluca2Large from '@/assets/clinics/physioholistic consultorio toluca calle.jpeg?w=800&h=600&format=webp';
 import clinicToluca2Fallback from '@/assets/clinics/physioholistic consultorio toluca calle.jpeg?w=800&h=600';
 
 interface GalleryImage {
-  src: string;
-  srcSet?: string;
+  srcSet: string;
   fallback: string;
   alt: string;
   caption?: string;
 }
 
-// Imágenes del consultorio - todas redimensionadas a 800x600 (aspect ratio 4:3)
+// Imágenes del consultorio con srcset responsive para optimización
+// Tamaños: 400w (móvil), 665w (tablet), 800w (desktop)
 const galleryImages: GalleryImage[] = [
   {
-    src: clinicCdmx1,
+    srcSet: `${clinicCdmx1Small} 400w, ${clinicCdmx1Medium} 665w, ${clinicCdmx1Large} 800w`,
     fallback: clinicCdmx1Fallback,
     alt: 'Consultorio PhysioHolistic CDMX - Sala de tratamiento principal',
     caption: 'Consultorio CDMX',
   },
   {
-    src: clinicCdmx2,
+    srcSet: `${clinicCdmx2Small} 400w, ${clinicCdmx2Medium} 665w, ${clinicCdmx2Large} 800w`,
     fallback: clinicCdmx2Fallback,
     alt: 'Consultorio PhysioHolistic CDMX - Instalaciones',
     caption: 'Consultorio CDMX',
   },
   {
-    src: clinicToluca1,
+    srcSet: `${clinicToluca1Small} 400w, ${clinicToluca1Medium} 665w, ${clinicToluca1Large} 800w`,
     fallback: clinicToluca1Fallback,
     alt: 'Consultorio PhysioHolistic Metepec - Sala de tratamiento',
     caption: 'Consultorio Metepec',
   },
   {
-    src: clinicToluca2,
+    srcSet: `${clinicToluca2Small} 400w, ${clinicToluca2Medium} 665w, ${clinicToluca2Large} 800w`,
     fallback: clinicToluca2Fallback,
     alt: 'Consultorio PhysioHolistic Metepec - Vista exterior',
     caption: 'Consultorio Metepec',
@@ -109,9 +126,13 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
                 tabIndex={0}
                 aria-label={`Ver imagen ${index + 1} en tamaño completo`}
               >
-                {/* Optimized image with WebP and fallback */}
+                {/* Optimized image with WebP, srcset responsive, and fallback */}
                 <picture>
-                  <source srcSet={image.src} type="image/webp" />
+                  <source
+                    srcSet={image.srcSet}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 665px, 800px"
+                    type="image/webp"
+                  />
                   <img
                     src={image.fallback}
                     alt={image.alt}
@@ -179,9 +200,13 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
           </DialogClose>
           {selectedImage && (
             <div className="relative rounded-2xl overflow-hidden bg-black">
-              {/* Optimized image in lightbox with WebP and fallback */}
+              {/* Optimized image in lightbox with WebP, srcset responsive, and fallback */}
               <picture>
-                <source srcSet={selectedImage.src} type="image/webp" />
+                <source
+                  srcSet={selectedImage.srcSet}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1200px"
+                  type="image/webp"
+                />
                 <img
                   src={selectedImage.fallback}
                   alt={selectedImage.alt}
@@ -189,6 +214,8 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
                   loading="eager"
                   fetchPriority="high"
                   decoding="sync"
+                  width={800}
+                  height={600}
                 />
               </picture>
               {selectedImage.caption && (

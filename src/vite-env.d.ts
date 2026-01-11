@@ -48,6 +48,16 @@ declare module '*?w=*&h=*' {
 }
 
 // More specific declarations for common sizes with height
+declare module '*?w=400&h=300&format=webp' {
+  const src: string;
+  export default src;
+}
+
+declare module '*?w=665&h=499&format=webp' {
+  const src: string;
+  export default src;
+}
+
 declare module '*?w=800&h=600&format=webp' {
   const src: string;
   export default src;
