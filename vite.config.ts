@@ -11,6 +11,56 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 /**
+ * Plugin para cargar CSS de forma asíncrona (no bloqueante)
+ * Modifica index.html después del build para cambiar <link rel="stylesheet">
+ * por <link rel="preload" as="style" onload="...">
+ * Esto reduce el tiempo de bloqueo del renderizado (~320ms según PageSpeed)
+ */
+const asyncCSSPlugin = (): Plugin => {
+  return {
+    name: 'async-css',
+    closeBundle() {
+      try {
+        // Leer index.html desde dist/ después de que Vite lo haya generado
+        const distIndexPath = join(process.cwd(), 'dist', 'index.html');
+        let indexHTML = readFileSync(distIndexPath, 'utf-8');
+
+        // Buscar solo el CSS generado por Vite (en /assets/) y convertirlo a carga asíncrona
+        // Excluir Google Fonts y otros recursos externos que ya están optimizados
+        indexHTML = indexHTML.replace(
+          /<link\s+([^>]*\s+)?rel=["']stylesheet["']([^>]*href=["']([^"']*\/assets\/[^"']+\.css[^"']*)["'][^>]*)>/gi,
+          (match, before, after, href) => {
+            // Si ya tiene onload, no modificar (evitar duplicados)
+            if (match.includes('onload=')) return match;
+
+            if (!href) return match;
+
+            // Extraer otros atributos (crossorigin, etc.) pero excluir rel y href
+            const otherAttrs = (before || '') + (after || '');
+            const cleanAttrs = otherAttrs
+              .replace(/rel=["']stylesheet["']/gi, '')
+              .replace(/href=["'][^"']+["']/gi, '')
+              .trim();
+
+            // Crear el nuevo link con preload y onload
+            // Agregar polyfill para navegadores que no soportan onload en <link>
+            const asyncLink = `<link rel="preload" as="style" href="${href}"${cleanAttrs ? ' ' + cleanAttrs : ''} onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="${href}"${cleanAttrs ? ' ' + cleanAttrs : ''}></noscript>`;
+
+            return asyncLink;
+          },
+        );
+
+        // Escribir el HTML modificado
+        writeFileSync(distIndexPath, indexHTML, 'utf-8');
+        console.log('✅ CSS configurado para carga asíncrona (no bloqueante)');
+      } catch (error) {
+        console.error('❌ Error al configurar CSS asíncrono:', error);
+      }
+    },
+  };
+};
+
+/**
  * Plugin para generar 404.html después del build
  * GitHub Pages necesita este archivo para manejar errores 404 y Google Search Console lo indexa
  */
@@ -111,6 +161,8 @@ export default defineConfig(({ mode }) => ({
   plugins: [
     react(),
     imagetools(),
+    // Cargar CSS de forma asíncrona (no bloqueante) - solo en producción
+    ...(mode === 'production' ? [asyncCSSPlugin()] : []),
     // Generate 404.html after build (only in production)
     ...(mode === 'production' ? [generate404Plugin()] : []),
     VitePWA({

@@ -365,6 +365,8 @@ export const TestimonialsSection = () => {
                   src="https://platform.docplanner.com/img/mx/logo/logo-default-mx.svg"
                   alt="Doctoralia"
                   className="h-6 object-contain"
+                  width={120}
+                  height={24}
                   loading="lazy"
                   fetchPriority="auto"
                   decoding="async"
