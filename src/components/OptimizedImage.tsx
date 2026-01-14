@@ -62,7 +62,8 @@ export const OptimizedImage = ({
           height={height}
           loading={priority ? 'eager' : 'lazy'}
           decoding={priority ? 'sync' : 'async'}
-          fetchPriority={priority ? 'high' : 'auto'}
+          // @ts-expect-error - fetchpriority is a valid HTML attribute but not yet in React types
+          fetchpriority={priority ? 'high' : 'auto'}
           onLoad={handleLoad}
           onError={handleError}
           className={cn(
