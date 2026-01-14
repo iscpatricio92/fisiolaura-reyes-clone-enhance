@@ -139,7 +139,8 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
                     decoding="async"
-                    fetchPriority="auto"
+                    // @ts-expect-error - fetchpriority is a valid HTML attribute but not yet in React types
+                    fetchpriority="auto"
                     width={800}
                     height={600}
                   />
@@ -212,7 +213,8 @@ export const ClinicGallery = ({ compact = false }: ClinicGalleryProps) => {
                   alt={selectedImage.alt}
                   className="w-full h-auto max-h-[80vh] object-contain"
                   loading="eager"
-                  fetchPriority="high"
+                  // @ts-expect-error - fetchpriority is a valid HTML attribute but not yet in React types
+                  fetchpriority="high"
                   decoding="sync"
                   width={800}
                   height={600}

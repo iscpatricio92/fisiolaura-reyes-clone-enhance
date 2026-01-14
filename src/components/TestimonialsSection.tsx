@@ -397,7 +397,8 @@ export const TestimonialsSection = () => {
                   width={120}
                   height={24}
                   loading="lazy"
-                  fetchPriority="auto"
+                  // @ts-expect-error - fetchpriority is a valid HTML attribute but not yet in React types
+                  fetchpriority="auto"
                   decoding="async"
                 />
               </div>

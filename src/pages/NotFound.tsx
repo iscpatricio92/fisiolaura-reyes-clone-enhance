@@ -5,6 +5,7 @@ import { trackEvent } from '@/lib/analytics';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Home } from 'lucide-react';
+import physioGiftVideo from '@/assets/physo gift.webm';
 
 const NotFound = () => {
   const location = useLocation();
@@ -34,6 +35,21 @@ const NotFound = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted/30 p-6">
       <div className="max-w-md w-full text-center space-y-6">
+        {/* Video */}
+        {/*       <div className="flex justify-center mb-4">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="max-w-[200px] w-full h-auto rounded-lg shadow-lg"
+            aria-label="Video animado de fisioterapia"
+          >
+            <source src={physioGiftVideo} type="video/webm" />
+            Tu navegador no soporta el elemento de video.
+          </video>
+        </div> */}
+
         {/* 404 Number */}
         <div className="space-y-2">
           <h1 className="text-8xl font-bold text-primary">404</h1>

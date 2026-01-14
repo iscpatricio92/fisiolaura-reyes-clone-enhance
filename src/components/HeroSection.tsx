@@ -8,12 +8,11 @@ import {
   Video,
   Check,
 } from 'lucide-react';
-import therapistImage from '@/assets/therapist-portrait_2.jpg';
-import therapistImageWebP from '@/assets/therapist-portrait_2.jpg?format=webp';
+import therapistImage from '@/assets/Lic. Analaura Reyes - Fisioterapeuta.png';
 // Responsive image sizes for srcset
-import therapistImageWebP400 from '@/assets/therapist-portrait_2.jpg?w=400&format=webp';
-import therapistImageWebP800 from '@/assets/therapist-portrait_2.jpg?w=800&format=webp';
-import therapistImageWebP1200 from '@/assets/therapist-portrait_2.jpg?w=1200&format=webp';
+import therapistImageWebP400 from '@/assets/Lic. Analaura Reyes - Fisioterapeuta.png?w=400&format=webp';
+import therapistImageWebP800 from '@/assets/Lic. Analaura Reyes - Fisioterapeuta.png?w=800&format=webp';
+import therapistImageWebP1200 from '@/assets/Lic. Analaura Reyes - Fisioterapeuta.png?w=1200&format=webp';
 import { trackCTAClick, trackPhoneClick } from '@/lib/analytics';
 
 export const HeroSection = () => {
@@ -190,7 +189,8 @@ export const HeroSection = () => {
                     alt="Lic. Analaura Reyes Priego - Fisioterapeuta"
                     className="w-full h-auto object-cover"
                     loading="eager"
-                    fetchPriority="high"
+                    // @ts-expect-error - fetchpriority is a valid HTML attribute but not yet in React types
+                    fetchpriority="high"
                     decoding="sync"
                     width={530}
                     height={530}
