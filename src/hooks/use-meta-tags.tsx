@@ -1,4 +1,9 @@
 import { useEffect } from 'react';
+import {
+  selectOGImage,
+  getOGImageDimensions,
+  prefersVerticalImage,
+} from '@/lib/og-image-selector';
 
 interface MetaTagsConfig {
   title: string;
@@ -16,7 +21,7 @@ interface MetaTagsConfig {
 }
 
 const BASE_URL = 'https://fisio-movimiento.com';
-const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/og-image-h.png`;
 const DEFAULT_SITE_NAME = 'FisioAnalaura';
 const DEFAULT_LOCALE = 'es_MX';
 // Facebook App ID - Obtener desde https://developers.facebook.com/apps/
@@ -89,13 +94,18 @@ export const useMetaTags = (config: MetaTagsConfig) => {
     // Open Graph tags
     // Nota: Estos tags ya existen en index.html, pero los actualizamos dinámicamente
     // para mantener consistencia y permitir cambios en SPAs
+    // Seleccionar imagen OG apropiada según la plataforma (horizontal o vertical)
+    const selectedImage = image === DEFAULT_IMAGE ? selectOGImage() : image;
+    const isVertical = prefersVerticalImage(window.navigator.userAgent);
+    const dimensions = getOGImageDimensions(isVertical);
+
     updateMetaTag('og:type', type, true);
     updateMetaTag('og:url', url, true);
     updateMetaTag('og:title', title, true);
     updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:image:width', '1200', true);
-    updateMetaTag('og:image:height', '630', true);
+    updateMetaTag('og:image', selectedImage, true);
+    updateMetaTag('og:image:width', dimensions.width, true);
+    updateMetaTag('og:image:height', dimensions.height, true);
     updateMetaTag('og:locale', locale, true);
     updateMetaTag('og:site_name', siteName, true);
 
@@ -105,11 +115,17 @@ export const useMetaTags = (config: MetaTagsConfig) => {
     }
 
     // Twitter Card tags
+    // Twitter siempre usa imagen horizontal (mejor para Twitter Cards)
+    const twitterImageSelected =
+      twitterImage === DEFAULT_IMAGE
+        ? `${BASE_URL}/og-image-h.png`
+        : twitterImage;
+
     updateMetaTag('twitter:card', twitterCard);
     updateMetaTag('twitter:url', url);
     updateMetaTag('twitter:title', twitterTitle);
     updateMetaTag('twitter:description', twitterDescription);
-    updateMetaTag('twitter:image', twitterImage);
+    updateMetaTag('twitter:image', twitterImageSelected);
 
     // Cleanup function (restore defaults on unmount)
     return () => {
